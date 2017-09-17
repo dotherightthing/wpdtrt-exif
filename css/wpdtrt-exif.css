@@ -3,14 +3,14 @@
  *
  * This file contains CSS.
  *
- * @link        https://github.com/dotherightthing/wpdtrt-attachment-gps
+ * @link        https://github.com/dotherightthing/wpdtrt-exif
  * @since       0.1.0
  *
- * @package     WPDTRT_Attachment_GPS
- * @subpackage  WPDTRT_Attachment_GPS/css
+ * @package     WPDTRT_EXIF
+ * @subpackage  WPDTRT_EXIF/css
  */
 
-.wpdtrt-attachment-gps-blocks {
+.wpdtrt-exif-blocks {
   counter-reset: blocks;
   background-color: #f0f0f0;
   color: #333;
@@ -20,29 +20,29 @@
   margin-bottom: 8px;
 }
 
-.wpdtrt-attachment-gps-blocks::before {
+.wpdtrt-exif-blocks::before {
   content: attr(data-number) " blocks";
   display: block;
   padding-bottom: 8px;
 }
 
-.wpdtrt-attachment-gps-blocks[data-number="1"]::before {
+.wpdtrt-exif-blocks[data-number="1"]::before {
   content: attr(data-number) " block";
 }
 
-.wpdtrt-attachment-gps-blocks::after {
+.wpdtrt-exif-blocks::after {
   content: "";
   display: table;
   width: 100%;
   clear: both;
 }
 
-.wpdtrt-attachment-gps-blocks ul,
-.wpdtrt-attachment-gps-blocks li {
+.wpdtrt-exif-blocks ul,
+.wpdtrt-exif-blocks li {
   list-style: none;
 }
 
-.wpdtrt-attachment-gps-blocks li {
+.wpdtrt-exif-blocks li {
   position: relative;
   float: left;
   margin: 0 8px 8px 0;
@@ -50,16 +50,16 @@
   width: 150px;
 }
 
-.widget .wpdtrt-attachment-gps-blocks ul li {
+.widget .wpdtrt-exif-blocks ul li {
   padding: 0;
   border: 0;
 }
 
-.widget .wpdtrt-attachment-gps-blocks ul li + li {
+.widget .wpdtrt-exif-blocks ul li + li {
   margin-top: 0; /* reset */
 }
 
-.wpdtrt-attachment-gps-blocks li > a::before {
+.wpdtrt-exif-blocks li > a::before {
   position: absolute;
   bottom: 0;
   right: 0;
@@ -69,7 +69,7 @@
   padding: 8px;
 }
 
-.wpdtrt-attachment-gps-blocks li img {
+.wpdtrt-exif-blocks li img {
   width: 150px;
   height: 150px;
 }

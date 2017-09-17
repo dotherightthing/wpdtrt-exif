@@ -4,15 +4,15 @@
  *
  * This file contains PHP.
  *
- * @link        https://github.com/dotherightthing/wpdtrt-attachment-gps
+ * @link        https://github.com/dotherightthing/wpdtrt-exif
  * @see         https://codex.wordpress.org/AJAX_in_Plugins
  * @since       0.1.0
  *
- * @package     WPDTRT_Attachment_GPS
- * @subpackage  WPDTRT_Attachment_GPS/app
+ * @package     WPDTRT_EXIF
+ * @subpackage  WPDTRT_EXIF/app
  */
 
-if ( !function_exists( 'wpdtrt_attachment_gps_js' ) ) {
+if ( !function_exists( 'wpdtrt_exif_js' ) ) {
 
   /**
    * Attach JS for front-end widgets and shortcodes
@@ -23,7 +23,7 @@ if ( !function_exists( 'wpdtrt_attachment_gps_js' ) ) {
    * @see         https://codex.wordpress.org/AJAX_in_Plugins
    * @see         https://codex.wordpress.org/Function_Reference/wp_localize_script
    */
-  function wpdtrt_attachment_gps_js() {
+  function wpdtrt_exif_js() {
 
     $attach_to_footer = true;
 
@@ -45,7 +45,7 @@ if ( !function_exists( 'wpdtrt_attachment_gps_js' ) ) {
 
     /*
     wp_register_script( 'a_dependency',
-      WPDTRT_ATTACHMENT_GPS_URL . 'vendor/bower_components/a_dependency/a_dependency.js',
+      WPDTRT_EXIF_URL . 'vendor/bower_components/a_dependency/a_dependency.js',
       array(
         'jquery'
       ),
@@ -54,27 +54,27 @@ if ( !function_exists( 'wpdtrt_attachment_gps_js' ) ) {
     );
     */
 
-    wp_enqueue_script( 'wpdtrt_attachment_gps',
-      WPDTRT_ATTACHMENT_GPS_URL . 'js/wpdtrt-attachment-gps.js',
+    wp_enqueue_script( 'wpdtrt_exif',
+      WPDTRT_EXIF_URL . 'js/wpdtrt-exif.js',
       array(
         // load these registered dependencies first:
         'jquery'
         // a_dependency
       ),
-      WPDTRT_ATTACHMENT_GPS_VERSION,
+      WPDTRT_EXIF_VERSION,
       $attach_to_footer
     );
 
-    wp_localize_script( 'wpdtrt_attachment_gps',
-      'wpdtrt_attachment_gps_config',
+    wp_localize_script( 'wpdtrt_exif',
+      'wpdtrt_exif_config',
       array(
-        'ajax_url' => admin_url( 'admin-ajax.php' ) // wpdtrt_attachment_gps_config.ajax_url
+        'ajax_url' => admin_url( 'admin-ajax.php' ) // wpdtrt_exif_config.ajax_url
       )
     );
 
   }
 
-  add_action( 'wp_enqueue_scripts', 'wpdtrt_attachment_gps_js' );
+  add_action( 'wp_enqueue_scripts', 'wpdtrt_exif_js' );
 
 }
 

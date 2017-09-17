@@ -4,18 +4,18 @@
  *
  * This file contains PHP.
  *
- * @link        https://github.com/dotherightthing/wpdtrt-attachment-gps
+ * @link        https://github.com/dotherightthing/wpdtrt-exif
  * @link        https://generatewp.com/shortcodes/
  * @since       0.1.0
  *
- * @example     [wpdtrt_attachment_gps number="4" enlargement="yes"]
- * @example     do_shortcode( '[wpdtrt_attachment_gps number="4" enlargement="yes"]' );
+ * @example     [wpdtrt_exif number="4" enlargement="yes"]
+ * @example     do_shortcode( '[wpdtrt_exif number="4" enlargement="yes"]' );
  *
- * @package     WPDTRT_Attachment_GPS
- * @subpackage  WPDTRT_Attachment_GPS/app
+ * @package     WPDTRT_EXIF
+ * @subpackage  WPDTRT_EXIF/app
  */
 
-if ( !function_exists( 'wpdtrt_attachment_gps_shortcode' ) ) {
+if ( !function_exists( 'wpdtrt_exif_shortcode' ) ) {
 
   /**
    * @param       array $atts
@@ -30,7 +30,7 @@ if ( !function_exists( 'wpdtrt_attachment_gps_shortcode' ) ) {
    * @see         http://php.net/manual/en/function.ob-start.php
    * @see         http://php.net/manual/en/function.ob-get-clean.php
    */
-  function wpdtrt_attachment_gps_shortcode( $atts, $content = null ) {
+  function wpdtrt_exif_shortcode( $atts, $content = null ) {
 
     // post object to get info about the post in which the shortcode appears
     global $post;
@@ -43,7 +43,7 @@ if ( !function_exists( 'wpdtrt_attachment_gps_shortcode' ) ) {
     $after_widget = null;
     $number = null;
     $enlargement = null;
-    $shortcode = 'wpdtrt_attachment_gps_shortcode';
+    $shortcode = 'wpdtrt_exif_shortcode';
 
     /**
      * Combine user attributes with known attributes and fill in defaults when needed.
@@ -69,8 +69,8 @@ if ( !function_exists( 'wpdtrt_attachment_gps_shortcode' ) ) {
       $enlargement = '0';
     }
 
-    $wpdtrt_attachment_gps_options = get_option('wpdtrt_attachment_gps');
-    $wpdtrt_attachment_gps_data = $wpdtrt_attachment_gps_options['wpdtrt_attachment_gps_data'];
+    $wpdtrt_exif_options = get_option('wpdtrt_exif');
+    $wpdtrt_exif_data = $wpdtrt_exif_options['wpdtrt_exif_data'];
 
     /**
      * ob_start — Turn on output buffering
@@ -80,7 +80,7 @@ if ( !function_exists( 'wpdtrt_attachment_gps_shortcode' ) ) {
      */
     ob_start();
 
-    require(WPDTRT_ATTACHMENT_GPS_PATH . 'templates/wpdtrt-attachment-gps-front-end.php');
+    require(WPDTRT_EXIF_PATH . 'templates/wpdtrt-exif-front-end.php');
 
     /**
      * ob_get_clean — Get current buffer contents and delete current output buffer
@@ -96,7 +96,7 @@ if ( !function_exists( 'wpdtrt_attachment_gps_shortcode' ) ) {
    * @param callable $func
    *    Hook to run when shortcode is found.
    */
-  add_shortcode( 'wpdtrt_attachment_gps', 'wpdtrt_attachment_gps_shortcode' );
+  add_shortcode( 'wpdtrt_exif', 'wpdtrt_exif_shortcode' );
 
 }
 

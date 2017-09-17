@@ -1,14 +1,14 @@
 {
   "generator-wp-plugin-boilerplate": {
-    "name": "wpdtrt-attachment-gps",
-    "nameSafe": "wpdtrt_attachment_gps",
-    "nameFriendly": "WPDTRT Attachment GPS",
-    "nameFriendlySafe": "WPDTRT_Attachment_GPS",
-    "nameAdminMenu": "DTRT Attachment GPS",
-    "urlAdminMenu": "wpdtrt-attachment-gps",
-    "description": "Adds a GPS field to the attachment media modal, for use by other plugins;",
-    "tags": "geotag",
-    "homepage": "https://github.com/dotherightthing/wpdtrt-attachment-gps",
+    "name": "wpdtrt-exif",
+    "nameSafe": "wpdtrt_exif",
+    "nameFriendly": "WPDTRT EXIF",
+    "nameFriendlySafe": "WPDTRT_EXIF",
+    "nameAdminMenu": "DTRT EXIF",
+    "urlAdminMenu": "wpdtrt-exif",
+    "description": "Adds EXIF (time and geotag) fields to the attachment media modal, for use by other plugins.",
+    "tags": "exif",
+    "homepage": "https://github.com/dotherightthing/wpdtrt-exif",
     "license": "GPLv2 or later",
     "licenseUrl": "http://www.gnu.org/licenses/gpl-2.0.html",
     "donateUrl": "http://dotherightthing.co.nz",
@@ -18,7 +18,7 @@
     "authorEmail": "dev@dotherightthing.co.nz",
     "authorUrl": "https://profiles.wordpress.org/dotherightthingnz",
     "repositoryType": "git",
-    "repositoryUrl": "git@github.com:dotherightthing/wpdtrt-attachment-gps.git",
+    "repositoryUrl": "git@github.com:dotherightthing/wpdtrt-exif.git",
     "version": "0.1.0"
   }
 }

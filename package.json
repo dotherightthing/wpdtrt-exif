@@ -1,7 +1,7 @@
 {
-  "name": "wpdtrt-attachment-gps",
+  "name": "wpdtrt-exif",
   "version": "0.1.0",
-  "description": "Adds a GPS field to the attachment media modal, for use by other plugins;",
+  "description": "Adds EXIF (time and geotag) fields to the attachment media modal, for use by other plugins.",
   "main": "readme.txt",
   "person": {
     "name" : "Dan Smith",
@@ -18,9 +18,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:dotherightthing/wpdtrt-attachment-gps.git"
+    "url": "git@github.com:dotherightthing/wpdtrt-exif.git"
   },
   "license": "ISC",
-  "homepage": "https://github.com/dotherightthing/wpdtrt-attachment-gps",
-  "srcDir": "/Volumes/DanBackup/Websites/wpdtrt-attachment-gps"
+  "homepage": "https://github.com/dotherightthing/wpdtrt-exif",
+  "srcDir": "/Volumes/DanBackup/Websites/wpdtrt-exif"
 }

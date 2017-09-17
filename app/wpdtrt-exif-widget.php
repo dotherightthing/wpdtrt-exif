@@ -4,14 +4,14 @@
  *
  * This file contains PHP.
  *
- * @link        https://github.com/dotherightthing/wpdtrt-attachment-gps
+ * @link        https://github.com/dotherightthing/wpdtrt-exif
  * @since       0.1.0
  *
- * @package     WPDTRT_Attachment_GPS
- * @subpackage  WPDTRT_Attachment_GPS/app
+ * @package     WPDTRT_EXIF
+ * @subpackage  WPDTRT_EXIF/app
  */
 
-if ( !class_exists( 'WPDTRT_Attachment_GPS_Widget' ) ) {
+if ( !class_exists( 'WPDTRT_EXIF_Widget' ) ) {
 
   /**
    * Extend WP_Widget
@@ -23,11 +23,11 @@ if ( !class_exists( 'WPDTRT_Attachment_GPS_Widget' ) ) {
    * @see         https://developer.wordpress.org/reference/classes/wp_widget/
    * @see         https://make.wordpress.org/core/handbook/best-practices/coding-standards/php/#naming-conventions
    */
-  class WPDTRT_Attachment_GPS_Widget extends WP_Widget {
+  class WPDTRT_EXIF_Widget extends WP_Widget {
 
     function __construct() {
       // Instantiate the parent object
-      parent::__construct( false, 'WPDTRT Attachment GPS Widget' );
+      parent::__construct( false, 'WPDTRT EXIF Widget' );
     }
 
     /**
@@ -54,8 +54,8 @@ if ( !class_exists( 'WPDTRT_Attachment_GPS_Widget' ) ) {
       $number = $instance['number'];
       $enlargement = $instance['enlargement'];
 
-      $wpdtrt_attachment_gps_options = get_option('wpdtrt_attachment_gps');
-      $wpdtrt_attachment_gps_data = $wpdtrt_attachment_gps_options['wpdtrt_attachment_gps_data'];
+      $wpdtrt_exif_options = get_option('wpdtrt_exif');
+      $wpdtrt_exif_data = $wpdtrt_exif_options['wpdtrt_exif_data'];
 
       /**
        * Get the unique ID
@@ -67,7 +67,7 @@ if ( !class_exists( 'WPDTRT_Attachment_GPS_Widget' ) ) {
      * Load the HTML template
      * This function's variables will be available to this template.
      */
-      require(WPDTRT_ATTACHMENT_GPS_PATH . 'templates/wpdtrt-attachment-gps-front-end.php');
+      require(WPDTRT_EXIF_PATH . 'templates/wpdtrt-exif-front-end.php');
     }
 
     /**
@@ -104,20 +104,20 @@ if ( !class_exists( 'WPDTRT_Attachment_GPS_Widget' ) ) {
       $number = esc_attr( $instance['number'] );
       $enlargement = esc_attr( $instance['enlargement'] );
 
-      $wpdtrt_attachment_gps_options = get_option('wpdtrt_attachment_gps');
-      $wpdtrt_attachment_gps_data = $wpdtrt_attachment_gps_options['wpdtrt_attachment_gps_data'];
+      $wpdtrt_exif_options = get_option('wpdtrt_exif');
+      $wpdtrt_exif_data = $wpdtrt_exif_options['wpdtrt_exif_data'];
 
     /**
      * Load the HTML template
      * This function's variables will be available to this template.
      */
-      require(WPDTRT_ATTACHMENT_GPS_PATH . 'templates/wpdtrt-attachment-gps-widget.php');
+      require(WPDTRT_EXIF_PATH . 'templates/wpdtrt-exif-widget.php');
     }
   }
 
 }
 
-if ( !function_exists( 'wpdtrt_attachment_gps_register_widgets' ) ) {
+if ( !function_exists( 'wpdtrt_exif_register_widgets' ) ) {
 
   /**
    * Register the widget
@@ -127,11 +127,11 @@ if ( !function_exists( 'wpdtrt_attachment_gps_register_widgets' ) ) {
    * @see         https://codex.wordpress.org/Function_Reference/register_widget#Example
    */
 
-  function wpdtrt_attachment_gps_register_widgets() {
-    register_widget( 'WPDTRT_Attachment_GPS_Widget' );
+  function wpdtrt_exif_register_widgets() {
+    register_widget( 'WPDTRT_EXIF_Widget' );
   }
 
-  add_action( 'widgets_init', 'wpdtrt_attachment_gps_register_widgets' );
+  add_action( 'widgets_init', 'wpdtrt_exif_register_widgets' );
 
 }
 

@@ -22,7 +22,7 @@
  * @link https://developer.wordpress.org/plugins/the-basics/uninstall-methods/#method-2-uninstall-php
  * @since      0.1.0
  *
- * @package    WPDTRT_Attachment_GPS
+ * @package    WPDTRT_EXIF
  */
 
 // if uninstall.php is not called by WordPress, die
@@ -30,7 +30,7 @@ if ( ! defined('WP_UNINSTALL_PLUGIN') ) {
   die;
 }
 
-$option_name = "wpdtrt-attachment-gps";
+$option_name = "wpdtrt-exif";
 
 delete_option($option_name);
 

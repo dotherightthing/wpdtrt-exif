@@ -1,15 +1,15 @@
 <?php
 /**
  * Template partial for Widget administration
- *    WP Admin > Appearance > Widgets > WPDTRT Attachment GPS
+ *    WP Admin > Appearance > Widgets > WPDTRT EXIF
  *
  * This file contains PHP, and HTML fields.
  *
- * @link        https://github.com/dotherightthing/wpdtrt-attachment-gps
+ * @link        https://github.com/dotherightthing/wpdtrt-exif
  * @since       0.1.0
  *
- * @package     WPDTRT_Attachment_GPS
- * @subpackage  WPDTRT_Attachment_GPS/templates
+ * @package     WPDTRT_EXIF
+ * @subpackage  WPDTRT_EXIF/templates
  */
 ?>
 
@@ -21,7 +21,7 @@
 <p>
   <label for="<?php echo $this->get_field_name('number'); ?>">Number of blocks to display</label>
   <input size="4" id="<?php echo $this->get_field_name('number'); ?>" name="<?php echo $this->get_field_name('number'); ?>" type="number" value="<?php echo $number; ?>" aria-describedby="<?php echo $this->get_field_name('number'); ?>-tip" />
-  <span id="<?php echo $this->get_field_name('number'); ?>-tip" class="wpdtrt-attachment-gps-tip">Minimum: 1 | Maximum: <?php echo count($wpdtrt_attachment_gps_data); ?></span>
+  <span id="<?php echo $this->get_field_name('number'); ?>-tip" class="wpdtrt-exif-tip">Minimum: 1 | Maximum: <?php echo count($wpdtrt_exif_data); ?></span>
 </p>
 
 <?php

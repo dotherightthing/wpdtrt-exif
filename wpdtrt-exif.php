@@ -1,14 +1,14 @@
 <?php
 /*
-Plugin Name:  WPDTRT Attachment GPS
-Plugin URI:   https://github.com/dotherightthing/wpdtrt-attachment-gps
-Description:  Adds a GPS field to the attachment media modal, for use by other plugins;
+Plugin Name:  WPDTRT EXIF
+Plugin URI:   https://github.com/dotherightthing/wpdtrt-exif
+Description:  Adds EXIF (time and geotag) fields to the attachment media modal, for use by other plugins.
 Version:      0.1.0
 Author:       Dan Smith
 Author URI:   https://profiles.wordpress.org/dotherightthingnz
 License:      GPLv2 or later
 License URI:  http://www.gnu.org/licenses/gpl-2.0.html
-Text Domain:  wpdtrt-attachment-gps
+Text Domain:  wpdtrt-exif
 Domain Path:  /languages
 */
 
@@ -40,8 +40,8 @@ Domain Path:  /languages
  * @example $plugin_data = get_plugin_data( __FILE__ ); $plugin_version = $plugin_data['Version'];
  * @link https://wordpress.stackexchange.com/questions/18268/i-want-to-get-a-plugin-version-number-dynamically
  */
-if( ! defined( 'WPDTRT_ATTACHMENT_GPS_VERSION' ) ) {
-  define( 'WPDTRT_ATTACHMENT_GPS_VERSION', '0.1' );
+if( ! defined( 'WPDTRT_EXIF_VERSION' ) ) {
+  define( 'WPDTRT_EXIF_VERSION', '0.1' );
 }
 
 /**
@@ -51,8 +51,8 @@ if( ! defined( 'WPDTRT_ATTACHMENT_GPS_VERSION' ) ) {
  * @link https://developer.wordpress.org/reference/functions/plugin_dir_path/
  * @link https://developer.wordpress.org/plugins/the-basics/best-practices/#prefix-everything
  */
-if( ! defined( 'WPDTRT_ATTACHMENT_GPS_PATH' ) ) {
-  define( 'WPDTRT_ATTACHMENT_GPS_PATH', plugin_dir_path( __FILE__ ) );
+if( ! defined( 'WPDTRT_EXIF_PATH' ) ) {
+  define( 'WPDTRT_EXIF_PATH', plugin_dir_path( __FILE__ ) );
 }
 
 /**
@@ -62,8 +62,8 @@ if( ! defined( 'WPDTRT_ATTACHMENT_GPS_PATH' ) ) {
  * @link https://codex.wordpress.org/Function_Reference/plugin_dir_url
  * @link https://developer.wordpress.org/plugins/the-basics/best-practices/#prefix-everything
  */
-if( ! defined( 'WPDTRT_ATTACHMENT_GPS_URL' ) ) {
-  define( 'WPDTRT_ATTACHMENT_GPS_URL', plugin_dir_url( __FILE__ ) );
+if( ! defined( 'WPDTRT_EXIF_URL' ) ) {
+  define( 'WPDTRT_EXIF_URL', plugin_dir_url( __FILE__ ) );
 }
 
 
@@ -72,23 +72,23 @@ if( ! defined( 'WPDTRT_ATTACHMENT_GPS_URL' ) ) {
  * So that we only use have to consume one row in the WP Options table
  * WordPress automatically serializes this (into a string)
  * because MySQL does not support arrays as a data type
- * @example update_option('wpdtrt_attachment_gps', $wpdtrt_attachment_gps_options);
- * @example $wpdtrt_attachment_gps_options = get_option('wpdtrt_attachment_gps');
+ * @example update_option('wpdtrt_exif', $wpdtrt_exif_options);
+ * @example $wpdtrt_exif_options = get_option('wpdtrt_exif');
  */
-  $wpdtrt_attachment_gps_options = array();
+  $wpdtrt_exif_options = array();
 
 /**
  * Include plugin logic
  */
 
-  require_once(WPDTRT_ATTACHMENT_GPS_PATH . 'app/wpdtrt-attachment-gps-api.php');
-  require_once(WPDTRT_ATTACHMENT_GPS_PATH . 'app/wpdtrt-attachment-gps-css.php');
-  require_once(WPDTRT_ATTACHMENT_GPS_PATH . 'app/wpdtrt-attachment-gps-html.php');
-  require_once(WPDTRT_ATTACHMENT_GPS_PATH . 'app/wpdtrt-attachment-gps-js.php');
-  require_once(WPDTRT_ATTACHMENT_GPS_PATH . 'app/wpdtrt-attachment-gps-options.php');
-  require_once(WPDTRT_ATTACHMENT_GPS_PATH . 'app/wpdtrt-attachment-gps-shortcode.php');
-  require_once(WPDTRT_ATTACHMENT_GPS_PATH . 'app/wpdtrt-attachment-gps-widget.php');
+  require_once(WPDTRT_EXIF_PATH . 'app/wpdtrt-exif-api.php');
+  require_once(WPDTRT_EXIF_PATH . 'app/wpdtrt-exif-css.php');
+  require_once(WPDTRT_EXIF_PATH . 'app/wpdtrt-exif-html.php');
+  require_once(WPDTRT_EXIF_PATH . 'app/wpdtrt-exif-js.php');
+  require_once(WPDTRT_EXIF_PATH . 'app/wpdtrt-exif-options.php');
+  require_once(WPDTRT_EXIF_PATH . 'app/wpdtrt-exif-shortcode.php');
+  require_once(WPDTRT_EXIF_PATH . 'app/wpdtrt-exif-widget.php');
 
-  require_once(WPDTRT_ATTACHMENT_GPS_PATH . 'config/tgm-plugin-activation.php');
+  require_once(WPDTRT_EXIF_PATH . 'config/tgm-plugin-activation.php');
 
 ?>

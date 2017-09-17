@@ -1,23 +1,23 @@
 
-=== WPDTRT Attachment GPS ===
+=== WPDTRT EXIF ===
 Contributors: dotherightthingnz
 Donate link: http://dotherightthing.co.nz
-Tags: geotag
+Tags: exif
 Requires at least: 4.8.1
 Tested up to: 4.8.1
 Stable tag: 0.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Adds a GPS field to the attachment media modal, for use by other plugins;
+Adds EXIF (time and geotag) fields to the attachment media modal, for use by other plugins.
 
 == Description ==
 
-Adds a GPS field to the attachment media modal, for use by other plugins;
+Adds EXIF (time and geotag) fields to the attachment media modal, for use by other plugins.
 
 == Installation ==
 
-1. Upload the plugin files to the `/wp-content/plugins/wpdtrt-attachment-gps` directory, or install the plugin through the WordPress plugins screen directly.
+1. Upload the plugin files to the `/wp-content/plugins/wpdtrt-exif` directory, or install the plugin through the WordPress plugins screen directly.
 2. Activate the plugin through the 'Plugins' screen in WordPress
 3. Use the Settings->Plugin Name screen to configure the plugin
 
@@ -27,7 +27,7 @@ Adds a GPS field to the attachment media modal, for use by other plugins;
 
 One or more widgets can be displayed within one or more sidebars:
 
-1. Locate the widget: Appearance > Widgets > *WPDTRT Attachment GPS Widget*
+1. Locate the widget: Appearance > Widgets > *WPDTRT EXIF Widget*
 2. Drag and drop the widget into one of your sidebars
 3. Add a *Title*
 4. Specify *Number of blocks to display*
@@ -37,10 +37,10 @@ One or more widgets can be displayed within one or more sidebars:
 
 ```
 <!-- within the editor -->
-[wpdtrt_attachment_gps option="value"]
+[wpdtrt_exif option="value"]
 
 // in a PHP template, as a template tag
-<?php echo do_shortcode( '[wpdtrt_attachment_gps option="value"]' ); ?>
+<?php echo do_shortcode( '[wpdtrt_exif option="value"]' ); ?>
 ```
 
 = Shortcode options =

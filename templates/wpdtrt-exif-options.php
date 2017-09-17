@@ -1,23 +1,23 @@
 <?php
 /**
  * Template partial for Admin Options page
- *    WP Admin > Settings > WPDTRT Attachment GPS
+ *    WP Admin > Settings > WPDTRT EXIF
  *
  * This file contains PHP, and HTML from the WordPress_Admin_Style plugin.
  *
- * @link        https://github.com/dotherightthing/wpdtrt-attachment-gps
+ * @link        https://github.com/dotherightthing/wpdtrt-exif
  * @link        /wp-admin/admin.php?page=WordPress_Admin_Style#twocolumnlayout2
  * @since       0.1.0
  *
- * @package     WPDTRT_Attachment_GPS
- * @subpackage  WPDTRT_Attachment_GPS/templates
+ * @package     WPDTRT_EXIF
+ * @subpackage  WPDTRT_EXIF/templates
  */
 ?>
 
 <div class="wrap">
 
   <div id="icon-options-general" class="icon32"></div>
-  <h1><?php esc_attr_e( 'WPDTRT Attachment GPS', 'wp_admin_style' ); ?>: Placeholder blocks</h1>
+  <h1><?php esc_attr_e( 'WPDTRT EXIF', 'wp_admin_style' ); ?>: Placeholder blocks</h1>
 
   <div id="poststuff">
 
@@ -32,11 +32,11 @@
           /**
            * Start Scenario 1 - data selection form
            * If the user has not chosen a content type yet.
-           * then $wpdtrt_attachment_gps_datatype will be set to the default of ""
+           * then $wpdtrt_exif_datatype will be set to the default of ""
            * The user must make a selection so that we know which page to query,
            * so we show the selection box first.
            */
-          if ( !isset( $wpdtrt_attachment_gps_datatype ) || ( $wpdtrt_attachment_gps_datatype === '') ) :
+          if ( !isset( $wpdtrt_exif_datatype ) || ( $wpdtrt_exif_datatype === '') ) :
           ?>
 
           <div class="postbox">
@@ -47,17 +47,17 @@
 
             <div class="inside">
 
-              <form name="wpdtrt_attachment_gps_data_form" method="post" action="">
+              <form name="wpdtrt_exif_data_form" method="post" action="">
 
-                <input type="hidden" name="wpdtrt_attachment_gps_form_submitted" value="Y" />
+                <input type="hidden" name="wpdtrt_exif_form_submitted" value="Y" />
 
                 <table class="form-table">
                   <tr>
                     <th>
-                      <label for="wpdtrt_attachment_gps_datatype">Please select a block type:</label>
+                      <label for="wpdtrt_exif_datatype">Please select a block type:</label>
                     </th>
                     <td>
-                      <select name="wpdtrt_attachment_gps_datatype" id="wpdtrt_attachment_gps_datatype">
+                      <select name="wpdtrt_exif_datatype" id="wpdtrt_exif_datatype">
                         <option value="">None</option>
                         <option value="photos">Coloured Blocks</option>
                         <option value="users">Map Blocks</option>
@@ -73,7 +73,7 @@
                   submit_button(
                     $text = 'Save',
                     $type = 'primary',
-                    $name = 'wpdtrt_attachment_gps_submit',
+                    $name = 'wpdtrt_exif_submit',
                     $wrap = true,
                     $other_attributes = null
                   );
@@ -96,7 +96,7 @@
           /**
            * Start Scenario 2 - data selected
            * If the user has already chosen a content type,
-           * then $wpdtrt_attachment_gps_data will contain the body of the resulting JSON.
+           * then $wpdtrt_exif_data will contain the body of the resulting JSON.
            */
 
           /**
@@ -115,11 +115,11 @@
 
             <div class="inside">
 
-              <p>This data set contains <?php echo count( $wpdtrt_attachment_gps_data ); ?> blocks.</p>
+              <p>This data set contains <?php echo count( $wpdtrt_exif_data ); ?> blocks.</p>
 
               <p>The first 6 are displayed below:</p>
 
-              <div class="wpdtrt-attachment-gps-blocks">
+              <div class="wpdtrt-exif-blocks">
                 <ul>
 
                 <?php
@@ -127,8 +127,8 @@
                   $count = 0;
                   $display_count = 1;
 
-                  foreach( $wpdtrt_attachment_gps_data as $key => $val ) {
-                    echo "<li>" . wpdtrt_attachment_gps_html_image( $key ) . "</li>\r\n";
+                  foreach( $wpdtrt_exif_data as $key => $val ) {
+                    echo "<li>" . wpdtrt_exif_html_image( $key ) . "</li>\r\n";
 
                     $count++;
                     $display_count++;
@@ -144,7 +144,7 @@
               </div>
 
               <?php
-                echo wpdtrt_attachment_gps_html_date();
+                echo wpdtrt_exif_html_date();
               ?>
 
             </div>
@@ -178,13 +178,13 @@
 
               <p>The data used to generate the blocks above.</p>
 
-              <div class="wpdtrt-attachment-gps-data"><pre><code><?php echo "{\r\n";
+              <div class="wpdtrt-exif-data"><pre><code><?php echo "{\r\n";
 
                   $count = 0;
                   $max_length = 6;
 
-                  foreach( $wpdtrt_attachment_gps_data as $key => $val ) {
-                    var_dump( $wpdtrt_attachment_gps_data[$key] );
+                  foreach( $wpdtrt_exif_data as $key => $val ) {
+                    var_dump( $wpdtrt_exif_data[$key] );
 
                     $count++;
 
@@ -237,7 +237,7 @@
            * But this time we'll give it secondary importance
            * by displaying it in a sidebar:
            */
-            if ( isset( $wpdtrt_attachment_gps_datatype ) && ( $wpdtrt_attachment_gps_datatype !== '') ) :
+            if ( isset( $wpdtrt_exif_datatype ) && ( $wpdtrt_exif_datatype !== '') ) :
           ?>
 
           <div class="postbox">
@@ -251,12 +251,12 @@
               <p>Sample data not what you were expecting?</p>
               <p>Change your selection here:</p>
 
-              <form name="wpdtrt_attachment_gps_data_form" method="post" action="">
+              <form name="wpdtrt_exif_data_form" method="post" action="">
 
-                <input type="hidden" name="wpdtrt_attachment_gps_form_submitted" value="Y" />
+                <input type="hidden" name="wpdtrt_exif_form_submitted" value="Y" />
 
                 <p>
-                  <label for="wpdtrt_attachment_gps_datatype">Please select a block type:</label>
+                  <label for="wpdtrt_exif_datatype">Please select a block type:</label>
                 </p>
                 <p>
                   <?php
@@ -267,10 +267,10 @@
                    * @link https://codex.wordpress.org/Function_Reference/selected
                    */
                   ?>
-                  <select name="wpdtrt_attachment_gps_datatype" id="wpdtrt_attachment_gps_datatype">
+                  <select name="wpdtrt_exif_datatype" id="wpdtrt_exif_datatype">
                     <option value="">None</option>
-                    <option value="photos" <?php selected( $wpdtrt_attachment_gps_datatype, "photos" ); ?>>Coloured blocks</option>
-                    <option value="users" <?php selected( $wpdtrt_attachment_gps_datatype, "users" ); ?>>Maps</option>
+                    <option value="photos" <?php selected( $wpdtrt_exif_datatype, "photos" ); ?>>Coloured blocks</option>
+                    <option value="users" <?php selected( $wpdtrt_exif_datatype, "users" ); ?>>Maps</option>
                   </select>
                 </p>
                 <p>
@@ -279,7 +279,7 @@
                     submit_button(
                       $text = 'Save &amp; load new data',
                       $type = 'primary',
-                      $name = 'wpdtrt_attachment_gps_submit',
+                      $name = 'wpdtrt_exif_submit',
                       $wrap = false, // don't wrap in paragraph
                       $other_attributes = null
                     );

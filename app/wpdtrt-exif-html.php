@@ -4,14 +4,14 @@
  *
  * This file contains PHP.
  *
- * @link        https://github.com/dotherightthing/wpdtrt-attachment-gps
+ * @link        https://github.com/dotherightthing/wpdtrt-exif
  * @since       0.1.0
  *
- * @package     WPDTRT_Attachment_GPS
- * @subpackage  WPDTRT_Attachment_GPS/app
+ * @package     WPDTRT_EXIF
+ * @subpackage  WPDTRT_EXIF/app
  */
 
-if ( !function_exists( 'wpdtrt_attachment_gps_html_image' ) ) {
+if ( !function_exists( 'wpdtrt_exif_html_image' ) ) {
 
   /**
    * Generate the HTML for a (linked) image
@@ -24,23 +24,23 @@ if ( !function_exists( 'wpdtrt_attachment_gps_html_image' ) ) {
    *
    * @since       0.1.0
    */
-  function wpdtrt_attachment_gps_html_image( $key, $has_enlargement = 0 ) {
+  function wpdtrt_exif_html_image( $key, $has_enlargement = 0 ) {
 
     // if options have not been stored, exit
-    $wpdtrt_attachment_gps_options = get_option('wpdtrt_attachment_gps');
+    $wpdtrt_exif_options = get_option('wpdtrt_exif');
 
-    if ( $wpdtrt_attachment_gps_options === '' ) {
+    if ( $wpdtrt_exif_options === '' ) {
       return '';
     }
 
     // the data set
-    $wpdtrt_attachment_gps_data = $wpdtrt_attachment_gps_options['wpdtrt_attachment_gps_data'];
+    $wpdtrt_exif_data = $wpdtrt_exif_options['wpdtrt_exif_data'];
 
     $str = '';
 
     if ( $has_enlargement ) {
 
-      if ( isset( $wpdtrt_attachment_gps_data[$key]->{'address'} ) ) {
+      if ( isset( $wpdtrt_exif_data[$key]->{'address'} ) ) {
 
         $str .= '<a href="';
         $str .= 'http://maps.googleapis.com/maps/api/staticmap';
@@ -48,7 +48,7 @@ if ( !function_exists( 'wpdtrt_attachment_gps_html_image' ) ) {
         $str .= '&format=jpg';
         $str .= '&maptype=satellite';
         $str .= '&zoom=2';
-        $str .= '&markers=' . wpdtrt_attachment_gps_html_latlng( $key );
+        $str .= '&markers=' . wpdtrt_exif_html_latlng( $key );
         $str .= '&key=AIzaSyAyMI7z2mnFYdONaVV78weOmB0U2LThZMo';
         $str .= '&size=600x600';
         $str .= '">';
@@ -57,7 +57,7 @@ if ( !function_exists( 'wpdtrt_attachment_gps_html_image' ) ) {
       else {
 
         $str .= '<a href="';
-        $str .= $wpdtrt_attachment_gps_data[$key]->{'url'};
+        $str .= $wpdtrt_exif_data[$key]->{'url'};
         $str .= '">';
 
       }
@@ -66,27 +66,27 @@ if ( !function_exists( 'wpdtrt_attachment_gps_html_image' ) ) {
     $str .= '<img src="';
 
     // user - map block
-    if ( isset( $wpdtrt_attachment_gps_data[$key]->{'address'} ) ) {
+    if ( isset( $wpdtrt_exif_data[$key]->{'address'} ) ) {
 
       $str .= 'http://maps.googleapis.com/maps/api/staticmap';
       $str .= '?scale=2';
       $str .= '&format=jpg';
       $str .= '&maptype=satellite';
       $str .= '&zoom=0';
-      $str .= '&markers=' . wpdtrt_attachment_gps_html_latlng( $key );
+      $str .= '&markers=' . wpdtrt_exif_html_latlng( $key );
       $str .= '&key=AIzaSyAyMI7z2mnFYdONaVV78weOmB0U2LThZMo';
       $str .= '&size=150x150';
 
     }
     else {
 
-      $str .= $wpdtrt_attachment_gps_data[$key]->{'thumbnailUrl'};
+      $str .= $wpdtrt_exif_data[$key]->{'thumbnailUrl'};
 
     }
 
     $str .='" alt="';
 
-    $str .= wpdtrt_attachment_gps_html_title( $key, $has_enlargement );
+    $str .= wpdtrt_exif_html_title( $key, $has_enlargement );
 
     $str .= '. ">';
 
@@ -98,7 +98,7 @@ if ( !function_exists( 'wpdtrt_attachment_gps_html_image' ) ) {
   }
 }
 
-if ( !function_exists( 'wpdtrt_attachment_gps_html_latlng' ) ) {
+if ( !function_exists( 'wpdtrt_exif_html_latlng' ) ) {
 
   /**
    * Get the coordinates of a map location
@@ -109,23 +109,23 @@ if ( !function_exists( 'wpdtrt_attachment_gps_html_latlng' ) ) {
    *
    * @since       0.1.0
    */
-  function wpdtrt_attachment_gps_html_latlng( $key ) {
+  function wpdtrt_exif_html_latlng( $key ) {
 
     // if options have not been stored, exit
-    $wpdtrt_attachment_gps_options = get_option('wpdtrt_attachment_gps');
+    $wpdtrt_exif_options = get_option('wpdtrt_exif');
 
-    if ( $wpdtrt_attachment_gps_options === '' ) {
+    if ( $wpdtrt_exif_options === '' ) {
       return '';
     }
 
     // the data set
-    $wpdtrt_attachment_gps_data = $wpdtrt_attachment_gps_options['wpdtrt_attachment_gps_data'];
+    $wpdtrt_exif_data = $wpdtrt_exif_options['wpdtrt_exif_data'];
 
     // user - map block
-    if ( isset( $wpdtrt_attachment_gps_data[$key]->{'address'} ) ) :
+    if ( isset( $wpdtrt_exif_data[$key]->{'address'} ) ) :
 
-      $lat = $wpdtrt_attachment_gps_data[$key]->{'address'}->{'geo'}->{'lat'};
-      $lng = $wpdtrt_attachment_gps_data[$key]->{'address'}->{'geo'}->{'lng'};
+      $lat = $wpdtrt_exif_data[$key]->{'address'}->{'geo'}->{'lat'};
+      $lng = $wpdtrt_exif_data[$key]->{'address'}->{'geo'}->{'lng'};
 
       $str = $lat . ',' . $lng;
 
@@ -139,7 +139,7 @@ if ( !function_exists( 'wpdtrt_attachment_gps_html_latlng' ) ) {
   }
 }
 
-if ( !function_exists( 'wpdtrt_attachment_gps_html_title' ) ) {
+if ( !function_exists( 'wpdtrt_exif_html_title' ) ) {
 
   /**
    * Generate an Alt attribute
@@ -152,27 +152,27 @@ if ( !function_exists( 'wpdtrt_attachment_gps_html_title' ) ) {
    *
    * @since       0.1.0
    */
-  function wpdtrt_attachment_gps_html_title( $key, $has_enlargement = 0 ) {
+  function wpdtrt_exif_html_title( $key, $has_enlargement = 0 ) {
 
     // if options have not been stored, exit
-    $wpdtrt_attachment_gps_options = get_option('wpdtrt_attachment_gps');
+    $wpdtrt_exif_options = get_option('wpdtrt_exif');
 
-    if ( $wpdtrt_attachment_gps_options === '' ) {
+    if ( $wpdtrt_exif_options === '' ) {
       return '';
     }
 
     // the data set
-    $wpdtrt_attachment_gps_data = $wpdtrt_attachment_gps_options['wpdtrt_attachment_gps_data'];
+    $wpdtrt_exif_data = $wpdtrt_exif_options['wpdtrt_exif_data'];
 
     // user - map block
-    if ( isset( $wpdtrt_attachment_gps_data[$key]->{'address'} ) ) {
+    if ( isset( $wpdtrt_exif_data[$key]->{'address'} ) ) {
 
-      $str = 'Map showing the co-ordinates ' . wpdtrt_attachment_gps_html_latlng( $key );
+      $str = 'Map showing the co-ordinates ' . wpdtrt_exif_html_latlng( $key );
 
     // photo - coloured block
     } else {
 
-      $str = $wpdtrt_attachment_gps_data[$key]->{'title'};
+      $str = $wpdtrt_exif_data[$key]->{'title'};
 
     }
 
@@ -184,7 +184,7 @@ if ( !function_exists( 'wpdtrt_attachment_gps_html_title' ) ) {
   }
 }
 
-if ( !function_exists( 'wpdtrt_attachment_gps_html_date' ) ) {
+if ( !function_exists( 'wpdtrt_exif_html_date' ) ) {
 
   /**
    * Generate the HTML for the last modified date
@@ -193,22 +193,22 @@ if ( !function_exists( 'wpdtrt_attachment_gps_html_date' ) ) {
    *
    * @since       0.1.0
    */
-  function wpdtrt_attachment_gps_html_date() {
+  function wpdtrt_exif_html_date() {
 
     // if options have not been stored, exit
-    $wpdtrt_attachment_gps_options = get_option('wpdtrt_attachment_gps');
+    $wpdtrt_exif_options = get_option('wpdtrt_exif');
 
-    if ( $wpdtrt_attachment_gps_options === '' ) {
+    if ( $wpdtrt_exif_options === '' ) {
       return '';
     }
 
     // the data set
-    $last_updated = $wpdtrt_attachment_gps_options['last_updated'];
+    $last_updated = $wpdtrt_exif_options['last_updated'];
 
     // use the date format set by the user
     $wp_date_format = get_option('date_format');
 
-    $str = '<p class="wpdtrt-attachment-gps-date">Data last updated: ' . date( $wp_date_format, $last_updated ) . '. </p>';
+    $str = '<p class="wpdtrt-exif-date">Data last updated: ' . date( $wp_date_format, $last_updated ) . '. </p>';
 
     return $str;
   }

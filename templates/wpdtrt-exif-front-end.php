@@ -4,11 +4,11 @@
  *
  * This file contains PHP, and HTML.
  *
- * @link        https://github.com/dotherightthing/wpdtrt-attachment-gps
+ * @link        https://github.com/dotherightthing/wpdtrt-exif
  * @since       0.1.0
  *
- * @package     WPDTRT_Attachment_GPS
- * @subpackage  WPDTRT_Attachment_GPS/templates
+ * @package     WPDTRT_EXIF
+ * @subpackage  WPDTRT_EXIF/templates
  */
 ?>
 
@@ -18,7 +18,7 @@
   echo $before_title . $title . $after_title;
 ?>
 
-<div class="wpdtrt-attachment-gps-blocks frontend" data-number="<?php echo $number; ?>">
+<div class="wpdtrt-exif-blocks frontend" data-number="<?php echo $number; ?>">
   <ul>
 
   <?php
@@ -38,11 +38,11 @@
      */
     $has_enlargement = filter_var( $enlargement, FILTER_VALIDATE_BOOLEAN );
 
-    foreach( $wpdtrt_attachment_gps_data as $key => $val ) {
+    foreach( $wpdtrt_exif_data as $key => $val ) {
 
       echo "<li>";
 
-      echo wpdtrt_attachment_gps_html_image( $key, $has_enlargement );
+      echo wpdtrt_exif_html_image( $key, $has_enlargement );
 
       echo "</li>\r\n";
 

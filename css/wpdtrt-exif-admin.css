@@ -3,37 +3,37 @@
  *
  * This file contains CSS.
  *
- * @link        https://github.com/dotherightthing/wpdtrt-attachment-gps
+ * @link        https://github.com/dotherightthing/wpdtrt-exif
  * @since       0.1.0
  *
- * @package     WPDTRT_Attachment_GPS
- * @subpackage  WPDTRT_Attachment_GPS/css
+ * @package     WPDTRT_EXIF
+ * @subpackage  WPDTRT_EXIF/css
  */
 
-.wpdtrt-attachment-gps-blocks {
+.wpdtrt-exif-blocks {
   counter-reset: blocks;
 }
 
-.wpdtrt-attachment-gps-blocks::after {
+.wpdtrt-exif-blocks::after {
   content: "";
   display: table;
   width: 100%;
   clear: both;
 }
 
-.wpdtrt-attachment-gps-blocks ul,
-.wpdtrt-attachment-gps-blocks li {
+.wpdtrt-exif-blocks ul,
+.wpdtrt-exif-blocks li {
   float: left;
 }
 
-.wpdtrt-attachment-gps-blocks li {
+.wpdtrt-exif-blocks li {
   position: relative;
   margin: 0 8px 8px 0;
   height: 150px;
   width: 150px;
 }
 
-.wpdtrt-attachment-gps-blocks li::before {
+.wpdtrt-exif-blocks li::before {
   position: absolute;
   top: 0;
   left: 0;
@@ -44,16 +44,16 @@
   padding: 8px;
 }
 
-.wpdtrt-attachment-gps-blocks li img {
+.wpdtrt-exif-blocks li img {
   width: 150px;
   height: 150px;
 }
 
-.wpdtrt-attachment-gps-date {
+.wpdtrt-exif-date {
   font-size: .95em;
 }
 
-.widget .wpdtrt-attachment-gps-tip {
+.widget .wpdtrt-exif-tip {
   display: block;
   padding-top: 4px;
 }
