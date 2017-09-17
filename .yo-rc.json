@@ -2,7 +2,7 @@
   "generator-wp-plugin-boilerplate": {
     "name": "wpdtrt-exif",
     "nameSafe": "wpdtrt_exif",
-    "nameFriendly": "WPDTRT EXIF",
+    "nameFriendly": "DTRT EXIF",
     "nameFriendlySafe": "WPDTRT_EXIF",
     "nameAdminMenu": "DTRT EXIF",
     "urlAdminMenu": "wpdtrt-exif",

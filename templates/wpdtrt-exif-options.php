@@ -1,7 +1,7 @@
 <?php
 /**
  * Template partial for Admin Options page
- *    WP Admin > Settings > WPDTRT EXIF
+ *    WP Admin > Settings > DTRT EXIF
  *
  * This file contains PHP, and HTML from the WordPress_Admin_Style plugin.
  *
@@ -17,7 +17,7 @@
 <div class="wrap">
 
   <div id="icon-options-general" class="icon32"></div>
-  <h1><?php esc_attr_e( 'WPDTRT EXIF', 'wp_admin_style' ); ?>: Placeholder blocks</h1>
+  <h1><?php esc_attr_e( 'DTRT EXIF', 'wp_admin_style' ); ?>: Placeholder blocks</h1>
 
   <div id="poststuff">
 

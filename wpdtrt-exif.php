@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name:  WPDTRT EXIF
+Plugin Name:  DTRT EXIF
 Plugin URI:   https://github.com/dotherightthing/wpdtrt-exif
 Description:  Adds EXIF (time and geotag) fields to the attachment media modal, for use by other plugins.
 Version:      0.1.0
@@ -81,13 +81,16 @@ if( ! defined( 'WPDTRT_EXIF_URL' ) ) {
  * Include plugin logic
  */
 
-  require_once(WPDTRT_EXIF_PATH . 'app/wpdtrt-exif-api.php');
+  require_once(WPDTRT_EXIF_PATH . 'app/wpdtrt-exif-geodata.php');
+  require_once(WPDTRT_EXIF_PATH . 'app/wpdtrt-exif-fields.php');
+
+  //require_once(WPDTRT_EXIF_PATH . 'app/wpdtrt-exif-api.php');
   require_once(WPDTRT_EXIF_PATH . 'app/wpdtrt-exif-css.php');
-  require_once(WPDTRT_EXIF_PATH . 'app/wpdtrt-exif-html.php');
-  require_once(WPDTRT_EXIF_PATH . 'app/wpdtrt-exif-js.php');
-  require_once(WPDTRT_EXIF_PATH . 'app/wpdtrt-exif-options.php');
-  require_once(WPDTRT_EXIF_PATH . 'app/wpdtrt-exif-shortcode.php');
-  require_once(WPDTRT_EXIF_PATH . 'app/wpdtrt-exif-widget.php');
+  //require_once(WPDTRT_EXIF_PATH . 'app/wpdtrt-exif-html.php');
+  //require_once(WPDTRT_EXIF_PATH . 'app/wpdtrt-exif-js.php');
+  //require_once(WPDTRT_EXIF_PATH . 'app/wpdtrt-exif-options.php');
+  //require_once(WPDTRT_EXIF_PATH . 'app/wpdtrt-exif-shortcode.php');
+  //require_once(WPDTRT_EXIF_PATH . 'app/wpdtrt-exif-widget.php');
 
   require_once(WPDTRT_EXIF_PATH . 'config/tgm-plugin-activation.php');
 

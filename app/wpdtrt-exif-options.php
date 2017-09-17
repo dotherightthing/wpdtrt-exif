@@ -1,7 +1,7 @@
 <?php
 /**
  * Functionality for the WP Admin Plugin Options page
- *    WP Admin > Settings > WPDTRT EXIF
+ *    WP Admin > Settings > DTRT EXIF
  *
  * This file contains PHP.
  *
@@ -25,7 +25,7 @@ if ( !function_exists( 'wpdtrt_exif_menu' ) ) {
   function wpdtrt_exif_menu() {
 
     add_options_page(
-      'WPDTRT EXIF',
+      'DTRT EXIF',
       'DTRT EXIF',
       'manage_options',
       'wpdtrt-exif',

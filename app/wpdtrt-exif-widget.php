@@ -27,7 +27,7 @@ if ( !class_exists( 'WPDTRT_EXIF_Widget' ) ) {
 
     function __construct() {
       // Instantiate the parent object
-      parent::__construct( false, 'WPDTRT EXIF Widget' );
+      parent::__construct( false, 'DTRT EXIF Widget' );
     }
 
     /**

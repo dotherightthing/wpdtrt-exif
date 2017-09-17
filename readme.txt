@@ -1,5 +1,5 @@
 
-=== WPDTRT EXIF ===
+=== DTRT EXIF ===
 Contributors: dotherightthingnz
 Donate link: http://dotherightthing.co.nz
 Tags: exif
@@ -19,39 +19,19 @@ Adds EXIF (time and geotag) fields to the attachment media modal, for use by oth
 
 1. Upload the plugin files to the `/wp-content/plugins/wpdtrt-exif` directory, or install the plugin through the WordPress plugins screen directly.
 2. Activate the plugin through the 'Plugins' screen in WordPress
-3. Use the Settings->Plugin Name screen to configure the plugin
 
 == Frequently Asked Questions ==
 
-= How do I use the widget? =
+= How do I use this? =
 
-One or more widgets can be displayed within one or more sidebars:
+This plugin adds the following custom fields to attachments:
 
-1. Locate the widget: Appearance > Widgets > *WPDTRT EXIF Widget*
-2. Drag and drop the widget into one of your sidebars
-3. Add a *Title*
-4. Specify *Number of blocks to display*
-5. Toggle *Link to enlargement?*
+1. `Time` (display only)
+2. `Geotag` (editable)
 
-= How do I use the shortcode? =
+`Geotag` is saved to the following custom field, which can be queried by other plugins:
 
-```
-<!-- within the editor -->
-[wpdtrt_exif option="value"]
-
-// in a PHP template, as a template tag
-<?php echo do_shortcode( '[wpdtrt_exif option="value"]' ); ?>
-```
-
-= Shortcode options =
-
-1. `Number of blocks to display="4"` (default) - number of blocks to display
-2. `enlargement="yes"` (default) - optionally link each block to a larger version
-
-== Screenshots ==
-
-1. The caption for ./assets/screenshot-1.(png|jpg|jpeg|gif)
-2. The caption for ./assets/screenshot-2.(png|jpg|jpeg|gif)
+* `wpdtrt_exif_attachment_geotag`
 
 == Changelog ==
 

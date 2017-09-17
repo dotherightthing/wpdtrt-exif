@@ -10,51 +10,15 @@
  * @subpackage  WPDTRT_EXIF/css
  */
 
-.wpdtrt-exif-blocks {
-  counter-reset: blocks;
-}
-
-.wpdtrt-exif-blocks::after {
-  content: "";
-  display: table;
-  width: 100%;
-  clear: both;
-}
-
-.wpdtrt-exif-blocks ul,
-.wpdtrt-exif-blocks li {
-  float: left;
-}
-
-.wpdtrt-exif-blocks li {
-  position: relative;
-  margin: 0 8px 8px 0;
-  height: 150px;
-  width: 150px;
-}
-
-.wpdtrt-exif-blocks li::before {
-  position: absolute;
-  top: 0;
-  left: 0;
-  color: #fff;
-  background-color: #000;
-  counter-increment: blocks;
-  content: counter(blocks);
-  padding: 8px;
-}
-
-.wpdtrt-exif-blocks li img {
-  width: 150px;
-  height: 150px;
-}
-
-.wpdtrt-exif-date {
-  font-size: .95em;
-}
-
-.widget .wpdtrt-exif-tip {
+/* add a faux label before the first EXIF attachment field */
+.compat-field-wpdtrt-exif-time::before {
+  content: "DTRT EXIF:";
   display: block;
-  padding-top: 4px;
 }
 
+/* add a divider after the last EXIF attachment field */
+.compat-field-wpdtrt-exif-gps {
+  padding-bottom: 5px;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 15px;
+}
