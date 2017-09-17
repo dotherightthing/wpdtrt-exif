@@ -80,13 +80,15 @@ function wpdtrt_exif_attachment_field( $form_fields, $post ) {
   // $post->ID // object reference (@param type)
   // $post['ID'] // array reference
 
+  // this will also return the attachment geotag if it is available
   $attachment_metadata = wpdtrt_exif_get_attachment_metadata( $post->ID );
 
   // wp_get_attachment_link has been overwritten to pass settings to JS, so it only ever points to the 'large' version
   //wpdtrt_log( 'TEST 1: ' . wp_get_attachment_image($post->ID, 'full') );
   //wpdtrt_log( 'TEST 2: ' . wp_get_attachment_link($post->ID, 'full') );
 
-  // Time is display only
+  // Time is read only
+
   if ( !empty( $attachment_metadata['image_meta']['created_timestamp'] ) ) {
 
     $timestamp_format = 'd:m:Y h:i:s';
@@ -98,6 +100,8 @@ function wpdtrt_exif_attachment_field( $form_fields, $post ) {
     );
   }
 
+  // Geotag is read and write
+
   $attachment_metadata_gps = wpdtrt_exif_get_attachment_metadata_gps( $attachment_metadata, 'number' );
 
   $attachment_metadata_gps_source = '';
@@ -105,8 +109,8 @@ function wpdtrt_exif_attachment_field( $form_fields, $post ) {
   // if the values can be pulled from the image
   if ( isset( $attachment_metadata_gps['latitude'], $attachment_metadata_gps['longitude'] ) ) {
     // then display these values to content admins
-    $value = ( $attachment_metadata_gps['latitude'] . ',' . $attachment_metadata_gps['longitude'] ); // working
-    $attachment_metadata_gps_source = 'WordPress';
+    $value = ( $attachment_metadata_gps['latitude'] . ',' . $attachment_metadata_gps['longitude'] );
+    $attachment_metadata_gps_source = 'WordPress'; // i.e. Image metadata has been stored to WordPress as attachment metadata
   }
   // else try to pull these values from the user field
   else {
@@ -155,6 +159,21 @@ function wpdtrt_exif_attachment_field_save( $post, $attachment ) {
   // $post['ID'] // array reference (@param type)
 
   if ( isset( $attachment['wpdtrt-exif-geotag'] ) ) {
+
+    /*
+    // TODO: convert $attachment['wpdtrt-exif-geotag'] array(lat,lng) to the formats that WP uses:
+
+    $attachment_metadata = wp_get_attachment_metadata( $attachment_id, false );
+
+    $attachment_metadata_updated = $attachment_metadata;
+    $attachment_metadata_updated['image_meta']['latitude'] =      $wp_latitude;
+    $attachment_metadata_updated['image_meta']['longitude'] =     $wp_longitude;
+    $attachment_metadata_updated['image_meta']['latitude_ref'] =  $wp_latitude_ref;
+    $attachment_metadata_updated['image_meta']['longitude_ref'] = $wp_longitude_ref;
+
+    wp_update_attachment_metadata( $post['ID'], $attachment_metadata_updated );
+    */
+
     update_post_meta( $post['ID'], 'wpdtrt_exif_attachment_geotag', $attachment['wpdtrt-exif-geotag'] );
   }
 
