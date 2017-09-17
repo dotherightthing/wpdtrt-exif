@@ -80,40 +80,38 @@ function wpdtrt_exif_attachment_field( $form_fields, $post ) {
   // $post->ID // object reference (@param type)
   // $post['ID'] // array reference
 
-  $file = get_attached_file( $post->ID );
-  $exif = @exif_read_data( $file );
+  $attachment_metadata = wpdtrt_exif_get_attachment_metadata( $post->ID );
 
   // wp_get_attachment_link has been overwritten to pass settings to JS, so it only ever points to the 'large' version
   //wpdtrt_log( 'TEST 1: ' . wp_get_attachment_image($post->ID, 'full') );
   //wpdtrt_log( 'TEST 2: ' . wp_get_attachment_link($post->ID, 'full') );
 
   // Time is display only
-  if ( !empty( $exif['DateTimeOriginal'] ) ) {
+  if ( !empty( $attachment_metadata['image_meta']['created_timestamp'] ) ) {
+
+    $timestamp_format = 'd:m:Y h:i:s';
+
     $form_fields['wpdtrt-exif-time'] = array(
       'label' => 'Time',
       'input' => 'html',
-      'html' => '<input type="text" readonly="readonly" value="' . $exif['DateTimeOriginal'] . '" />',
+      'html' => '<input type="text" readonly="readonly" value="' . date( $timestamp_format, $attachment_metadata['image_meta']['created_timestamp'] ) . '" />',
     );
   }
 
-  $meta = array();
+  $attachment_metadata_gps = wpdtrt_exif_get_attachment_metadata_gps( $attachment_metadata, 'number' );
 
-  if ( !empty( $exif['GPSLatitude'] ) && isset( $exif['GPSLatitudeRef'] ) ) {
-    $meta['latitude'] = wpdtrt_exif_gps_dms_to_decimal( $exif['GPSLatitudeRef'], $exif["GPSLatitude"][0], $exif["GPSLatitude"][1], $exif["GPSLatitude"][2] );
-  }
-
-  if ( !empty( $exif['GPSLongitude'] ) && isset( $exif['GPSLongitudeRef'] ) ) {
-    $meta['longitude'] = wpdtrt_exif_gps_dms_to_decimal( $exif['GPSLongitudeRef'], $exif["GPSLongitude"][0], $exif["GPSLongitude"][1], $exif["GPSLongitude"][2] );
-  }
+  $attachment_metadata_gps_source = '';
 
   // if the values can be pulled from the image
-  if ( isset( $meta['latitude'], $meta['longitude'] ) ) {
+  if ( isset( $attachment_metadata_gps['latitude'], $attachment_metadata_gps['longitude'] ) ) {
     // then display these values to content admins
-    $value = ( $meta['latitude'] . ',' . $meta['longitude'] ); // working
+    $value = ( $attachment_metadata_gps['latitude'] . ',' . $attachment_metadata_gps['longitude'] ); // working
+    $attachment_metadata_gps_source = 'WordPress';
   }
   // else try to pull these values from the user field
   else {
     $value = get_post_meta( $post->ID, 'wpdtrt_exif_attachment_geotag', true );
+    $attachment_metadata_gps_source = 'Custom Field';
   }
 
   $gmap = '';
@@ -132,7 +130,7 @@ function wpdtrt_exif_attachment_field( $form_fields, $post ) {
     'label' => 'Geotag',
     'input' => 'text',
     'value' => $value,
-    'helps' => '<img src="' . $gmap . '" alt="' . $value . '" title="' . $value . '" width="150" height="150" />',
+    'helps' => '<img src="' . $gmap . '" alt="' . $value . '" title="' . $value . '" width="150" height="150"><br>Geotag source: ' . $attachment_metadata_gps_source,
   );
 
   return $form_fields;
@@ -147,7 +145,7 @@ add_filter( 'attachment_fields_to_edit', 'wpdtrt_exif_attachment_field', 10, 2 )
  * @param $attachment array, attachment fields (form submitted via Ajax)
  * @return $post array, modified post data
  *
- * @todo Investigate writing to image rather than saving to custom field
+ * @todo wp_update_attachment_metadata rather than update_post_meta, making update_post_meta redundant
  */
 
 function wpdtrt_exif_attachment_field_save( $post, $attachment ) {
