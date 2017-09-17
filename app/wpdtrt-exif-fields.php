@@ -67,7 +67,7 @@ function wpdtrt_exif_gps_dms_to_decimal( $reference_direction, $degrees, $minute
  * @see https://core.trac.wordpress.org/ticket/23932
  *
  * @param $form_fields array, fields to include in attachment form
- * @param $post object, attachment record in database
+ * @param $post object, the $post object describing the attachment being edited
  * @return $form_fields, modified form fields
  * @see https://codex.wordpress.org/Function_Reference/get_attached_file
  * @see attachment.php
@@ -75,6 +75,10 @@ function wpdtrt_exif_gps_dms_to_decimal( $reference_direction, $degrees, $minute
  * @see wp-includes/media-template.php
  */
 function wpdtrt_exif_attachment_field( $form_fields, $post ) {
+
+  // NOTE:
+  // $post->ID // object reference (@param type)
+  // $post['ID'] // array reference
 
   $file = get_attached_file( $post->ID );
   $exif = @exif_read_data( $file );
@@ -109,7 +113,7 @@ function wpdtrt_exif_attachment_field( $form_fields, $post ) {
   }
   // else try to pull these values from the user field
   else {
-    $value = get_post_meta( $post->ID, 'wpdtrt_exif_attachment_geotag', true ); // working
+    $value = get_post_meta( $post->ID, 'wpdtrt_exif_attachment_geotag', true );
   }
 
   $gmap = '';
@@ -124,7 +128,7 @@ function wpdtrt_exif_attachment_field( $form_fields, $post ) {
     $gmap .= '&key=AIzaSyAyMI7z2mnFYdONaVV78weOmB0U2LThZMo';
   }
 
-  $form_fields['wpdtrt-exif-gps'] = array(
+  $form_fields['wpdtrt-exif-geotag'] = array(
     'label' => 'Geotag',
     'input' => 'text',
     'value' => $value,
@@ -137,17 +141,23 @@ function wpdtrt_exif_attachment_field( $form_fields, $post ) {
 add_filter( 'attachment_fields_to_edit', 'wpdtrt_exif_attachment_field', 10, 2 );
 
 /**
- * Save value of Location field in media uploader, for GPS dependent functions (map, weather)
+ * Save value of EXIF field in media uploader, for GPS dependent functions (map, weather)
  *
- * @param $post array, the post data for database
- * @param $attachment array, attachment fields from $_POST form
+ * @param $post array, Post attributes.
+ * @param $attachment array, attachment fields (form submitted via Ajax)
  * @return $post array, modified post data
+ *
+ * @todo Investigate writing to image rather than saving to custom field
  */
 
 function wpdtrt_exif_attachment_field_save( $post, $attachment ) {
 
-  if ( isset( $attachment['wpdtrt-exif-gps'] ) ) {
-    update_post_meta( $post['ID'], 'wpdtrt_exif_attachment_geotag', $attachment['dtrt-gps'] ); // working
+  // NOTE:
+  // $post->ID // object reference
+  // $post['ID'] // array reference (@param type)
+
+  if ( isset( $attachment['wpdtrt-exif-geotag'] ) ) {
+    update_post_meta( $post['ID'], 'wpdtrt_exif_attachment_geotag', $attachment['wpdtrt-exif-geotag'] );
   }
 
   return $post;
