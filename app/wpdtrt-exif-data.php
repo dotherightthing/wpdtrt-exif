@@ -14,10 +14,10 @@ include_once( ABSPATH . 'wp-admin/includes/image.php' ); // access wp_read_image
 add_filter('wp_read_image_metadata', 'wpdtrt_exif_read_image_geodata','',3);
 
 /**
+ * Read metadata from image
+ *
  * Supplement the core function wp_read_image_metadata
- * to request GPS location data
- * which WP doesn't normally return
- * and return it with the metadata it does normally return
+ * to also return the GPS location data which WP usually ignores
  *
  * Added false values to prevent this function running over and over
  * if the image was taken with a non-geotagging camera
