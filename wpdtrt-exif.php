@@ -66,7 +66,6 @@ if( ! defined( 'WPDTRT_EXIF_URL' ) ) {
   define( 'WPDTRT_EXIF_URL', plugin_dir_url( __FILE__ ) );
 }
 
-
 /**
  * Store all of our plugin options in an array
  * So that we only use have to consume one row in the WP Options table
@@ -82,9 +81,9 @@ if( ! defined( 'WPDTRT_EXIF_URL' ) ) {
  */
 
   require_once(WPDTRT_EXIF_PATH . 'app/wpdtrt-exif-css.php');
+  require_once(WPDTRT_EXIF_PATH . 'app/wpdtrt-exif-conversion.php');
   require_once(WPDTRT_EXIF_PATH . 'app/wpdtrt-exif-data.php');
   require_once(WPDTRT_EXIF_PATH . 'app/wpdtrt-exif-fields.php');
-  require_once(WPDTRT_EXIF_PATH . 'app/wpdtrt-exif-geodata.php');
 
   require_once(WPDTRT_EXIF_PATH . 'config/tgm-plugin-activation.php');
 
