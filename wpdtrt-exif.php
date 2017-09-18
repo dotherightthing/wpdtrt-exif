@@ -81,10 +81,10 @@ if( ! defined( 'WPDTRT_EXIF_URL' ) ) {
  * Include plugin logic
  */
 
-  require_once(WPDTRT_EXIF_PATH . 'app/wpdtrt-exif-geodata.php');
-  require_once(WPDTRT_EXIF_PATH . 'app/wpdtrt-exif-fields.php');
-
   require_once(WPDTRT_EXIF_PATH . 'app/wpdtrt-exif-css.php');
+  require_once(WPDTRT_EXIF_PATH . 'app/wpdtrt-exif-data.php');
+  require_once(WPDTRT_EXIF_PATH . 'app/wpdtrt-exif-fields.php');
+  require_once(WPDTRT_EXIF_PATH . 'app/wpdtrt-exif-geodata.php');
 
   require_once(WPDTRT_EXIF_PATH . 'config/tgm-plugin-activation.php');
 
