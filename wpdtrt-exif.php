@@ -84,13 +84,7 @@ if( ! defined( 'WPDTRT_EXIF_URL' ) ) {
   require_once(WPDTRT_EXIF_PATH . 'app/wpdtrt-exif-geodata.php');
   require_once(WPDTRT_EXIF_PATH . 'app/wpdtrt-exif-fields.php');
 
-  //require_once(WPDTRT_EXIF_PATH . 'app/wpdtrt-exif-api.php');
   require_once(WPDTRT_EXIF_PATH . 'app/wpdtrt-exif-css.php');
-  //require_once(WPDTRT_EXIF_PATH . 'app/wpdtrt-exif-html.php');
-  //require_once(WPDTRT_EXIF_PATH . 'app/wpdtrt-exif-js.php');
-  //require_once(WPDTRT_EXIF_PATH . 'app/wpdtrt-exif-options.php');
-  //require_once(WPDTRT_EXIF_PATH . 'app/wpdtrt-exif-shortcode.php');
-  //require_once(WPDTRT_EXIF_PATH . 'app/wpdtrt-exif-widget.php');
 
   require_once(WPDTRT_EXIF_PATH . 'config/tgm-plugin-activation.php');
 
