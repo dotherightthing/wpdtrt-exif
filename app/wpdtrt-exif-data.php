@@ -22,14 +22,15 @@ add_filter('wp_read_image_metadata', 'wpdtrt_exif_read_image_geodata','',3);
  * Added false values to prevent this function running over and over
  * if the image was taken with a non-geotagging camera
  *
- * @todo Pull geotag from wpdtrt_exif_attachment_geotag if it is not available in the image
- *
  * @example
  *  include_once( ABSPATH . 'wp-admin/includes/image.php' ); // access wp_read_image_metadata
  *  add_filter('wp_read_image_metadata', 'wpdtrt_exif_read_image_geodata','',3);
  *
  * @see http://kristarella.blog/2009/04/add-image-exif-metadata-to-wordpress/
  * @uses wp-admin/includes/image.php
+ *
+ * @todo Pull geotag from wpdtrt_exif_attachment_geotag if it is not available in the image.
+ *  This requires resolving the conversion issue https://github.com/dotherightthing/wpdtrt-exif/issues/2
  */
 function wpdtrt_exif_read_image_geodata( $meta, $file, $sourceImageType ) {
 
@@ -124,6 +125,7 @@ function wpdtrt_exif_get_attachment_metadata( $attachment_id ) {
  * @param $attachment_metadata
  * @param $format
  * @return array ($lat, $lng)
+ * @todo https://github.com/dotherightthing/wpdtrt-exif/issues/3
  */
 function wpdtrt_exif_get_attachment_metadata_gps( $attachment_metadata, $format ) {
 
@@ -135,6 +137,8 @@ function wpdtrt_exif_get_attachment_metadata_gps( $attachment_metadata, $format 
 
   $lat = wpdtrt_exif_convert_dms_to_dd( $latitude );
   $lng = wpdtrt_exif_convert_dms_to_dd( $longitude );
+
+  //wpdtrt_exif_convert_test( $latitude );
 
   $lat_ref = $attachment_metadata['image_meta']['latitude_ref'];
   $lng_ref = $attachment_metadata['image_meta']['longitude_ref'];
@@ -160,10 +164,11 @@ function wpdtrt_exif_get_attachment_metadata_gps( $attachment_metadata, $format 
       $lng_out = ( $neg_lng . number_format($lng, 6) );
     }
     // text based latitude and longitude for Alternative text
-    else if ( $format === 'text' ) {
-      $lat_out = ( geo_pretty_fracs2dec($latitude). $lat_ref );
-      $lng_out = ( geo_pretty_fracs2dec($longitude) . $lng_ref );
-    }
+    // geo_pretty_fracs2dec() missing
+    //else if ( $format === 'text' ) {
+    //  $lat_out = ( geo_pretty_fracs2dec($latitude). $lat_ref );
+    //  $lng_out = ( geo_pretty_fracs2dec($longitude) . $lng_ref );
+    //}
   }
 
   return array(

@@ -103,6 +103,7 @@ add_filter( 'attachment_fields_to_edit', 'wpdtrt_exif_attachment_field', 10, 2 )
  * @return $post array, modified post data
  *
  * @todo wp_update_attachment_metadata rather than update_post_meta, making update_post_meta redundant
+ * @see https://github.com/dotherightthing/wpdtrt-exif/issues/2
  */
 
 function wpdtrt_exif_attachment_field_save( $post, $attachment ) {
@@ -114,15 +115,21 @@ function wpdtrt_exif_attachment_field_save( $post, $attachment ) {
   if ( isset( $attachment['wpdtrt-exif-geotag'] ) ) {
 
     /*
-    // TODO: convert $attachment['wpdtrt-exif-geotag'] array(lat,lng) to the formats that WP uses:
+    // Copy user input from custom field to attachment metadata,
+    // converting $attachment['wpdtrt-exif-geotag'] array(lat,lng) to the exif format that WP uses
 
     $attachment_metadata = wp_get_attachment_metadata( $attachment_id, false );
 
     $attachment_metadata_updated = $attachment_metadata;
-    $attachment_metadata_updated['image_meta']['latitude'] =      $wp_latitude;
-    $attachment_metadata_updated['image_meta']['longitude'] =     $wp_longitude;
-    $attachment_metadata_updated['image_meta']['latitude_ref'] =  $wp_latitude_ref;
-    $attachment_metadata_updated['image_meta']['longitude_ref'] = $wp_longitude_ref;
+
+    $user_dd = explode( ',', $attachment['wpdtrt-exif-geotag'] );
+    $user_lat_dms_fr = wpdtrt_exif_convert_dd_to_dms( $user_dd[0] );
+    $user_long_dms_fr = wpdtrt_exif_convert_dd_to_dms( $user_dd[1] );
+
+    $attachment_metadata_updated['image_meta']['latitude'] =      $user_lat_dms_fr[; // array( 39/1, 56/1, 357/100)
+    $attachment_metadata_updated['image_meta']['latitude_ref'] =  $TODO; // N
+    $attachment_metadata_updated['image_meta']['longitude'] =     $user_long_dms_fr; // array( 116/1, 23/1, 4891/100 )
+    $attachment_metadata_updated['image_meta']['longitude_ref'] = $TODO; // E
 
     wp_update_attachment_metadata( $post['ID'], $attachment_metadata_updated );
     */
