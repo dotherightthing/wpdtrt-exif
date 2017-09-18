@@ -14,7 +14,7 @@ include_once( ABSPATH . 'wp-admin/includes/image.php' ); // access wp_read_image
 add_filter('wp_read_image_metadata', 'wpdtrt_exif_read_image_geodata','',3);
 
 /**
- * Read metadata from image
+ * Get metadata from image
  *
  * Supplement the core function wp_read_image_metadata
  * to also return the GPS location data which WP usually ignores
@@ -67,6 +67,110 @@ function wpdtrt_exif_read_image_geodata( $meta, $file, $sourceImageType ) {
   }
 
   return $meta;
+}
+
+/**
+  * Get metadata from attachment, including geotag
+  *
+  * @param $attachment_id
+  * @returns array $attachment_metadata
+  * @uses http://kristarella.blog/2008/12/geo-exif-data-in-wordpress/
+  */
+
+function wpdtrt_exif_get_attachment_metadata( $attachment_id ) {
+
+  // reinstate attachment metadata accidentally deleted during development:
+  // $attach_data = wp_generate_attachment_metadata( $id, get_attached_file( $id ) );
+  // wp_update_attachment_metadata( $id, $attach_data );
+
+  // get the core metadata stored with the image post
+  $attachment_metadata = wp_get_attachment_metadata( $attachment_id, false );
+
+  // if the core metadata doesn't include a GPS location
+  // then this wasn't stored when the image was uploaded into WP
+  // (i.e. it was uploaded before this function was written)
+  // so reprocess the image
+  if ( !array_key_exists('latitude', $attachment_metadata) || !array_key_exists('longitude', $attachment_metadata) ) {
+
+    $file = get_attached_file( $attachment_id ); // full path
+
+    // read metadata, including the GPS metadata requested by our filter wpdtrt_exif_read_image_geodata
+    // this includes running exif_read_data()
+    $image_metadata = wp_read_image_metadata( $file );
+
+    // TODO: check for false values
+    // and replace with the value of the custom field if it has been supplied
+
+    // the metadata update is destructive
+    // so merge the existing metadata with the metadata which we've just read from the image
+    $attachment_metadata_updated = $attachment_metadata;
+    $attachment_metadata_updated['image_meta'] = $image_metadata;
+
+    // write the updated metadata to WP's database
+    // note that the actual image EXIF metadata is not changed
+    // i.e. this is not wp_write_image_metadata
+    wp_update_attachment_metadata( $attachment_id, $attachment_metadata_updated );
+
+    // read the updated metadata
+    // TODO: is this redundant?
+    $attachment_metadata = wp_get_attachment_metadata( $attachment_id, false );
+  }
+
+  return $attachment_metadata;
+}
+
+/**
+ * Get geotag from attachment metadata
+ * @param $attachment_metadata
+ * @param $format
+ * @return array ($lat, $lng)
+ */
+function wpdtrt_exif_get_attachment_metadata_gps( $attachment_metadata, $format ) {
+
+  $lat_out = null;
+  $lng_out = null;
+
+  $latitude = $attachment_metadata['image_meta']['latitude'];
+  $longitude = $attachment_metadata['image_meta']['longitude'];
+
+  $lat = wpdtrt_exif_convert_dms_to_dd( $latitude );
+  $lng = wpdtrt_exif_convert_dms_to_dd( $longitude );
+
+  $lat_ref = $attachment_metadata['image_meta']['latitude_ref'];
+  $lng_ref = $attachment_metadata['image_meta']['longitude_ref'];
+
+  if ($lat_ref == 'S') {
+    $neg_lat = '-';
+  }
+  else {
+    $neg_lat = '';
+  }
+
+  if ($lng_ref == 'W') {
+    $neg_lng = '-';
+  }
+  else {
+    $neg_lng = '';
+  }
+
+  if ($latitude != 0 && $longitude != 0) {
+    // full decimal latitude and longitude for Google Maps
+    if ( $format === 'number' ) {
+      $lat_out = ( $neg_lat . number_format($lat,6) );
+      $lng_out = ( $neg_lng . number_format($lng, 6) );
+    }
+    // text based latitude and longitude for Alternative text
+    else if ( $format === 'text' ) {
+      $lat_out = ( geo_pretty_fracs2dec($latitude). $lat_ref );
+      $lng_out = ( geo_pretty_fracs2dec($longitude) . $lng_ref );
+    }
+  }
+
+  return array(
+    'latitude' => $lat_out,
+    'longitude' => $lng_out
+  );
+
 }
 
 ?>
