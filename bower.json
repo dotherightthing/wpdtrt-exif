@@ -6,10 +6,7 @@
   "authors": [
     "Dan Smith <dev@dotherightthing.co.nz>"
   ],
-  "devDependencies": {
-    "WordPress-Admin-Style": "https://github.com/bueltge/WordPress-Admin-Style.git#^1.4.1",
-    "wp-skeleton-plugin": "https://github.com/ptahdunbar/wp-skeleton-plugin.git"
-  },
+  "devDependencies": {},
   "license": "All Rights Reserved",
   "homepage": "https://github.com/dotherightthing/wpdtrt-exif",
   "ignore": [
