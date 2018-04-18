@@ -41,7 +41,7 @@ function wpdtrt_exif_attachment_field_gps( $form_fields, $post ) {
 	}
 	// else try to pull these values from the user field
 	else {
-		$value = get_post_meta( $post->ID, 'wpdtrt_exif_attachment_geotag', true );
+		$value = get_post_meta( $post->ID, 'wpdtrt_exif_attachment_gps', true );
 		$attachment_metadata_gps_source = 'Custom Field';
 	}
 

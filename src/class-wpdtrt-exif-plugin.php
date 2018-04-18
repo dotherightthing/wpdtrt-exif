@@ -172,12 +172,12 @@ class WPDTRT_Exif_Plugin extends DoTheRightThing\WPPlugin\Plugin {
      *
      * @todo This should then be stored with the image, but it needs to be converted
      * @todo https://github.com/dotherightthing/wpdtrt-exif/issues/2
-     * @todo rename wpdtrt_exif_attachment_geotag to use my 'cf' naming convention
+     * @todo rename wpdtrt_exif_attachment_gps to use my 'cf' naming convention
      */
     public function get_user_gps() {
         global $post;
         // TODO: $post->ID is throwing error in edit screen
-        $user_gps = get_post_meta( $post->ID, 'wpdtrt_exif_attachment_geotag', true );
+        $user_gps = get_post_meta( $post->ID, 'wpdtrt_exif_attachment_gps', true );
 
         if ( isset($user_gps) && ( strpos($user_gps, ',') !== false ) ) {
             $user_gps = explode(',', $user_gps);
@@ -214,7 +214,7 @@ class WPDTRT_Exif_Plugin extends DoTheRightThing\WPPlugin\Plugin {
      * @see http://kristarella.blog/2009/04/add-image-exif-metadata-to-wordpress/
      * @uses wp-admin/includes/image.php
      *
-     * @todo Pull geotag from wpdtrt_exif_attachment_geotag if it is not available in the image.
+     * @todo Pull geotag from wpdtrt_exif_attachment_gps if it is not available in the image.
      *  This requires resolving the conversion issue https://github.com/dotherightthing/wpdtrt-exif/issues/2
      */
     function filter_read_image_geodata( $meta, $file, $sourceImageType ) {
