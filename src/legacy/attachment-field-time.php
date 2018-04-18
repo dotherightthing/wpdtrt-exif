@@ -31,8 +31,10 @@ function wpdtrt_exif_attachment_field_time( $form_fields, $post ) {
 	// $post->ID // object reference (@param type)
 	// $post['ID'] // array reference
 
+	global $wpdtrt_exif_plugin;
+
 	// this will also return the attachment geotag if it is available
-	$attachment_metadata = $this->get_attachment_metadata( $post->ID );
+	$attachment_metadata = $wpdtrt_exif_plugin->get_attachment_metadata( $post->ID );
 
 	// wp_get_attachment_link has been overwritten to pass settings to JS, so it only ever points to the 'large' version
 	//wpdtrt_log( 'TEST 1: ' . wp_get_attachment_image($post->ID, 'full') );

@@ -27,10 +27,12 @@
  */
 function wpdtrt_exif_attachment_field_gps( $form_fields, $post ) {
 
-	$plugin_options = $this->get_plugin_options();
+	global $wpdtrt_exif_plugin;
+
+	$plugin_options = $wpdtrt_exif_plugin->get_plugin_options();
 	$google_static_maps_api_key = $plugin_options['google_static_maps_api_key'];
 
-	$attachment_metadata_gps = $this->get_attachment_metadata_gps( $attachment_metadata, 'number' );
+	$attachment_metadata_gps = $wpdtrt_exif_plugin->get_attachment_metadata_gps( $attachment_metadata, 'number' );
 	$attachment_metadata_gps_source = '';
 
 	// if the values can be pulled from the image
