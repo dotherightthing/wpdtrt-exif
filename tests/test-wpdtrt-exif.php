@@ -193,13 +193,13 @@ class wpdtrt_exifTest extends WP_UnitTestCase {
      */
     public function test_helper_convert_dms_to_dd() {
 
-        $attachment_metadata = $this->get_attachment_metadata( $this->attachment_id_1 );
+        $attachment_metadata = $this->plugin->get_attachment_metadata( $this->attachment_id_1 );
 
         // Latitude in Degrees Minutes Seconds fractions
         $latitude = $attachment_metadata['image_meta']['latitude'];
 
-        $latitude_dd = $this->helper_convert_dms_to_dd( $latitude );
-        $latitude_dms = $this->helper_convert_dd_to_dms( $latitude_dd );
+        $latitude_dd = $this->plugin->helper_convert_dms_to_dd( $latitude );
+        $latitude_dms = $this->plugin->helper_convert_dd_to_dms( $latitude_dd );
 
         $this->assertEquals(
             '39.9958333333',
