@@ -188,6 +188,50 @@ class wpdtrt_exifTest extends WP_UnitTestCase {
     // ########## TEST ########## //
 
     /**
+     * Test that querying empty attachment fields gives the expected results
+     */
+    public function test_empty_attachment_fields() {
+
+        global $wpdtrt_exif_plugin;
+
+        $this->go_to(
+            get_post_permalink( $this->post_id_1 )
+        );
+
+        $this->assertEquals(
+            array(
+                'latitude' => null,
+                'longitude' => null
+            ),
+            $wpdtrt_exif_plugin->get_user_gps(),
+            'Expected no user GPS data, if GPS not manually entered'
+        );
+    }
+
+    /**
+     * Test that querying populated attachment fields gives the expected results
+     */
+    public function test_attachment_fields() {
+
+        global $wpdtrt_exif_plugin;
+        $test1jpg_location = '40.0798614,116.6009234';
+        update_post_meta( $this->attachment_id_1, 'wpdtrt_exif_attachment_gps', $test1jpg_location );
+
+        $this->go_to(
+            get_post_permalink( $this->post_id_1 )
+        );
+
+        $this->assertNotEquals(
+            array(
+                'latitude' => null,
+                'longitude' => null
+            ),
+            $wpdtrt_exif_plugin->get_user_gps(),
+            'Expected user GPS data, if GPS manually entered'
+        );
+    }
+
+    /**
      * Test that meta data can be pulled from the attachment image
      */
     public function test_attachment_meta() {
@@ -211,15 +255,6 @@ class wpdtrt_exifTest extends WP_UnitTestCase {
             $attachment_metadata['image_meta']['latitude'],
             'attachment image_meta is missing latitude'
         );
-    }
-
-    /**
-     * Test that the custom field keys and values are output as ?
-     *
-     * @see test-wpdtrt-gallery.php
-     */
-    public function __test_attachment_fields() {
-        return true; // TODO
     }
 
     /**
