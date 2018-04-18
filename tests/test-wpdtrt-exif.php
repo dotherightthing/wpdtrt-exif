@@ -182,7 +182,7 @@ class wpdtrt_exifTest extends WP_UnitTestCase {
      *
      * @see test-wpdtrt-gallery.php
      */
-    public function test_attachment_fields() {
+    public function __test_attachment_fields() {
         return true; // TODO
     }
 
