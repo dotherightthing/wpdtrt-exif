@@ -113,9 +113,10 @@ if( ! defined( 'WPDTRT_EXIF_URL' ) ) {
   $test_path = ABSPATH;
 
   // remove trailing slash from ABSPATH
-  if ( substr($test_path, -1) == '/' ) {
-    $test_path = substr($test_path, 0, -1);
-  }
+  // works for local unit testing, but fails in local WordPress and in Travis
+  //if ( substr($test_path, -1) == '/' ) {
+  //  $test_path = substr($test_path, 0, -1);
+  //}
 
   require_once( $test_path . 'wp-admin/includes/image.php' ); // access wp_read_image_metadata
 
