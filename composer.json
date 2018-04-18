@@ -1,0 +1,35 @@
+{
+	"name": "dotherightthing/wpdtrt-exif",
+	"description": "Adds EXIF (time and geotag) fields to the attachment media modal, for use by other plugins.",
+	"type": "library",
+    "keywords": ["exif", "geotag", "attachment"],
+    "license": "ISC",
+    "authors": [
+        {
+            "name": "Dan Smith",
+            "email": "dev@dotherightthing.co.nz",
+            "homepage": "https://github.com/dotherightthing/wpdtrt-exif",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "email": "support@dotherightthing.co.nz",
+        "issues": "https://github.com/dotherightthing/wpdtrt-exif/issues"
+    },
+    "require": {
+        "dotherightthing/wpdtrt-plugin": "^1.0.0"
+    },
+    "minimum-stability": "stable",
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://repo.packagist.com/dotherightthing/"
+        },
+        {
+            "packagist.org": false
+        }
+    ],
+    "config": {
+        "vendor-dir": "vendor"
+    }
+}

@@ -1,7 +1,10 @@
+.DS_Store
+.yo-rc.json
+composer.phar
+css
 docs
 generators
 logs
 node_modules
-tests
-composer.phar
-.DS_Store
+release.zip
+vendor

@@ -1,22 +1,14 @@
 /**
- * gulpfile.js
- * Run tasks to aid the development process.
- * @example gulp default
+ * Gulp Task Runner
+ * Compile front-end resources
+ *
+ * @example usage from child plugin:
+ *    gulp --gulpfile ./vendor/dotherightthing/wpdtrt-plugin/gulpfile.js --cwd ./
+ *    gulp dev --gulpfile ./vendor/dotherightthing/wpdtrt-plugin/gulpfile.js --cwd ./
+ *    gulp dist --gulpfile ./vendor/dotherightthing/wpdtrt-plugin/gulpfile.js --cwd ./
+ *
+ * @package     WPDTRT_Exif
+ * @version 	0.0.1
+ * @since       0.7.5
  */
-var gulp = require('gulp');
-var phplint = require('gulp-phplint');
-
-gulp.task('default', function () {
-  return gulp.src(['**/*.php'])
-
-    // validate PHP
-    // The linter ships with PHP
-    .pipe(phplint())
-    .pipe(phplint.reporter(function(file){
-      var report = file.phplintReport || {};
-
-      if (report.error) {
-        console.log(report.message+' on line '+report.line+' of '+report.filename);
-      }
-    }));
-});
+ 
