@@ -110,8 +110,8 @@ if( ! defined( 'WPDTRT_EXIF_URL' ) ) {
   require_once(WPDTRT_EXIF_PATH . 'src/class-wpdtrt-exif-widgets.php');
 
   // legacy helpers
-  require_once(WPDTRT_GALLERY_PATH . 'src/legacy/attachment-field-time.php');
-  require_once(WPDTRT_GALLERY_PATH . 'src/legacy/attachment-field-gps.php');
+  require_once(WPDTRT_EXIF_PATH . 'src/legacy/attachment-field-time.php');
+  require_once(WPDTRT_EXIF_PATH . 'src/legacy/attachment-field-gps.php');
 
   // log & trace helpers
   $debug = new DoTheRightThing\WPDebug\Debug;
