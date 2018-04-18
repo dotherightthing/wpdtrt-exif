@@ -188,6 +188,32 @@ class wpdtrt_exifTest extends WP_UnitTestCase {
     // ########## TEST ########## //
 
     /**
+     * Test that meta data can be pulled from the attachment image
+     */
+    public function test_attachment_meta() {
+
+        global $wpdtrt_exif_plugin;
+
+        $attachment_metadata = $wpdtrt_exif_plugin->get_attachment_metadata( $this->attachment_id_1 );
+
+        $this->assertTrue(
+            function_exists( 'wp_read_image_metadata' ),
+            'wp_read_image_metadata is not available'
+        );
+
+        $this->assertArrayHasKey(
+            'image_meta',
+            $attachment_metadata,
+            'attachment image_meta is missing'
+        );
+
+        $this->assertNotNull(
+            $attachment_metadata['image_meta']['latitude'],
+            'attachment image_meta is missing latitude'
+        );
+    }
+
+    /**
      * Test that the custom field keys and values are output as ?
      *
      * @see test-wpdtrt-gallery.php
@@ -205,17 +231,16 @@ class wpdtrt_exifTest extends WP_UnitTestCase {
 
         global $wpdtrt_exif_plugin;
 
-        $attachment_metadata = $wpdtrt_exif_plugin->get_attachment_metadata( $this->attachment_id_1 );
-
-        // Latitude in Degrees Minutes Seconds fractions
-        $latitude = $attachment_metadata['image_meta']['latitude'];
-
         $this->assertEquals(
             array(),
             $attachment_metadata,
             'attachment_metadata has an unexpected value'
         );
 
+        // Latitude in Degrees Minutes Seconds fractions
+        $latitude = $attachment_metadata['image_meta']['latitude'];
+
+        // Latitude in DD
         $latitude_dd = $wpdtrt_exif_plugin->helper_convert_dms_to_dd( $latitude );
         //$latitude_dms = $wpdtrt_exif_plugin->helper_convert_dd_to_dms( $latitude_dd );
 
@@ -225,7 +250,6 @@ class wpdtrt_exifTest extends WP_UnitTestCase {
             'Incorrect conversion from DMS to DD'
         );
 
-        /*
         $this->assertEquals(
             Array (
                 '39/1',
@@ -235,6 +259,5 @@ class wpdtrt_exifTest extends WP_UnitTestCase {
             $latitude_dms,
             'Incorrect conversion from DD to DMS'
         );
-        */
     }
 }

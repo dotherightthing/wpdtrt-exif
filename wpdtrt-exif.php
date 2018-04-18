@@ -109,6 +109,16 @@ if( ! defined( 'WPDTRT_EXIF_URL' ) ) {
   require_once(WPDTRT_EXIF_PATH . 'src/class-wpdtrt-exif-plugin.php');
   require_once(WPDTRT_EXIF_PATH . 'src/class-wpdtrt-exif-widgets.php');
 
+  // wordpress
+  $test_path = ABSPATH;
+
+  // remove trailing slash from ABSPATH
+  if ( substr($test_path, -1) == '/' ) {
+    $test_path = substr($test_path, 0, -1);
+  }
+
+  require_once( $test_path . 'wp-admin/includes/image.php' ); // access wp_read_image_metadata
+
   // legacy helpers
   require_once(WPDTRT_EXIF_PATH . 'src/legacy/attachment-field-time.php');
   require_once(WPDTRT_EXIF_PATH . 'src/legacy/attachment-field-gps.php');

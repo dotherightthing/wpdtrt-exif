@@ -68,8 +68,6 @@ class WPDTRT_Exif_Plugin extends DoTheRightThing\WPPlugin\Plugin {
      */
     public function get_attachment_metadata( $attachment_id ) {
 
-        include_once( ABSPATH . 'wp-admin/includes/image.php' ); // access wp_read_image_metadata
-
         // reinstate attachment metadata accidentally deleted during development:
         // $attach_data = wp_generate_attachment_metadata( $id, get_attached_file( $id ) );
         // wp_update_attachment_metadata( $id, $attach_data );
