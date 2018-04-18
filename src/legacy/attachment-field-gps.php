@@ -24,10 +24,11 @@
  * @see attachment.php
  * @see wp-admin/includes/media.php
  * @see wp-includes/media-template.php
- *
- * @todo Remove hardcoded Google Maps Key
  */
 function wpdtrt_exif_attachment_field_gps( $form_fields, $post ) {
+
+	$plugin_options = $this->get_plugin_options();
+	$google_static_maps_api_key = $plugin_options['google_static_maps_api_key'];
 
 	$attachment_metadata_gps = $this->get_attachment_metadata_gps( $attachment_metadata, 'number' );
 	$attachment_metadata_gps_source = '';
@@ -53,7 +54,7 @@ function wpdtrt_exif_attachment_field_gps( $form_fields, $post ) {
 		$gmap .= '&zoom=8';
 		$gmap .= '&size=150x150';
 		$gmap .= '&markers=color:0xff0000|' . $value;
-		$gmap .= '&key=AIzaSyAyMI7z2mnFYdONaVV78weOmB0U2LThZMo'; // TODO
+		$gmap .= '&key=' . $google_static_maps_api_key;
 	}
 
   	// Time is read only

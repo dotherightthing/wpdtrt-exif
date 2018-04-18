@@ -143,11 +143,11 @@ if( ! defined( 'WPDTRT_EXIF_URL' ) ) {
      * @see https://github.com/dotherightthing/wpdtrt-plugin/blob/master/views/form-element-text.php
      */
     $plugin_options = array(
-      'pluginoption1' => array(
+      'google_static_maps_api_key' => array(
         'type' => 'text',
-        'label' => __('Field label', 'wpdtrt-exif'),
-        'size' => 10,
-        'tip' => __('Helper text', 'wpdtrt-exif')
+        'label' => __('Google Static Maps API Key', 'wpdtrt-exif'),
+        'size' => 50,
+        'tip' => __('https://developers.google.com/maps/documentation/static-maps/ > GET A KEY', 'wpdtrt-exif')
       )
     );
 
