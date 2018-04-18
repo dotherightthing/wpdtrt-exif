@@ -152,9 +152,10 @@ class WPDTRT_Exif_Plugin extends DoTheRightThing\WPPlugin\Plugin {
         }
         else {
             $user_gps = $this->get_user_gps();
+
             if ( $format === 'number' ) {
-            $lat_out = $user_gps['latitude'];
-            $lng_out = $user_gps['longitude'];
+                $lat_out = $user_gps['latitude'];
+                $lng_out = $user_gps['longitude'];
             }
         }
         return array(
