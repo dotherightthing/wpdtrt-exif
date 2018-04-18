@@ -29,7 +29,7 @@
  */
 function wpdtrt_exif_attachment_field_gps( $form_fields, $post ) {
 
-	$attachment_metadata_gps = wpdtrt_exif_get_attachment_metadata_gps( $attachment_metadata, 'number' );
+	$attachment_metadata_gps = $this->get_attachment_metadata_gps( $attachment_metadata, 'number' );
 	$attachment_metadata_gps_source = '';
 
 	// if the values can be pulled from the image
@@ -90,8 +90,8 @@ function wpdtrt_exif_attachment_field_gps_save( $post, $attachment ) {
 		$attachment_metadata = wp_get_attachment_metadata( $attachment_id, false );
 		$attachment_metadata_updated = $attachment_metadata;
 		$user_dd = explode( ',', $attachment['wpdtrt-exif-geotag'] );
-		$user_lat_dms_fr = wpdtrt_exif_convert_dd_to_dms( $user_dd[0] );
-		$user_long_dms_fr = wpdtrt_exif_convert_dd_to_dms( $user_dd[1] );
+		$user_lat_dms_fr = $this->helper_convert_dd_to_dms( $user_dd[0] );
+		$user_long_dms_fr = $this->helper_convert_dd_to_dms( $user_dd[1] );
 		$attachment_metadata_updated['image_meta']['latitude'] =      $user_lat_dms_fr[; // array( 39/1, 56/1, 357/100)
 		$attachment_metadata_updated['image_meta']['latitude_ref'] =  $TODO; // N
 		$attachment_metadata_updated['image_meta']['longitude'] =     $user_long_dms_fr; // array( 116/1, 23/1, 4891/100 )

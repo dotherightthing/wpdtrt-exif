@@ -52,7 +52,7 @@ class WPDTRT_Exif_Plugin extends DoTheRightThing\WPPlugin\Plugin {
     	parent::wp_setup();
 
 		// add actions and filters here
-        add_filter( 'wp_read_image_metadata', 'wpdtrt_exif_read_image_geodata', '', 3 );
+        add_filter( 'wp_read_image_metadata', [$this, 'filter_read_image_geodata'], '', 3 );
     }
 
     //// END WORDPRESS INTEGRATION \\\\
@@ -66,7 +66,7 @@ class WPDTRT_Exif_Plugin extends DoTheRightThing\WPPlugin\Plugin {
      * @return array $attachment_metadata
      * @uses http://kristarella.blog/2008/12/geo-exif-data-in-wordpress/
      */
-    function wpdtrt_exif_get_attachment_metadata( $attachment_id ) {
+    public function get_attachment_metadata( $attachment_id ) {
 
         include_once( ABSPATH . 'wp-admin/includes/image.php' ); // access wp_read_image_metadata
 
@@ -83,7 +83,7 @@ class WPDTRT_Exif_Plugin extends DoTheRightThing\WPPlugin\Plugin {
         if ( !array_key_exists('latitude', $attachment_metadata) || !array_key_exists('longitude', $attachment_metadata) ) {
             $file = get_attached_file( $attachment_id ); // full path
 
-            // read metadata, including the GPS metadata requested by our filter wpdtrt_exif_read_image_geodata
+            // read metadata, including the GPS metadata requested by our filter filter_read_image_geodata
             // this includes running exif_read_data()
             $image_metadata = wp_read_image_metadata( $file );
 
@@ -107,8 +107,6 @@ class WPDTRT_Exif_Plugin extends DoTheRightThing\WPPlugin\Plugin {
         return $attachment_metadata;
     }
 
-
-
     /**
      * Get geotag from attachment metadata
      * @param $attachment_metadata
@@ -116,14 +114,13 @@ class WPDTRT_Exif_Plugin extends DoTheRightThing\WPPlugin\Plugin {
      * @return array ($latitude, $longitude)
      * @todo https://github.com/dotherightthing/wpdtrt-exif/issues/3
      */
-    function wpdtrt_exif_get_attachment_metadata_gps( $attachment_metadata, $format ) {
+    public function get_attachment_metadata_gps( $attachment_metadata, $format ) {
         $lat_out = null;
         $lng_out = null;
         $latitude = $attachment_metadata['image_meta']['latitude'];
         $longitude = $attachment_metadata['image_meta']['longitude'];
-        $lat = wpdtrt_exif_convert_dms_to_dd( $latitude );
-        $lng = wpdtrt_exif_convert_dms_to_dd( $longitude );
-        //wpdtrt_exif_convert_test( $latitude );
+        $lat = $this->helper_convert_dms_to_dd( $latitude );
+        $lng = $this->helper_convert_dms_to_dd( $longitude );
         $lat_ref = $attachment_metadata['image_meta']['latitude_ref'];
         $lng_ref = $attachment_metadata['image_meta']['longitude_ref'];
 
@@ -156,7 +153,7 @@ class WPDTRT_Exif_Plugin extends DoTheRightThing\WPPlugin\Plugin {
             //}
         }
         else {
-            $user_gps = wpdtrt_exif_get_user_gps();
+            $user_gps = $this->get_user_gps();
             if ( $format === 'number' ) {
             $lat_out = $user_gps['latitude'];
             $lng_out = $user_gps['longitude'];
@@ -178,7 +175,7 @@ class WPDTRT_Exif_Plugin extends DoTheRightThing\WPPlugin\Plugin {
      * @todo https://github.com/dotherightthing/wpdtrt-exif/issues/2
      * @todo rename wpdtrt_exif_attachment_geotag to use my 'cf' naming convention
      */
-    function wpdtrt_exif_get_user_gps() {
+    public function get_user_gps() {
         global $post;
         // TODO: $post->ID is throwing error in edit screen
         $user_gps = get_post_meta( $post->ID, 'wpdtrt_exif_attachment_geotag', true );
@@ -201,106 +198,6 @@ class WPDTRT_Exif_Plugin extends DoTheRightThing\WPPlugin\Plugin {
 
     //// END SETTERS AND GETTERS \\\\
 
-    //// START CONVERTORS \\\\
-
-    /**
-     * Convert from Degrees Minutes Seconds fractions, to Decimal Degrees for Google Maps
-     *
-     * Note: A parallel version of this script
-     * used wpdtrt_exif_dms_to_number() instead of wp_exif_frac2dec()
-     * used wpdtrt_exif_gps_dms_to_decimal() instead of wpdtrt_exif_convert_dms_to_dd()
-     *
-     * @param $dms_fractions Degrees Minutes Seconds fractions
-     * @return string $decimal_degrees
-     *
-     * @uses wp_exif_frac2dec
-     * @see http://kristarella.blog/2008/12/geo-exif-data-in-wordpress/
-     * @see https://tmackinnon.com/converting-decimal-degrees-to-degrees-minutes-seconds.php
-     */
-    function wpdtrt_exif_convert_dms_to_dd($dms_fractions) {
-        // dms_fractions = array( 52/1, 17/1, 2282/100 );
-        $degrees = wp_exif_frac2dec( $dms_fractions[0] ); // 52/1 -> 52 -> 52
-        $minutes = wp_exif_frac2dec( $dms_fractions[1] ); // 17/1 -> 17 /60 -> 0.283333333333333
-        $seconds = wp_exif_frac2dec( $dms_fractions[2] ); // 2282/100 -> 22.82 /60 -> 0.380333333333333
-        // 52.6636666667
-        $decimal_degrees = $degrees + $minutes/60 + $seconds/60;
-
-        return $decimal_degrees;
-    }
-
-    /**
-     * Converts from Decimal Degrees to Degrees Minutes Seconds
-     *
-     * @param $dd Decimal Degrees
-     * @return array($degrees, $minutes, $seconds)
-     *
-     * @see https://stackoverflow.com/a/7927527/6850747
-     * @uses https://www.web-max.ca/PHP/misc_6.php
-     * @todo Not generating the WP format yet
-     */
-    function wpdtrt_exif_convert_dd_to_dms($dd) {
-        // To avoid issues with floating
-        // point math we extract the integer part and the float
-        // part by using a string function.
-        $vars = explode( ".", $dd );
-        $deg = $vars[0];
-        $tempma = "0." . $vars[1];
-        $tempma = $tempma * 3600;
-        $min = floor( $tempma / 60 );
-        $sec = $tempma - ( $min * 60 );
-
-        return array(
-            $deg,
-            $min,
-            $sec
-        );
-    }
-
-    /**
-     * Test the two-way conversion from DMS to DD
-     *
-     * @param $latitude_dms_fr_1 Latitude in Degrees Minutes Seconds fractions
-     *
-     * @see https://github.com/dotherightthing/wpdtrt-exif/issues/2
-     */
-    function wpdtrt_exif_convert_test( $latitude_dms_fr_1 ) {
-        $latitude_dd_1 =        wpdtrt_exif_convert_dms_to_dd( $latitude_dms_fr_1 );
-        $latitude_dms_fr_2 =    wpdtrt_exif_convert_dd_to_dms( $latitude_dd_1 );
-        //$latitude_dd_1 =      wpdtrt_exif_convert_dms_to_dd( $latitude_dms_fr_2 );
-        wpdtrt_log( '==== wpdtrt_exif_convert_test ====' );
-        /*
-        From DMS Fractions:
-        Array
-        (
-        [0] => 39/1
-        [1] => 56/1
-        [2] => 375/100
-        )
-        */
-        wpdtrt_log( $latitude_dms_fr_1 );
-        /*
-        To Decimal Degrees:
-        39.9958333333
-        */
-        wpdtrt_log( $latitude_dd_1 );
-        /*
-        To DMS Fractions
-        Array
-        (
-        [0] => 39
-        [1] => 59
-        [2] => 44.99999988
-        )
-        */
-        wpdtrt_log( $latitude_dms_fr_2 );
-        /*
-        To Decimal Degrees:
-        */
-        //wpdtrt_log( $latitude_dd_2 );
-    }
-
-    //// END CONVERTORS \\\\
-
     //// START RENDERERS \\\\
     //// END RENDERERS \\\\
 
@@ -315,17 +212,13 @@ class WPDTRT_Exif_Plugin extends DoTheRightThing\WPPlugin\Plugin {
      * Added false values to prevent this function running over and over
      * if the image was taken with a non-geotagging camera
      *
-     * @example
-     *  include_once( ABSPATH . 'wp-admin/includes/image.php' ); // access wp_read_image_metadata
-     *  add_filter('wp_read_image_metadata', 'wpdtrt_exif_read_image_geodata','',3);
-     *
      * @see http://kristarella.blog/2009/04/add-image-exif-metadata-to-wordpress/
      * @uses wp-admin/includes/image.php
      *
      * @todo Pull geotag from wpdtrt_exif_attachment_geotag if it is not available in the image.
      *  This requires resolving the conversion issue https://github.com/dotherightthing/wpdtrt-exif/issues/2
      */
-    function wpdtrt_exif_read_image_geodata( $meta, $file, $sourceImageType ) {
+    function filter_read_image_geodata( $meta, $file, $sourceImageType ) {
         // the filtered function also runs exif_read_data
         // but the value is not accessible to the function.
         // note: @ suppresses any error messages that might be generated by the prefixed expression
@@ -366,6 +259,60 @@ class WPDTRT_Exif_Plugin extends DoTheRightThing\WPPlugin\Plugin {
     //// END FILTERS \\\\
 
     //// START HELPERS \\\\
+
+    /**
+     * Convert from Degrees Minutes Seconds fractions, to Decimal Degrees for Google Maps
+     *
+     * Note: A parallel version of this script
+     * used wpdtrt_exif_dms_to_number() instead of wp_exif_frac2dec()
+     * used wpdtrt_exif_gps_dms_to_decimal() instead of $this->helper_convert_dms_to_dd()
+     *
+     * @param $dms_fractions Degrees Minutes Seconds fractions
+     * @return string $decimal_degrees
+     *
+     * @uses wp_exif_frac2dec
+     * @see http://kristarella.blog/2008/12/geo-exif-data-in-wordpress/
+     * @see https://tmackinnon.com/converting-decimal-degrees-to-degrees-minutes-seconds.php
+     */
+    public function helper_convert_dms_to_dd($dms_fractions) {
+        // dms_fractions = array( 52/1, 17/1, 2282/100 );
+        $degrees = wp_exif_frac2dec( $dms_fractions[0] ); // 52/1 -> 52 -> 52
+        $minutes = wp_exif_frac2dec( $dms_fractions[1] ); // 17/1 -> 17 /60 -> 0.283333333333333
+        $seconds = wp_exif_frac2dec( $dms_fractions[2] ); // 2282/100 -> 22.82 /60 -> 0.380333333333333
+        // 52.6636666667
+        $decimal_degrees = $degrees + $minutes/60 + $seconds/60;
+
+        return $decimal_degrees;
+    }
+
+    /**
+     * Converts from Decimal Degrees to Degrees Minutes Seconds
+     *
+     * @param $dd Decimal Degrees
+     * @return array($degrees, $minutes, $seconds)
+     *
+     * @see https://stackoverflow.com/a/7927527/6850747
+     * @uses https://www.web-max.ca/PHP/misc_6.php
+     * @todo Not generating the WP format yet
+     */
+    public function helper_convert_dd_to_dms($dd) {
+        // To avoid issues with floating
+        // point math we extract the integer part and the float
+        // part by using a string function.
+        $vars = explode( ".", $dd );
+        $deg = $vars[0];
+        $tempma = "0." . $vars[1];
+        $tempma = $tempma * 3600;
+        $min = floor( $tempma / 60 );
+        $sec = $tempma - ( $min * 60 );
+
+        return array(
+            $deg,
+            $min,
+            $sec
+        );
+    }
+    
     //// END HELPERS \\\\
 }
 
