@@ -68,6 +68,8 @@ class WPDTRT_Exif_Plugin extends DoTheRightThing\WPPlugin\Plugin {
      */
     public function get_attachment_metadata( $attachment_id ) {
 
+        require_once( ABSPATH . '/wp-admin/includes/image.php' ); // access wp_read_image_metadata
+
         // reinstate attachment metadata accidentally deleted during development:
         // $attach_data = wp_generate_attachment_metadata( $id, get_attached_file( $id ) );
         // wp_update_attachment_metadata( $id, $attach_data );
@@ -79,30 +81,54 @@ class WPDTRT_Exif_Plugin extends DoTheRightThing\WPPlugin\Plugin {
         // (i.e. it was uploaded before this function was written)
         // so reprocess the image
         if ( !array_key_exists('latitude', $attachment_metadata) || !array_key_exists('longitude', $attachment_metadata) ) {
-            $file = get_attached_file( $attachment_id ); // full path
 
-            // read metadata, including the GPS metadata requested by our filter filter_read_image_geodata
-            // this includes running exif_read_data()
-            $image_metadata = wp_read_image_metadata( $file );
-
-            // TODO: check for false values
-            // and replace with the value of the custom field if it has been supplied
-            // the metadata update is destructive
-            // so merge the existing metadata with the metadata which we've just read from the image
-            $attachment_metadata_updated = $attachment_metadata;
-            $attachment_metadata_updated['image_meta'] = $image_metadata;
-
-            // write the updated metadata to WP's database
-            // note that the actual image EXIF metadata is not changed
-            // i.e. this is not wp_write_image_metadata
-            wp_update_attachment_metadata( $attachment_id, $attachment_metadata_updated );
-
-            // read the updated metadata
-            // TODO: is this redundant?
-            $attachment_metadata = wp_get_attachment_metadata( $attachment_id, false );
+            $attachment_metadata = $this->update_attachment_metadata( $attachment_id, $attachment_metadata );
         }
 
         return $attachment_metadata;
+    }
+
+    /**
+     * Get metadata from attachment, including geotag
+     *
+     * @param $attachment_id
+     * @return array $image_metadata
+     */
+    public function get_image_metadata( $attachment_id ) {
+
+        $file = get_attached_file( $attachment_id ); // full path
+
+        // read metadata, including the GPS metadata requested by our filter filter_read_image_geodata
+        // this includes running exif_read_data()
+        $image_metadata = wp_read_image_metadata( $file );
+
+        return $image_metadata;
+    }
+
+    /**
+     * Add image metadata to the attachment metadata stored in WordPress
+     *
+     * @param $attachment_id
+     * @param $attachment_metadata
+     * @return array $merged_attachment_metadata
+     */
+    public function update_attachment_metadata( $attachment_id, $attachment_metadata ) {
+
+        // TODO: check for false values
+        // and replace with the value of the custom field if it has been supplied
+        // the metadata update is destructive
+        // so merge the existing metadata with the metadata which we've just read from the image
+        $attachment_metadata_updated = $attachment_metadata;
+        $attachment_metadata_updated['image_meta'] = $this->get_image_metadata( $attachment_id );
+
+        // write the updated metadata to WP's database
+        // note that the actual image EXIF metadata is not changed
+        // i.e. this is not wp_write_image_metadata
+        wp_update_attachment_metadata( $attachment_id, $attachment_metadata_updated );
+
+        // read the updated metadata
+        // TODO: is this redundant?
+        return wp_get_attachment_metadata( $attachment_id, false );
     }
 
     /**
@@ -115,6 +141,14 @@ class WPDTRT_Exif_Plugin extends DoTheRightThing\WPPlugin\Plugin {
     public function get_attachment_metadata_gps( $attachment_metadata, $format ) {
         $lat_out = null;
         $lng_out = null;
+
+        //global $debug;
+        //$debug->log( $attachment_metadata['image_meta'] );
+
+        if ( ! isset( $attachment_metadata['image_meta']['latitude'], $attachment_metadata['image_meta']['longitude'] ) ) {
+            return array();
+        }
+
         $latitude = $attachment_metadata['image_meta']['latitude'];
         $longitude = $attachment_metadata['image_meta']['longitude'];
         $lat = $this->helper_convert_dms_to_dd( $latitude );
