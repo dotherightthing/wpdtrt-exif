@@ -1,6 +1,6 @@
 # DTRT EXIF
 
-[![GitHub tags](https://img.shields.io/github/tag/dotherightthing/wpdtrt-exif.svg)](https://github.com/dotherightthing/wpdtrt-exif/tags) [![Build Status](https://travis-ci.org/dotherightthing/wpdtrt-exif.svg?branch=master)](https://travis-ci.org/dotherightthing/wpdtrt-exif) [![GitHub issues](https://img.shields.io/github/issues/dotherightthing/wpdtrt-exif.svg)](https://github.com/dotherightthing/wpdtrt-exif/issues)
+[![GitHub release](https://img.shields.io/github/release/dotherightthing/wpdtrt-exif.svg)](https://github.com/dotherightthing/wpdtrt-exif/releases) [![Build Status](https://travis-ci.org/dotherightthing/wpdtrt-exif.svg?branch=master)](https://travis-ci.org/dotherightthing/wpdtrt-exif) [![GitHub issues](https://img.shields.io/github/issues/dotherightthing/wpdtrt-exif.svg)](https://github.com/dotherightthing/wpdtrt-exif/issues)
 
 Adds EXIF (time and geotag) fields to the attachment media modal, for use by other plugins.
 
