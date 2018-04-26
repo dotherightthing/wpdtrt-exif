@@ -1,7 +1,7 @@
 {
-	"name": "dotherightthing/wpdtrt-exif",
-	"description": "Adds EXIF (time and geotag) fields to the attachment media modal, for use by other plugins.",
-	"type": "library",
+    "name": "dotherightthing/wpdtrt-exif",
+    "description": "Adds EXIF (time and geotag) fields to the attachment media modal, for use by other plugins.",
+    "type": "library",
     "keywords": ["exif", "geotag", "attachment"],
     "license": "ISC",
     "authors": [

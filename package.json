@@ -1,4 +1,5 @@
 {
+  "private": true,
   "name": "wpdtrt-exif",
   "version": "0.0.1",
   "description": "Adds EXIF (time and geotag) fields to the attachment media modal, for use by other plugins.",
@@ -11,6 +12,9 @@
   "devDependencies": {
     "gulp": "^3.9.1"
   },
+  "workspaces": [
+    "vendor/dotherightthing/wpdtrt-plugin/"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -24,8 +28,5 @@
   ],
   "license": "ISC",
   "homepage": "https://github.com/dotherightthing/wpdtrt-exif",
-  "srcDir": "/Volumes/DanBackup/Websites/wpdtrt-exif",
-  "dependencies": {
-    "bower": "^1.8.2"
-  }
+  "srcDir": "/Volumes/DanBackup/Websites/wpdtrt-exif"
 }
