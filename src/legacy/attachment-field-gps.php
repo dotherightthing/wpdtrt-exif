@@ -30,10 +30,10 @@ function wpdtrt_exif_attachment_field_gps( $form_fields, $post ) {
 	global $wpdtrt_exif_plugin;
 
 	$plugin_options = $wpdtrt_exif_plugin->get_plugin_options();
-	$google_static_maps_api_key = $plugin_options['google_static_maps_api_key'];
+	$google_static_maps_api_key = '';
 
-	if ( !isset($google_static_maps_api_key) ) {
-		$google_static_maps_api_key = '';
+	if ( array_key_exists( 'value', $plugin_options['google_static_maps_api_key'] ) ) {
+		$google_static_maps_api_key = $plugin_options['google_static_maps_api_key']['value'];
 	}
 
 	$attachment_metadata = $wpdtrt_exif_plugin->get_attachment_metadata( $post->ID );
