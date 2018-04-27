@@ -32,11 +32,13 @@ function wpdtrt_exif_attachment_field_gps( $form_fields, $post ) {
 	$plugin_options = $wpdtrt_exif_plugin->get_plugin_options();
 	$google_static_maps_api_key = $plugin_options['google_static_maps_api_key'];
 
+	if ( !isset($google_static_maps_api_key) ) {
+		$google_static_maps_api_key = '';
+	}
+
 	$attachment_metadata = $wpdtrt_exif_plugin->get_attachment_metadata( $post->ID );
 
-	$attachment_metadata_gps = $wpdtrt_exif_plugin->get_attachment_metadata_gps( $attachment_metadata, 'number' );
-
-	$attachment_metadata_gps_source = '';
+	$attachment_metadata_gps = $wpdtrt_exif_plugin->get_attachment_metadata_gps( $attachment_metadata, 'number', $post );
 
 	// if the values can be pulled from the image
 	if ( isset( $attachment_metadata_gps['latitude'], $attachment_metadata_gps['longitude'] ) ) {
@@ -47,10 +49,11 @@ function wpdtrt_exif_attachment_field_gps( $form_fields, $post ) {
 	// else try to pull these values from the user field
 	else {
 		$value = get_post_meta( $post->ID, 'wpdtrt_exif_attachment_gps', true );
-		$attachment_metadata_gps_source = 'Custom Field';
+		$attachment_metadata_gps_source = 'This field';
 	}
 
 	$gmap = '';
+	$helps = '';
 
 	if ( $value !== '' ) {
 		$gmap .= 'https://maps.googleapis.com/maps/api/staticmap?';
@@ -60,22 +63,19 @@ function wpdtrt_exif_attachment_field_gps( $form_fields, $post ) {
 		$gmap .= '&size=150x150';
 		$gmap .= '&markers=color:0xff0000|' . $value;
 		$gmap .= '&key=' . $google_static_maps_api_key;
+
+		$helps .= '<img src="' . $gmap . '" alt="' . $value . '" title="' . $value . '" width="150" height="150">';
+		$helps .= '<br>';
 	}
 
-  	// Time is read only
-	if ( !empty( $attachment_metadata['image_meta']['created_gpsstamp'] ) ) {
+	$form_fields['wpdtrt-exif-gps'] = array(
+		'label' => 'Geotag',
+		'input' => 'text',
+		'value' => $value,
+		'helps' => $helps . 'Source: ' . $attachment_metadata_gps_source,
+	);
 
-		$timestamp_format = 'd:m:Y h:i:s';
-
-		$form_fields['wpdtrt-exif-gps'] = array(
-			'label' => 'Geotag',
-			'input' => 'text',
-			'value' => $value,
-			'helps' => '<img src="' . $gmap . '" alt="' . $value . '" title="' . $value . '" width="150" height="150"><br>Geotag source: ' . $attachment_metadata_gps_source,
-		);
-
-  		return $form_fields;
-  	}
+  	return $form_fields;
 }
 
 add_filter( 'attachment_fields_to_edit', 'wpdtrt_exif_attachment_field_gps', 10, 2 );

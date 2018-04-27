@@ -42,18 +42,20 @@ function wpdtrt_exif_attachment_field_time( $form_fields, $post ) {
 
   	// Time is read only
 	if ( !empty( $attachment_metadata['image_meta']['created_timestamp'] ) ) {
+		$timestamp = date( 'd.m.Y h:i:s', $attachment_metadata['image_meta']['created_timestamp'] );
+	}
+	else {
+		$timestamp = 'N/A';
+	}
 
-		$timestamp_format = 'd:m:Y h:i:s';
+	$form_fields['wpdtrt-exif-time'] = array(
+		'label' => 'Time',
+		'input' => 'html',
+		'html' => '<input type="text" readonly="readonly" value="' . $timestamp . '" />',
+		'helps' => '',
+	);
 
-		$form_fields['wpdtrt-exif-time'] = array(
-			'label' => 'Time',
-			'input' => 'html',
-			'html' => '<input type="text" readonly="readonly" value="' . date( $timestamp_format, $attachment_metadata['image_meta']['created_timestamp'] ) . '" />',
-			'helps' => '',
-		);
-
-  		return $form_fields;
-  	}
+  	return $form_fields;
 }
 
 add_filter( 'attachment_fields_to_edit', 'wpdtrt_exif_attachment_field_time', 10, 2 );
