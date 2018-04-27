@@ -121,6 +121,7 @@ if( ! defined( 'WPDTRT_EXIF_URL' ) ) {
   require_once( $test_path . 'wp-admin/includes/image.php' ); // access wp_read_image_metadata
 
   // legacy helpers
+  require_once(WPDTRT_EXIF_PATH . 'src/legacy/attachment-field-heading.php');
   require_once(WPDTRT_EXIF_PATH . 'src/legacy/attachment-field-time.php');
   require_once(WPDTRT_EXIF_PATH . 'src/legacy/attachment-field-gps.php');
 
