@@ -135,10 +135,11 @@ class WPDTRT_Exif_Plugin extends DoTheRightThing\WPPlugin\Plugin {
      * Get geotag from attachment metadata
      * @param $attachment_metadata
      * @param $format
+     * @param $post
      * @return array ($latitude, $longitude)
      * @todo https://github.com/dotherightthing/wpdtrt-exif/issues/3
      */
-    public function get_attachment_metadata_gps( $attachment_metadata, $format ) {
+    public function get_attachment_metadata_gps( $attachment_metadata, $format, $post ) {
         $lat_out = null;
         $lng_out = null;
 
@@ -185,7 +186,7 @@ class WPDTRT_Exif_Plugin extends DoTheRightThing\WPPlugin\Plugin {
             //}
         }
         else {
-            $user_gps = $this->get_user_gps();
+            $user_gps = $this->get_user_gps($post);
 
             if ( $format === 'number' ) {
                 $lat_out = $user_gps['latitude'];
@@ -202,15 +203,15 @@ class WPDTRT_Exif_Plugin extends DoTheRightThing\WPPlugin\Plugin {
      * Get geotag from user edited custom field
      *  This provides a fallback if there is no GPS metadata stored with the image.
      *
+     * @param $post
      * @return array ($latitude, $longitude)
      *
      * @todo This should then be stored with the image, but it needs to be converted
      * @todo https://github.com/dotherightthing/wpdtrt-exif/issues/2
      * @todo rename wpdtrt_exif_attachment_gps to use my 'cf' naming convention
      */
-    public function get_user_gps() {
-        global $post;
-        // TODO: $post->ID is throwing error in edit screen
+    public function get_user_gps( $post ) {
+
         $user_gps = get_post_meta( $post->ID, 'wpdtrt_exif_attachment_gps', true );
 
         if ( isset($user_gps) && ( strpos($user_gps, ',') !== false ) ) {
