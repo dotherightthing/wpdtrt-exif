@@ -207,8 +207,9 @@ class wpdtrt_exifTest extends WP_UnitTestCase {
     /**
      * Test that the correct 'upload' location is used by create_attachment()
      *  to debug wp_read_image_metadata(), via $plugin->get_image_metadata()
+     * @todo Test only works on local dev
      */
-    public function test_upload_dir() {
+    public function __test_upload_dir() {
 
         $wp_upload_dir = wp_upload_dir();
 
