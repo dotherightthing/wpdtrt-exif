@@ -8,7 +8,7 @@
  *    gulp dist --gulpfile ./vendor/dotherightthing/wpdtrt-plugin/gulpfile.js --cwd ./
  *
  * @package     WPDTRT_Exif
- * @version 	0.0.1
+ * @version 	0.1.0
  * @since       0.7.5
  */
  
