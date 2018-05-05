@@ -180,6 +180,7 @@ if( ! defined( 'WPDTRT_EXIF_URL' ) ) {
         'prefix' => 'wpdtrt_exif',
         'slug' => 'wpdtrt-exif',
         'menu_title' => __('EXIF', 'wpdtrt-exif'),
+        'settings_title' => __('Settings', 'wpdtrt-exif'),
         'developer_prefix' => '',
         'path' => WPDTRT_EXIF_PATH,
         'messages' => array(
