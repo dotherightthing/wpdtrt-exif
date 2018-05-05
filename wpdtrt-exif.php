@@ -156,7 +156,7 @@ if( ! defined( 'WPDTRT_EXIF_URL' ) ) {
      */
     $plugin_options = array(
       'google_static_maps_api_key' => array(
-        'type' => 'text',
+        'type' => 'password',
         'label' => __('Google Static Maps API Key', 'wpdtrt-exif'),
         'size' => 50,
         'tip' => __('https://developers.google.com/maps/documentation/static-maps/ > GET A KEY', 'wpdtrt-exif')
