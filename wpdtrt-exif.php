@@ -3,7 +3,7 @@
  * Plugin Name:  DTRT EXIF
  * Plugin URI:   https://github.com/dotherightthing/wpdtrt-exif
  * Description:  Adds EXIF (time and geotag) fields to the attachment media modal, for use by other plugins.
- * Version:      0.1.1
+ * Version:      0.1.2
  * Author:       Dan Smith
  * Author URI:   https://profiles.wordpress.org/dotherightthingnz
  * License:      GPLv2 or later
