@@ -16,7 +16,7 @@
  * @version 	0.0.1
  * @since       0.7.5
  */
-class WPDTRT_Exif_Plugin extends DoTheRightThing\WPPlugin\r_1_4_14\Plugin {
+class WPDTRT_Exif_Plugin extends DoTheRightThing\WPPlugin\r_1_4_15\Plugin {
 
     /**
      * Hook the plugin in to WordPress
