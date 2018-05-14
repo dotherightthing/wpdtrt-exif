@@ -52,7 +52,8 @@ class wpdtrt_exifTest extends WP_UnitTestCase {
      * @see https://gistpages.com/posts/php_delete_files_with_unlink
      */
     public function delete_sized_images() {
-        array_map( 'unlink', glob("images/test1-*.jpg") );
+        array_map( 'unlink', glob("tests/data/test1-*.jpg") );
+        array_map( 'unlink', glob("tests/data/test2-*.jpg") );
     }
 
     /**
@@ -66,27 +67,66 @@ class wpdtrt_exifTest extends WP_UnitTestCase {
         // Generate WordPress data fixtures
 
 	    $this->post_id_1 = $this->create_post( array(
-	    	'post_title' => 'DTRT EXIF test',
+	    	'post_title' => 'DTRT EXIF test 1',
 	    	'post_content' => 'This is a simple test'
 	    ) );
 
-        // Attachment (for testing custom sizes and meta)
-        $this->attachment_id_1 = $this->create_attachment( array(
-            'filename' => 'images/test1.jpg',
-            'parent_post_id' => $this->post_id_1
+        $this->post_id_2 = $this->create_post( array(
+            'post_title' => 'DTRT EXIF test 2',
+            'post_content' => 'This is a simple test'
         ) );
 
         // Attachment (for testing custom sizes and meta)
+        $this->attachment_id_1 = $this->create_attachment( array(
+            'filename' => 'tests/data/test1.jpg',
+            'parent_post_id' => $this->post_id_1
+        ) );
+
         $this->attachment_id_2 = $this->create_attachment( array(
+            'filename' => 'tests/data/test2.jpg',
+            'parent_post_id' => $this->post_id_2
+        ) );
+
+        $this->attachment_2_meta = array(
+            'aperture' => '2.4',
+            'credit' => '',
+            'camera' => 'iPhone 5',
+            'caption' => '',
+            'created_timestamp' => '1442664479',
+            'copyright' => '',
+            'focal_length' => '4.12',
+            'iso' => '50',
+            'shutter_speed' => '0.0001469939732471',
+            'title' => '',
+            'orientation' => '1',
+            'keywords' => Array(),
+            'latitude' => Array(
+                '52/1',
+                '50/1',
+                '1019/100' // 2dp - actual 10.188 (3dp) but this alone is not the cause
+            ),
+            'latitude_ref' => 'N',
+            'longitude' => Array(
+                '106/1',
+                '30/1',
+                '3164/100' // 2dp - actual 31.638 (3dp) but this alone is not the cause
+            ),
+            'longitude_ref' => 'E'
+        );
+
+        /*
+        // Attachment (for testing custom sizes and meta)
+        $this->attachment_id_3 = $this->create_attachment( array(
             'filename' => 'tests/data/23465055912_ce8ff02e9f_o_Saihan_Tal.jpg',
             'parent_post_id' => $this->post_id_1
         ) );
 
         // Attachment (for testing custom sizes and meta)
-        $this->attachment_id_3 = $this->create_attachment( array(
+        $this->attachment_id_4 = $this->create_attachment( array(
             'filename' => 'tests/data/MDM_20151206_155919_20151206_1559_Outer_Mongolia.jpg',
             'parent_post_id' => $this->post_id_1
         ) );
+        */
     }
 
     /**
@@ -102,7 +142,8 @@ class wpdtrt_exifTest extends WP_UnitTestCase {
         wp_delete_post( $this->post_id_1, true );
         wp_delete_post( $this->attachment_id_1, true );
         wp_delete_post( $this->attachment_id_2, true );
-        wp_delete_post( $this->attachment_id_3, true );
+        //wp_delete_post( $this->attachment_id_3, true );
+        //wp_delete_post( $this->attachment_id_4, true );
 
         $this->delete_sized_images();
     }
@@ -232,53 +273,9 @@ class wpdtrt_exifTest extends WP_UnitTestCase {
     }
 
     /**
-     * Test that the test image has been 'uploaded' to the expected location,
-     *  to debug wp_read_image_metadata(), via $plugin->get_image_metadata()
-     */
-    public function test_file_exists() {
-
-        // passes
-        $this->assertFileExists(
-            'images/test1.jpg',
-            'file does not exist 0'
-        );
-
-        // passes if image manually copied over
-        /*
-        $this->assertFileExists(
-            '/var/folders/0y/31dr5mx52c98lmldc_zpw3w00000gn/T/wordpress/wp-content/uploads/2018/04/test1.jpg',
-            'file does not exist 1'
-        );
-        */
-
-        /*
-        $this->assertFileExists(
-            '/var/folders/0y/31dr5mx52c98lmldc_zpw3w00000gn/T/wordpress/wp-content/uploads/2018/04/images/test1.jpg',
-            'file does not exist 2'
-        );
-        */
-
-        /*
-        $this->assertFileExists(
-            '/var/folders/0y/31dr5mx52c98lmldc_zpw3w00000gn/T/wordpress/wp-content/uploads/images/test1.jpg',
-            'file does not exist 3'
-        );
-        */
-
-        // passes with bogus path, image NOT manually copied over nor actually in file system at this location
-        /*
-        $this->assertSame(
-            '/var/folders/0y/31dr5mx52c98lmldc_zpw3w00000gn/T/wordpress//wp-content/uploads/images/test1.jpg',
-            get_attached_file( $this->attachment_id_1 ),
-            'file does not exist 4'
-        );
-        */
-    }
-
-    /**
      * Test that querying empty attachment fields gives the expected results
      */
-    public function test_empty_attachment_fields() {
+    public function __test_empty_attachment_fields() {
 
         global $wpdtrt_exif_plugin;
 
@@ -324,41 +321,123 @@ class wpdtrt_exifTest extends WP_UnitTestCase {
 
     /**
      * Test that meta data can be pulled from the attachment image
+     *  using the WordPress API
      */
-    public function test_attachment_meta() {
+    public function test_core_meta_retrieval() {
+
+        // images are uploaded to
+        // /var/folders/0y/31dr5mx52c98lmldc_zpw3w00000gn/T/wordpress//wp-content/uploads/
+        // + real_relative_path
+
+        // ok
+        $this->assertContains(
+            'wp-content/uploads/tests/data/test1.jpg',
+            get_attached_file( $this->attachment_id_1 ),
+            'Attachment 1 should exist'
+        );
+
+        // ok
+        $this->assertContains(
+            'wp-content/uploads/tests/data/test2.jpg',
+            get_attached_file( $this->attachment_id_2 ),
+            'Attachment 2 should exist'
+        );
+
+        // ok - disabled as this path can change
+        /*
+        $this->assertEquals(
+            '/var/folders/0y/31dr5mx52c98lmldc_zpw3w00000gn/T/wordpress//wp-content/uploads/tests/data/test2.jpg',
+            get_attached_file( $this->attachment_id_2 ),
+            'Attachment should have this file path'
+        );
+        */
+
+        // ok
+        $this->assertTrue(
+            function_exists( 'wp_read_image_metadata' ),
+            'Function should exist'
+        );
+
+        // ok
+        $this->assertEquals(
+            $this->attachment_2_meta,
+            wp_read_image_metadata( 'tests/data/test2.jpg' ),
+            'Image metadata should exist'
+        );
+
+        // ok
+        $this->assertTrue(
+            file_exists( 'tests/data/test2.jpg' ),
+            'Real file should exist'
+        );
+
+        // fails - #10
+        $this->assertTrue(
+            file_exists( get_attached_file( $this->attachment_id_2 ) ),
+            'Virtual file should exist'
+        );
+
+        // passes if image manually copied over
+        /*
+        $this->assertFileExists(
+            '/var/folders/0y/31dr5mx52c98lmldc_zpw3w00000gn/T/wordpress/wp-content/uploads/2018/04/test1.jpg',
+            'file does not exist 1'
+        );
+        */
+
+        /*
+        $this->assertFileExists(
+            '/var/folders/0y/31dr5mx52c98lmldc_zpw3w00000gn/T/wordpress/wp-content/uploads/2018/04/tests/data/test1.jpg',
+            'file does not exist 2'
+        );
+        */
+
+        /*
+        $this->assertFileExists(
+            '/var/folders/0y/31dr5mx52c98lmldc_zpw3w00000gn/T/wordpress/wp-content/uploads/tests/data/test1.jpg',
+            'file does not exist 3'
+        );
+        */
+
+        // passes with bogus path, image NOT manually copied over nor actually in file system at this location
+        /*
+        $this->assertSame(
+            '/var/folders/0y/31dr5mx52c98lmldc_zpw3w00000gn/T/wordpress//wp-content/uploads/tests/data/test1.jpg',
+            get_attached_file( $this->attachment_id_1 ),
+            'file does not exist 4'
+        );
+        */
+    }
+
+    /**
+     * Test that meta data can be pulled from the attachment image
+     *  using the plugin's methods
+     */
+    public function test_plugin_meta_retrieval() {
 
         global $wpdtrt_exif_plugin;
 
-        $attachment_metadata = $wpdtrt_exif_plugin->get_attachment_metadata( $this->attachment_id_1 );
-
-        $this->assertTrue(
-            function_exists( 'wp_read_image_metadata' ),
-            'function wp_read_image_metadata() is missing'
-        );
+        $attachment_metadata = $wpdtrt_exif_plugin->get_attachment_metadata( $this->attachment_id_2 );
+        $image_metadata = $wpdtrt_exif_plugin->get_image_metadata( $this->attachment_id_2 );
 
         $this->assertArrayHasKey(
             'image_meta',
             $attachment_metadata,
-            'attachment image_meta is missing'
+            'Attachment meta should include image meta'
         );
 
-        // passes, but image is not actually at this location
-        $this->assertContains(
-            'wp-content/uploads/images/test1.jpg',
-            get_attached_file( $this->attachment_id_1 ),
-            'attached file is incorrect'
+        // fails
+        $this->assertNotNull(
+            $attachment_metadata['image_meta']['latitude'],
+            'Attachment meta should include the GPS latitude'
         );
 
-        // this appears to fail because the file_exists fails in PHPUnit
-        // fails even if image is manually copied to 'wp-content/uploads/images/test1.jpg'
-        /*
-        $this->assertSame(
-            array(),
-            //$wpdtrt_exif_plugin->get_image_metadata( $this->attachment_id_1 ),
-            wp_read_image_metadata( $this->attachment_id_1 ),
-            'image metadata is missing 0'
+        // fails - #10
+        $this->assertEquals(
+            $this->attachment_2_meta,
+            $image_metadata,
+            'Image metadata should exist'
         );
-        */
 
         /*
         $this->assertSame(
@@ -367,52 +446,99 @@ class wpdtrt_exifTest extends WP_UnitTestCase {
             'image metadata is ?'
         );
         */
-
-        /*
-        // fails
-        $this->assertNotNull(
-            $attachment_metadata['image_meta']['latitude'],
-            'attachment image_meta is missing latitude'
-        );
-        */
     }
 
     /**
-     * Test the two-way conversion from DMS to DD
+     * Test DMS to decimal conversion
      *
-     * @see https://github.com/dotherightthing/wpdtrt-exif/issues/2
+     * @see https://www.fcc.gov/media/radio/dms-decimal
      */
-    public function __test_helper_convert_dms_to_dd() {
+    public function test_old_meta_conversion() {
 
         global $wpdtrt_exif_plugin;
 
+        // Epic 180
+        /*
+        'latitude' => Array(
+            0 => '52/1',
+            1 => '50/1',
+            2 => '1019/100'
+        ),
+        'latitude_ref' => 'N',
+        */
         $this->assertEquals(
-            array(),
-            $attachment_metadata,
-            'attachment_metadata has an unexpected value'
+            number_format( 53.003167, 6 ), // current from plugin attachment field
+            number_format( $wpdtrt_exif_plugin->helper_convert_dms_to_dd( $this->attachment_2_meta['latitude'] ), 6 ),
+            '1 Latitude should be converted from degrees-decimal to degrees-minutes-seconds'
         );
 
-        // Latitude in Degrees Minutes Seconds fractions
-        $latitude = $attachment_metadata['image_meta']['latitude'];
-
-        // Latitude in DD
-        $latitude_dd = $wpdtrt_exif_plugin->helper_convert_dms_to_dd( $latitude );
-        //$latitude_dms = $wpdtrt_exif_plugin->helper_convert_dd_to_dms( $latitude_dd );
-
+        // Epic 180
+        /*
+        'longitude' => Array(
+            0 => '106/1',
+            1 => '30/1',
+            2 => '3164/100'
+        ),
+        'longitude_ref' => 'E'
+        */
         $this->assertEquals(
-            '39.9958333333',
-            $latitude_dd,
-            'Incorrect conversion from DMS to DD'
+            number_format( 107.027333, 6 ), // current from plugin attachment field
+            number_format( $wpdtrt_exif_plugin->helper_convert_dms_to_dd( $this->attachment_2_meta['longitude'] ), 6 ),
+            '2 Longitude should be converted from degrees-decimal to degrees-minutes-seconds'
         );
 
+        // Epic 180
         $this->assertEquals(
-            Array (
-                '39/1',
-                '56/1',
-                '375/100',
-            ),
-            $latitude_dms,
-            'Incorrect conversion from DD to DMS'
+            number_format( 53.003167, 6 ), // current from Preview
+            number_format( $wpdtrt_exif_plugin->helper_convert_dms_to_dd(Array (
+                '52/1',
+                '50/1',
+                '10.188/100'
+            )), 6 ),
+            '3 Latitude should be converted from degrees-decimal to degrees-minutes-seconds'
+        );
+
+        // Epic 180
+        $this->assertEquals(
+            number_format( 107.027333, 6 ), // current
+            number_format( $wpdtrt_exif_plugin->helper_convert_dms_to_dd(Array (
+                '106/1',
+                '30/1',
+                '31.638/100'
+            )), 6 ),
+            '4 Longitude should be converted from degrees-decimal to degrees-minutes-seconds'
+        );
+    }
+
+    /**
+     * Test DMS to decimal conversion
+     *
+     * @see https://www.fcc.gov/media/radio/dms-decimal
+     */
+    public function test_new_meta_conversion_fcc() {
+
+        global $wpdtrt_exif_plugin;
+
+        // Epic 180 - latitude
+        $this->assertEquals(
+            number_format( 52.836163, 6), // FCC
+            number_format( $wpdtrt_exif_plugin->helper_convert_dms_to_dd(Array (
+                '52/1',
+                '50/1',
+                '10.188/100'
+            )), 6 ),
+            '1 Latitude should be converted from degrees-decimal to degrees-minutes-seconds'
+        );
+
+        // Epic 180 - longitude
+        $this->assertEquals(
+            number_format( 106.508788, 6 ), // FCC
+            number_format( $wpdtrt_exif_plugin->helper_convert_dms_to_dd(Array (
+                '106/1',
+                '30/1',
+                '31.638/100'
+            )), 6 ),
+            '2 Longitude should be converted from degrees-decimal to degrees-minutes-seconds'
         );
     }
 }
