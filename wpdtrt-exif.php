@@ -170,7 +170,7 @@ if( ! defined( 'WPDTRT_EXIF_URL' ) ) {
         'type' => 'password',
         'label' => __('Google Static Maps API Key', 'wpdtrt-exif'),
         'size' => 50,
-        'tip' => __('https://developers.google.com/maps/documentation/static-maps/ > GET A KEY', 'wpdtrt-exif')
+        'tip' => __('https://developers.google.com/maps/documentation/maps-static/get-api-key', 'wpdtrt-exif')
       )
     );
 
