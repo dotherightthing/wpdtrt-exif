@@ -295,32 +295,51 @@ class WPDTRT_Exif_Plugin extends DoTheRightThing\WPPlugin\r_1_4_15\Plugin {
     //// START HELPERS \\\\
 
     /**
-     * Convert from Degrees Minutes Seconds fractions, to Decimal Degrees for Google Maps
-     *
-     * Note: A parallel version of this script
-     * used wpdtrt_exif_dms_to_number() instead of wp_exif_frac2dec()
-     * used wpdtrt_exif_gps_dms_to_decimal() instead of $this->helper_convert_dms_to_dd()
+     * Convert Degrees Minutes Seconds fractions, to Decimal Degrees for Google Maps
      *
      * @param $dms_fractions Degrees Minutes Seconds fractions
      * @return string $decimal_degrees
      *
-     * @uses wp_exif_frac2dec
      * @see http://kristarella.blog/2008/12/geo-exif-data-in-wordpress/
      * @see https://tmackinnon.com/converting-decimal-degrees-to-degrees-minutes-seconds.php
      */
     public function helper_convert_dms_to_dd($dms_fractions) {
+
         // dms_fractions = array( 52/1, 17/1, 2282/100 );
-        $degrees = wp_exif_frac2dec( $dms_fractions[0] ); // 52/1 -> 52 -> 52
-        $minutes = wp_exif_frac2dec( $dms_fractions[1] ); // 17/1 -> 17 /60 -> 0.283333333333333
-        $seconds = wp_exif_frac2dec( $dms_fractions[2] ); // 2282/100 -> 22.82 /60 -> 0.380333333333333
+        $degrees = $this->helper_convert_dms_to_number( $dms_fractions[0] ); // 52/1 -> 52 -> 52
+        $minutes = $this->helper_convert_dms_to_number( $dms_fractions[1] ); // 17/1 -> 17 /60 -> 0.283333333333333
+        $seconds = $this->helper_convert_dms_to_number( $dms_fractions[2] ); // 2282/100 -> 22.82 /60 -> 0.380333333333333
         // 52.6636666667
+
         $decimal_degrees = $degrees + $minutes/60 + $seconds/60;
 
         return $decimal_degrees;
     }
 
     /**
-     * Converts from Decimal Degrees to Degrees Minutes Seconds
+     * Convert Degrees Minutes Seconds fraction string to decimal number
+     *  (ex. wpdtrt-exif-archive.php)
+     *  Note: replaced by helper_convert_fraction_to_decimal()
+     *
+     * @param string $str Fraction string
+     * @return number $number Decimal number
+     */
+    function helper_convert_dms_to_number( $str ) {
+
+        $decimal = 0;
+
+        // list - assigns variables as if they were an array
+        @list( $n, $d ) = explode( '/', $str );
+
+        if ( !empty($d) ) {
+            $decimal = $n / $d;
+        }
+
+        return $decimal;
+    }
+
+    /**
+     * Converts Decimal Degrees to Degrees Minutes Seconds
      *
      * @param $dd Decimal Degrees
      * @return array($degrees, $minutes, $seconds)
