@@ -133,6 +133,8 @@ class WPDTRT_Exif_Plugin extends DoTheRightThing\WPPlugin\r_1_4_15\Plugin {
 
     /**
      * Get geotag from attachment metadata
+     *  (partially ex get_geo_exif in twentysixteenchild-dontbelievethehype/includes/attachment-geolocation.php)
+     *
      * @param $attachment_metadata
      * @param $format
      * @param $post
@@ -177,13 +179,11 @@ class WPDTRT_Exif_Plugin extends DoTheRightThing\WPPlugin\r_1_4_15\Plugin {
                 $lat_out = ( $neg_lat . number_format($lat,6) );
                 $lng_out = ( $neg_lng . number_format($lng, 6) );
             }
-
             // text based latitude and longitude for Alternative text
-            // geo_pretty_fracs2dec() missing
-            //else if ( $format === 'text' ) {
-            //  $lat_out = ( geo_pretty_fracs2dec($latitude). $lat_ref );
-            //  $lng_out = ( geo_pretty_fracs2dec($longitude) . $lng_ref );
-            //}
+            else if ( $format === 'text' ) {
+                $lat_out = ( $this->helper_geo_pretty_fracs2dec($latitude). $lat_ref );
+                $lng_out = ( $this->helper_geo_pretty_fracs2dec($longitude) . $lng_ref );
+            }
         }
         else {
             $user_gps = $this->get_user_gps($post);
@@ -192,6 +192,7 @@ class WPDTRT_Exif_Plugin extends DoTheRightThing\WPPlugin\r_1_4_15\Plugin {
                 $lat_out = $user_gps['latitude'];
                 $lng_out = $user_gps['longitude'];
             }
+            // TODO: do we need an ALT TEXT version here?
         }
         return array(
             'latitude' => $lat_out,
@@ -239,6 +240,7 @@ class WPDTRT_Exif_Plugin extends DoTheRightThing\WPPlugin\r_1_4_15\Plugin {
 
     /**
      * Get metadata from image
+     *  (ex add_geo_exif in twentysixteenchild-dontbelievethehype/includes/attachment-geolocation.php)
      *
      * Supplement the core function wp_read_image_metadata
      * to also return the GPS location data which WP usually ignores
@@ -295,6 +297,31 @@ class WPDTRT_Exif_Plugin extends DoTheRightThing\WPPlugin\r_1_4_15\Plugin {
     //// START HELPERS \\\\
 
     /**
+     * Generate the full decimal latitude and longitude for Google
+     *  (ex geo_single_fracs2dec in twentysixteenchild-dontbelievethehype/includes/attachment-geolocation.php))
+     *
+     * @uses http://kristarella.blog/2008/12/geo-exif-data-in-wordpress/
+     */
+    function helper_geo_single_fracs2dec($fracs) {
+        return geo_frac2dec($fracs[0]) +
+        geo_frac2dec($fracs[1]) / 60 +
+        geo_frac2dec($fracs[2]) / 3600;
+    }
+
+    /**
+     * Convert fraction to decimal, format to be human readable
+     *  (ex twentysixteenchild-dontbelievethehype/includes/attachment-geolocation.php)
+     *
+     * @param $fracs
+     * @return $str
+     */
+    public function helper_geo_pretty_fracs2dec($fracs) {
+        return  geo_frac2dec($fracs[0]) . '&deg; ' .
+        geo_frac2dec($fracs[1]) . '&prime; ' .
+        geo_frac2dec($fracs[2]) . '&Prime; ';
+    }
+
+    /**
      * Convert Degrees Minutes Seconds fractions, to Decimal Degrees for Google Maps
      *
      * @param $dms_fractions Degrees Minutes Seconds fractions
@@ -313,12 +340,15 @@ class WPDTRT_Exif_Plugin extends DoTheRightThing\WPPlugin\r_1_4_15\Plugin {
 
         $decimal_degrees = $degrees + $minutes/60 + $seconds/60;
 
+        //$debug->log($decimal_degrees);
+
         return $decimal_degrees;
     }
 
     /**
      * Convert Degrees Minutes Seconds fraction string to decimal number
      *  (ex. wpdtrt-exif-archive.php)
+     *  (ex geo_frac2dec in twentysixteenchild-dontbelievethehype/includes/attachment-geolocation.php)
      *  Note: replaced by helper_convert_fraction_to_decimal()
      *
      * @param string $str Fraction string
