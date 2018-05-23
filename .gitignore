@@ -7,4 +7,5 @@ generators
 logs
 node_modules
 release.zip
+tests/data/*-.jpg
 vendor
