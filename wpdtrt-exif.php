@@ -141,6 +141,13 @@ add_action( 'init', 'wpdtrt_exif_plugin_init', 0 );
 //add_action( 'init', 'wpdtrt_exif_taxonomy_init', 100 );
 //add_action( 'widgets_init', 'wpdtrt_exif_widget_init', 10 );
 
+add_filter( 'attachment_fields_to_edit', 'wpdtrt_exif_attachment_field_gps', 10, 2 );
+add_filter( 'attachment_fields_to_edit', 'wpdtrt_exif_attachment_field_heading', 10, 2 );
+add_filter( 'attachment_fields_to_edit', 'wpdtrt_exif_attachment_field_time', 10, 2 );
+
+add_filter( 'attachment_fields_to_save', 'wpdtrt_exif_attachment_field_gps_save', 10, 2 );
+add_filter( 'attachment_fields_to_save', 'wpdtrt_exif_attachment_field_time_save', 10, 2 );
+
 register_deactivation_hook( dirname( __FILE__ ), 'wpdtrt_exif_helper_deactivate' );
 
 /**

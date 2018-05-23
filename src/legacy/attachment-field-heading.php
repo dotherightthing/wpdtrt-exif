@@ -27,7 +27,3 @@ function wpdtrt_exif_attachment_field_heading( $form_fields, $post ) {
 
   return $form_fields;
 }
-
-add_filter( 'attachment_fields_to_edit', 'wpdtrt_exif_attachment_field_heading', 10, 2 );
-
-?>

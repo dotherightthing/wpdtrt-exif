@@ -78,8 +78,6 @@ function wpdtrt_exif_attachment_field_gps( $form_fields, $post ) {
   	return $form_fields;
 }
 
-add_filter( 'attachment_fields_to_edit', 'wpdtrt_exif_attachment_field_gps', 10, 2 );
-
 /**
  * Save value of Time field in media uploader, for GPS dependent functions (map, weather)
  *
@@ -104,13 +102,9 @@ function wpdtrt_exif_attachment_field_gps_save( $post, $attachment ) {
 		$attachment_metadata_updated['image_meta']['longitude_ref'] = $TODO; // E
 		wp_update_attachment_metadata( $post['ID'], $attachment_metadata_updated );
 		*/
-		
+
 		update_post_meta( $post['ID'], 'wpdtrt_exif_attachment_gps', $attachment['wpdtrt-exif-gps'] );
 	}
 
 	return $post;
 }
-
-add_filter( 'attachment_fields_to_save', 'wpdtrt_exif_attachment_field_gps_save', 10, 2 );
-
-?>

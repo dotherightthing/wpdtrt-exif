@@ -58,8 +58,6 @@ function wpdtrt_exif_attachment_field_time( $form_fields, $post ) {
   	return $form_fields;
 }
 
-add_filter( 'attachment_fields_to_edit', 'wpdtrt_exif_attachment_field_time', 10, 2 );
-
 /**
  * Save value of Time field in media uploader, for Time dependent functions (map, weather)
  *
@@ -74,7 +72,3 @@ function wpdtrt_exif_attachment_field_time_save( $post, $attachment ) {
 
 	return $post;
 }
-
-add_filter( 'attachment_fields_to_save', 'wpdtrt_exif_attachment_field_time_save', 10, 2 );
-
-?>
