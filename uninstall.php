@@ -27,13 +27,11 @@
  */
 
 // if uninstall.php is not called by WordPress, die
-if ( ! defined('WP_UNINSTALL_PLUGIN') ) {
+if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	die;
 }
 
-delete_option('wpdtrt_exif');
+delete_option( 'wpdtrt_exif' );
 
 // for site options in Multisite
-delete_site_option('wpdtrt_exif');
-
-?>
+delete_site_option( 'wpdtrt_exif' );

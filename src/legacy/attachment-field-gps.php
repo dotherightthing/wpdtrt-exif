@@ -1,9 +1,9 @@
 <?php
 /**
  * Add GPS field to attachment media modal
- * 	Writing the EXIF back to the image is a hassle, so we can query the GPS in the future, instead.
- * 	Note: except for 'title', unwanted fields cannot be removed from the attachment modal
- * 	This file contains PHP.
+ * Writing the EXIF back to the image is a hassle, so we can query the GPS in the future, instead.
+ * Note: except for 'title', unwanted fields cannot be removed from the attachment modal
+ * This file contains PHP.
  *
  * @since       0.0.1
  * @see http://www.billerickson.net/wordpress-add-custom-fields-media-gallery/
@@ -29,7 +29,7 @@ function wpdtrt_exif_attachment_field_gps( $form_fields, $post ) {
 
 	global $wpdtrt_exif_plugin;
 
-	$plugin_options = $wpdtrt_exif_plugin->get_plugin_options();
+	$plugin_options             = $wpdtrt_exif_plugin->get_plugin_options();
 	$google_static_maps_api_key = '';
 
 	if ( array_key_exists( 'value', $plugin_options['google_static_maps_api_key'] ) ) {
@@ -40,22 +40,21 @@ function wpdtrt_exif_attachment_field_gps( $form_fields, $post ) {
 
 	$attachment_metadata_gps = $wpdtrt_exif_plugin->get_attachment_metadata_gps( $attachment_metadata, 'number', $post );
 
-	// if the values can be pulled from the image
 	if ( isset( $attachment_metadata_gps['latitude'], $attachment_metadata_gps['longitude'] ) ) {
+		// if the values can be pulled from the image
 		// then display these values to content admins
-		$value = ( $attachment_metadata_gps['latitude'] . ',' . $attachment_metadata_gps['longitude'] );
+		$value                          = ( $attachment_metadata_gps['latitude'] . ',' . $attachment_metadata_gps['longitude'] );
 		$attachment_metadata_gps_source = 'WordPress'; // i.e. Image metadata has been stored to WordPress as attachment metadata
-	}
-	// else try to pull these values from the user field
-	else {
-		$value = get_post_meta( $post->ID, 'wpdtrt_exif_attachment_gps', true );
+	} else {
+		// else try to pull these values from the user field
+		$value                          = get_post_meta( $post->ID, 'wpdtrt_exif_attachment_gps', true );
 		$attachment_metadata_gps_source = 'This field';
 	}
 
-	$gmap = '';
+	$gmap  = '';
 	$helps = '';
 
-	if ( $value !== '' ) {
+	if ( '' !== $value ) {
 		$gmap .= 'https://maps.googleapis.com/maps/api/staticmap?';
 		$gmap .= 'maptype=satellite';
 		$gmap .= '&center=' . $value;
@@ -75,7 +74,7 @@ function wpdtrt_exif_attachment_field_gps( $form_fields, $post ) {
 		'helps' => $helps . 'Source: ' . $attachment_metadata_gps_source,
 	);
 
-  	return $form_fields;
+	return $form_fields;
 }
 
 /**

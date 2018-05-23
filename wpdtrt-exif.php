@@ -34,40 +34,40 @@
  */
 
 if ( ! defined( 'WPDTRT_EXIF_VERSION' ) ) {
-  /**
-   * Plugin version.
-   *
-   * WP provides get_plugin_data(), but it only works within WP Admin,
-   * so we define a constant instead.
-   *
-   * @see $plugin_data = get_plugin_data( __FILE__ ); $plugin_version = $plugin_data['Version'];
-   * @see https://wordpress.stackexchange.com/questions/18268/i-want-to-get-a-plugin-version-number-dynamically
-   */
-  define( 'WPDTRT_EXIF_VERSION', '0.1.6' );
+	/**
+	 * Plugin version.
+	 *
+	 * WP provides get_plugin_data(), but it only works within WP Admin,
+	 * so we define a constant instead.
+	 *
+	 * @see $plugin_data = get_plugin_data( __FILE__ ); $plugin_version = $plugin_data['Version'];
+	 * @see https://wordpress.stackexchange.com/questions/18268/i-want-to-get-a-plugin-version-number-dynamically
+	 */
+	define( 'WPDTRT_EXIF_VERSION', '0.1.6' );
 }
 
 if ( ! defined( 'WPDTRT_EXIF_PATH' ) ) {
-  /**
-   * Plugin directory filesystem path.
-   *
-   * @param string $file
-   * @return The filesystem directory path (with trailing slash)
-   * @see https://developer.wordpress.org/reference/functions/plugin_dir_path/
-   * @see https://developer.wordpress.org/plugins/the-basics/best-practices/#prefix-everything
-   */
-  define( 'WPDTRT_EXIF_PATH', plugin_dir_path( __FILE__ ) );
+	/**
+	 * Plugin directory filesystem path.
+	 *
+	 * @param string $file
+	 * @return The filesystem directory path (with trailing slash)
+	 * @see https://developer.wordpress.org/reference/functions/plugin_dir_path/
+	 * @see https://developer.wordpress.org/plugins/the-basics/best-practices/#prefix-everything
+	 */
+	define( 'WPDTRT_EXIF_PATH', plugin_dir_path( __FILE__ ) );
 }
 
 if ( ! defined( 'WPDTRT_EXIF_URL' ) ) {
-  /**
-   * Plugin directory URL path.
-   *
-   * @param string $file
-   * @return The URL (with trailing slash)
-   * @see https://codex.wordpress.org/Function_Reference/plugin_dir_url
-   * @see https://developer.wordpress.org/plugins/the-basics/best-practices/#prefix-everything
-   */
-  define( 'WPDTRT_EXIF_URL', plugin_dir_url( __FILE__ ) );
+	/**
+	 * Plugin directory URL path.
+	 *
+	 * @param string $file
+	 * @return The URL (with trailing slash)
+	 * @see https://codex.wordpress.org/Function_Reference/plugin_dir_url
+	 * @see https://developer.wordpress.org/plugins/the-basics/best-practices/#prefix-everything
+	 */
+	define( 'WPDTRT_EXIF_URL', plugin_dir_url( __FILE__ ) );
 }
 
 /**
@@ -80,7 +80,7 @@ if ( ! defined( 'WPDTRT_EXIF_URL' ) ) {
  * @see https://github.com/dotherightthing/wpdtrt-plugin-boilerplate-boilerplate/issues/51
  */
 if ( ! defined( 'WPDTRT_PLUGIN_CHILD' ) ) {
-  define( 'WPDTRT_PLUGIN_CHILD', true );
+	define( 'WPDTRT_PLUGIN_CHILD', true );
 }
 
 /**
@@ -90,20 +90,16 @@ if ( ! defined( 'WPDTRT_PLUGIN_CHILD' ) ) {
  * @see https://github.com/dotherightthing/wpdtrt-plugin-boilerplate-boilerplate/wiki/Options:-Adding-WordPress-plugin-dependencies
  */
 if ( defined( 'WPDTRT_EXIF_TEST_DEPENDENCY' ) ) {
-  $project_root_path = realpath( __DIR__ . '/../../..' ) . '/';
+	$project_root_path = realpath( __DIR__ . '/../../..' ) . '/';
 } else {
-  $project_root_path = '';
+	$project_root_path = '';
 }
 
 require_once $project_root_path . 'vendor/autoload.php';
 
 // sub classes, not loaded via PSR-4.
-// comment out the ones you don't need, edit the ones you do.
+// remove the includes you don't need, edit the files you do need.
 require_once WPDTRT_EXIF_PATH . 'src/class-wpdtrt-exif-plugin.php';
-//require_once WPDTRT_EXIF_PATH . 'src/class-wpdtrt-exif-rewrite.php';
-//require_once WPDTRT_EXIF_PATH . 'src/class-wpdtrt-exif-shortcode.php';
-//require_once WPDTRT_EXIF_PATH . 'src/class-wpdtrt-exif-taxonomy.php';
-//require_once WPDTRT_EXIF_PATH . 'src/class-wpdtrt-exif-widget.php';
 
 // access wp_read_image_metadata
 // remove trailing slash from ABSPATH
@@ -114,9 +110,9 @@ require_once WPDTRT_EXIF_PATH . 'src/class-wpdtrt-exif-plugin.php';
 require_once( ABSPATH . 'wp-admin/includes/image.php' );
 
 // legacy helpers
-require_once(WPDTRT_EXIF_PATH . 'src/legacy/attachment-field-heading.php');
-require_once(WPDTRT_EXIF_PATH . 'src/legacy/attachment-field-time.php');
-require_once(WPDTRT_EXIF_PATH . 'src/legacy/attachment-field-gps.php');
+require_once WPDTRT_EXIF_PATH . 'src/legacy/attachment-field-heading.php';
+require_once WPDTRT_EXIF_PATH . 'src/legacy/attachment-field-time.php';
+require_once WPDTRT_EXIF_PATH . 'src/legacy/attachment-field-gps.php';
 
 // log & trace helpers.
 global $debug;
@@ -137,9 +133,6 @@ $debug = new DoTheRightThing\WPDebug\Debug;
 register_activation_hook( dirname( __FILE__ ), 'wpdtrt_exif_helper_activate' );
 
 add_action( 'init', 'wpdtrt_exif_plugin_init', 0 );
-//add_action( 'init', 'wpdtrt_exif_shortcode_init', 100 );
-//add_action( 'init', 'wpdtrt_exif_taxonomy_init', 100 );
-//add_action( 'widgets_init', 'wpdtrt_exif_widget_init', 10 );
 
 add_filter( 'attachment_fields_to_edit', 'wpdtrt_exif_attachment_field_gps', 10, 2 );
 add_filter( 'attachment_fields_to_edit', 'wpdtrt_exif_attachment_field_heading', 10, 2 );
@@ -162,7 +155,7 @@ register_deactivation_hook( dirname( __FILE__ ), 'wpdtrt_exif_helper_deactivate'
  * @see See also Plugin::helper_flush_rewrite_rules()
  */
 function wpdtrt_exif_helper_activate() {
-  flush_rewrite_rules();
+	flush_rewrite_rules();
 }
 
 /**
@@ -174,7 +167,7 @@ function wpdtrt_exif_helper_activate() {
  * @see See also Plugin::helper_flush_rewrite_rules()
  */
 function wpdtrt_exif_helper_deactivate() {
-  flush_rewrite_rules();
+	flush_rewrite_rules();
 }
 
 /**
@@ -190,86 +183,86 @@ function wpdtrt_exif_helper_deactivate() {
  * @todo Add a constructor function to WPDTRT_Blocks_Plugin, to explain the options array
  */
 function wpdtrt_exif_plugin_init() {
-  // pass object reference between classes via global
-  // because the object does not exist until the WordPress init action has fired
-  global $wpdtrt_exif_plugin;
+	// pass object reference between classes via global
+	// because the object does not exist until the WordPress init action has fired
+	global $wpdtrt_exif_plugin;
 
-  /**
-   * Global options
-   *
-   * @see https://github.com/dotherightthing/wpdtrt-plugin-boilerplate-boilerplate/wiki/Options:-Adding-global-options Options: Adding global options
-   */
-  $plugin_options = array(
-    'google_static_maps_api_key' => array(
-      'type'  => 'password',
-      'label' => __('Google Static Maps API Key', 'wpdtrt-exif'),
-      'size'  => 50,
-      'tip'   => __('https://developers.google.com/maps/documentation/maps-static/get-api-key', 'wpdtrt-exif')
-    )
-  );
+	/**
+	 * Global options
+	 *
+	 * @see https://github.com/dotherightthing/wpdtrt-plugin-boilerplate-boilerplate/wiki/Options:-Adding-global-options Options: Adding global options
+	 */
+	$plugin_options = array(
+		'google_static_maps_api_key' => array(
+			'type'  => 'password',
+			'label' => __( 'Google Static Maps API Key', 'wpdtrt-exif' ),
+			'size'  => 50,
+			'tip'   => __( 'https://developers.google.com/maps/documentation/maps-static/get-api-key', 'wpdtrt-exif' ),
+		),
+	);
 
-  /**
-   * Shortcode or Widget options
-   *
-   * @see https://github.com/dotherightthing/wpdtrt-plugin-boilerplate-boilerplate/wiki/Options:-Adding-shortcode-or-widget-options Options: Adding shortcode or widget options
-   */
-  $instance_options = array();
+	/**
+	 * Shortcode or Widget options
+	 *
+	 * @see https://github.com/dotherightthing/wpdtrt-plugin-boilerplate-boilerplate/wiki/Options:-Adding-shortcode-or-widget-options Options: Adding shortcode or widget options
+	 */
+	$instance_options = array();
 
-  /**
-   * Plugin dependencies
-   *
-   * @see https://github.com/dotherightthing/wpdtrt-plugin-boilerplate-boilerplate/wiki/Options:-Adding-WordPress-plugin-dependencies Options: Adding WordPress plugin dependencies
-   */
-  $plugin_dependencies = array();
+	/**
+	 * Plugin dependencies
+	 *
+	 * @see https://github.com/dotherightthing/wpdtrt-plugin-boilerplate-boilerplate/wiki/Options:-Adding-WordPress-plugin-dependencies Options: Adding WordPress plugin dependencies
+	 */
+	$plugin_dependencies = array();
 
-  /**
-   *  UI Messages
-   */
-  $ui_messages = array(
-    'demo_data_description'       => __( 'This demo was generated from the following data', 'wpdtrt-exif' ),
-    'demo_data_displayed_length'  => __( 'results displayed', 'wpdtrt-exif' ),
-    'demo_data_length'            => __( 'results', 'wpdtrt-exif' ),
-    'demo_data_title'             => __( 'Demo data', 'wpdtrt-exif' ),
-    'demo_date_last_updated'      => __( 'Data last updated', 'wpdtrt-exif' ),
-    'demo_sample_title'           => __( 'Demo sample', 'wpdtrt-exif' ),
-    'demo_shortcode_title'        => __( 'Demo shortcode', 'wpdtrt-exif' ),
-    'insufficient_permissions'    => __( 'Sorry, you do not have sufficient permissions to access this page.', 'wpdtrt-exif' ),
-    'no_options_form_description' => __( 'There aren\'t currently any options.', 'wpdtrt-exif' ),
-    'noscript_warning'            => __( 'Please enable JavaScript', 'wpdtrt-exif' ),
-    'options_form_description'    => __( 'Please enter your preferences.', 'wpdtrt-exif' ),
-    'options_form_submit'         => __( 'Save Changes', 'wpdtrt-exif' ),
-    'options_form_title'          => __( 'General Settings', 'wpdtrt-exif' ),
-    'loading'                     => __( 'Loading latest data...', 'wpdtrt-exif' ),
-    'success'                     => __( 'settings successfully updated', 'wpdtrt-exif' ),
-  );
+	/**
+	 *  UI Messages
+	 */
+	$ui_messages = array(
+		'demo_data_description'       => __( 'This demo was generated from the following data', 'wpdtrt-exif' ),
+		'demo_data_displayed_length'  => __( 'results displayed', 'wpdtrt-exif' ),
+		'demo_data_length'            => __( 'results', 'wpdtrt-exif' ),
+		'demo_data_title'             => __( 'Demo data', 'wpdtrt-exif' ),
+		'demo_date_last_updated'      => __( 'Data last updated', 'wpdtrt-exif' ),
+		'demo_sample_title'           => __( 'Demo sample', 'wpdtrt-exif' ),
+		'demo_shortcode_title'        => __( 'Demo shortcode', 'wpdtrt-exif' ),
+		'insufficient_permissions'    => __( 'Sorry, you do not have sufficient permissions to access this page.', 'wpdtrt-exif' ),
+		'no_options_form_description' => __( 'There aren\'t currently any options.', 'wpdtrt-exif' ),
+		'noscript_warning'            => __( 'Please enable JavaScript', 'wpdtrt-exif' ),
+		'options_form_description'    => __( 'Please enter your preferences.', 'wpdtrt-exif' ),
+		'options_form_submit'         => __( 'Save Changes', 'wpdtrt-exif' ),
+		'options_form_title'          => __( 'General Settings', 'wpdtrt-exif' ),
+		'loading'                     => __( 'Loading latest data...', 'wpdtrt-exif' ),
+		'success'                     => __( 'settings successfully updated', 'wpdtrt-exif' ),
+	);
 
-  /**
-   * Demo shortcode
-   *
-   * @see https://github.com/dotherightthing/wpdtrt-plugin-boilerplate-boilerplate/wiki/Settings-page:-Adding-a-demo-shortcode Settings page: Adding a demo shortcode
-   */
-  $demo_shortcode_params = array();
+	/**
+	 * Demo shortcode
+	 *
+	 * @see https://github.com/dotherightthing/wpdtrt-plugin-boilerplate-boilerplate/wiki/Settings-page:-Adding-a-demo-shortcode Settings page: Adding a demo shortcode
+	 */
+	$demo_shortcode_params = array();
 
-  /**
-   * Plugin configuration
-   */
-  $wpdtrt_exif_plugin = new WPDTRT_Exif_Plugin(
-    array(
-      'path'                  => WPDTRT_EXIF_PATH,
-      'url'                   => WPDTRT_EXIF_URL,
-      'version'               => WPDTRT_EXIF_VERSION,
-      'prefix'                => 'wpdtrt_exif',
-      'slug'                  => 'wpdtrt-exif',
-      'menu_title'            => __( 'EXIF', 'wpdtrt-exif' ),
-      'settings_title'        => __( 'Settings', 'wpdtrt-exif' ),
-      'developer_prefix'      => 'DTRT',
-      'messages'              => $ui_messages,
-      'plugin_options'        => $plugin_options,
-      'instance_options'      => $instance_options,
-      'plugin_dependencies'   => $plugin_dependencies,
-      'demo_shortcode_params' => $demo_shortcode_params,
-    )
-  );
+	/**
+	 * Plugin configuration
+	 */
+	$wpdtrt_exif_plugin = new WPDTRT_Exif_Plugin(
+		array(
+			'path'                  => WPDTRT_EXIF_PATH,
+			'url'                   => WPDTRT_EXIF_URL,
+			'version'               => WPDTRT_EXIF_VERSION,
+			'prefix'                => 'wpdtrt_exif',
+			'slug'                  => 'wpdtrt-exif',
+			'menu_title'            => __( 'EXIF', 'wpdtrt-exif' ),
+			'settings_title'        => __( 'Settings', 'wpdtrt-exif' ),
+			'developer_prefix'      => 'DTRT',
+			'messages'              => $ui_messages,
+			'plugin_options'        => $plugin_options,
+			'instance_options'      => $instance_options,
+			'plugin_dependencies'   => $plugin_dependencies,
+			'demo_shortcode_params' => $demo_shortcode_params,
+		)
+	);
 }
 
 /**
@@ -281,11 +274,11 @@ function wpdtrt_exif_plugin_init() {
  */
 function wpdtrt_exif_rewrite_init() {
 
-  global $wpdtrt_exif_plugin;
+	global $wpdtrt_exif_plugin;
 
-  $wpdtrt_exif_rewrite = new WPDTRT_Exif_Rewrite(
-    array()
-  );
+	$wpdtrt_exif_rewrite = new WPDTRT_Exif_Rewrite(
+		array()
+	);
 }
 
 /**
@@ -297,11 +290,11 @@ function wpdtrt_exif_rewrite_init() {
  */
 function wpdtrt_exif_shortcode_init() {
 
-  global $wpdtrt_exif_plugin;
+	global $wpdtrt_exif_plugin;
 
-  $wpdtrt_exif_shortcode = new WPDTRT_Exif_Shortcode(
-    array()
-  );
+	$wpdtrt_exif_shortcode = new WPDTRT_Exif_Shortcode(
+		array()
+	);
 }
 
 /**
@@ -315,14 +308,14 @@ function wpdtrt_exif_shortcode_init() {
  */
 function wpdtrt_exif_taxonomy_init() {
 
-  global $wpdtrt_exif_plugin;
+	global $wpdtrt_exif_plugin;
 
-  $wpdtrt_exif_taxonomy = new WPDTRT_Exif_Taxonomy(
-    array()
-  );
+	$wpdtrt_exif_taxonomy = new WPDTRT_Exif_Taxonomy(
+		array()
+	);
 
-  // return a reference for unit testing.
-  return $wpdtrt_exif_taxonomy;
+	// return a reference for unit testing.
+	return $wpdtrt_exif_taxonomy;
 }
 
 /**
@@ -344,11 +337,11 @@ function wpdtrt_exif_taxonomy_init() {
  */
 function wpdtrt_exif_widget_init() {
 
-  global $wpdtrt_exif_plugin;
+	global $wpdtrt_exif_plugin;
 
-  $wpdtrt_exif_widget = new WPDTRT_Exif_Widget(
-    array()
-  );
+	$wpdtrt_exif_widget = new WPDTRT_Exif_Widget(
+		array()
+	);
 
-  register_widget( $wpdtrt_exif_widget );
+	register_widget( $wpdtrt_exif_widget );
 }

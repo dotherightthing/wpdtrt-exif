@@ -19,11 +19,11 @@
  */
 
 function wpdtrt_exif_attachment_field_heading( $form_fields, $post ) {
-  $form_fields['wpdtrt-exif-heading'] = array(
-    'label' => '<h2>WPDTRT EXIF</h2>',
-    'input' => 'html',
-    'html' => '<span></span>',
-  );
+	$form_fields['wpdtrt-exif-heading'] = array(
+		'label' => '<h2>WPDTRT EXIF</h2>',
+		'input' => 'html',
+		'html'  => '<span></span>',
+	);
 
-  return $form_fields;
+	return $form_fields;
 }

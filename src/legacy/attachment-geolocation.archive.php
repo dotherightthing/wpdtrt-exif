@@ -1,5 +1,5 @@
 <?php
-
+// phpcs:disable
 include_once( ABSPATH . 'wp-admin/includes/image.php' ); // for access to wp_read_image_metadata
 
 /**
@@ -136,5 +136,4 @@ function get_geo_exif($id, $format) {
 
   return array($lat_out, $lng_out);
 }
-
-?>
+// phpcs:enable

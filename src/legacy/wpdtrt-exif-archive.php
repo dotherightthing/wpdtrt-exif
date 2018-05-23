@@ -1,5 +1,5 @@
 <?php
-
+// phpcs:disable
 /**
  * Convert Degrees Minutes Seconds String To Number
  * @param string $string The String
@@ -46,6 +46,4 @@ function wpdtrt_exif_gps_dms_to_decimal( $reference_direction, $degrees, $minute
 
   return $decimal;
 }
-
-
-?>
+// phpcs:enable
