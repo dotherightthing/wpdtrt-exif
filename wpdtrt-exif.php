@@ -246,7 +246,7 @@ function wpdtrt_exif_plugin_init() {
   /**
    * Plugin configuration
    */
-  $wpdtrt_exif_plugin = new WPDTRT_Contentsections_Plugin(
+  $wpdtrt_exif_plugin = new WPDTRT_Exif_Plugin(
     array(
       'path'                  => WPDTRT_EXIF_PATH,
       'url'                   => WPDTRT_EXIF_URL,
@@ -276,7 +276,7 @@ function wpdtrt_exif_rewrite_init() {
 
   global $wpdtrt_exif_plugin;
 
-  $wpdtrt_exif_rewrite = new WPDTRT_Contentsections_Rewrite(
+  $wpdtrt_exif_rewrite = new WPDTRT_Exif_Rewrite(
     array()
   );
 }
@@ -292,7 +292,7 @@ function wpdtrt_exif_shortcode_init() {
 
   global $wpdtrt_exif_plugin;
 
-  $wpdtrt_exif_shortcode = new WPDTRT_Contentsections_Shortcode(
+  $wpdtrt_exif_shortcode = new WPDTRT_Exif_Shortcode(
     array()
   );
 }
@@ -310,7 +310,7 @@ function wpdtrt_exif_taxonomy_init() {
 
   global $wpdtrt_exif_plugin;
 
-  $wpdtrt_exif_taxonomy = new WPDTRT_Contentsections_Taxonomy(
+  $wpdtrt_exif_taxonomy = new WPDTRT_Exif_Taxonomy(
     array()
   );
 
@@ -339,7 +339,7 @@ function wpdtrt_exif_widget_init() {
 
   global $wpdtrt_exif_plugin;
 
-  $wpdtrt_exif_widget = new WPDTRT_Contentsections_Widget(
+  $wpdtrt_exif_widget = new WPDTRT_Exif_Widget(
     array()
   );
 
