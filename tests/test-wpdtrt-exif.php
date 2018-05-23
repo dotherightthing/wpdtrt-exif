@@ -12,7 +12,7 @@
  *
  * @package     WPDTRT_Exif
  * @version     0.0.1
- * @since       0.7.5
+ * @since       0.7.5 DTRT WordPress Plugin Boilerplate Generator
  *
  * @see http://kb.dotherightthing.dan/php/wordpress/php-unit-testing-revisited/ - Links
  * @see http://richardsweeney.com/testing-integrations/
@@ -133,7 +133,7 @@ class wpdtrt_exifTest extends WP_UnitTestCase {
      * TearDown
      * Automatically called by PHPUnit after each test method is run
      *
-     * @see https://codesymphony.co/writing-wordpress-plugin-unit-tests/#object-factories     
+     * @see https://codesymphony.co/writing-wordpress-plugin-unit-tests/#object-factories
      */
     public function tearDown() {
 
@@ -226,7 +226,7 @@ class wpdtrt_exifTest extends WP_UnitTestCase {
 
         // Create the attachment from an array of post data
         $attachment_id = $this->factory->attachment->create([
-            'guid'           => $wp_upload_dir['url'] . '/' . basename( $filename ), 
+            'guid'           => $wp_upload_dir['url'] . '/' . basename( $filename ),
             'post_mime_type' => $filetype['type'],
             'post_title'     => preg_replace( '/\.[^.]+$/', '', basename( $filename ) ),
             'post_content'   => '',

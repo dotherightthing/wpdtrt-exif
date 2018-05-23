@@ -4,7 +4,7 @@
  *
  * @package   DTRT EXIF
  * @version   0.0.1
- * @since     0.7.5
+ * @since     0.7.5 DTRT WordPress Plugin Boilerplate Generator
  */
 
 // Predeclare variables

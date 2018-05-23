@@ -2,64 +2,57 @@
 /**
  * Plugin sub class.
  *
- * @package     wpdtrt_exif
- * @version 	0.0.1
- * @since       0.7.5
+ * @package WPDTRT_Exif
+ * @since   0.7.16 DTRT WordPress Plugin Boilerplate Generator
  */
 
 /**
- * Plugin sub class.
- *
- * Extends the base class to inherit boilerplate functionality.
+ * Extend the base class to inherit boilerplate functionality.
  * Adds application-specific methods.
  *
- * @version 	0.0.1
- * @since       0.7.5
+ * @since   1.0.0
  */
-class WPDTRT_Exif_Plugin extends DoTheRightThing\WPPlugin\r_1_4_15\Plugin {
+class WPDTRT_Exif_Plugin extends DoTheRightThing\WPDTRT_Plugin_Boilerplate\r_1_4_22\Plugin {
 
-    /**
-     * Hook the plugin in to WordPress
-     * This constructor automatically initialises the object's properties
-     * when it is instantiated,
-     * using new WPDTRT_Weather_Plugin
-     *
-     * @param     array $settings Plugin options
-     *
-	 * @version 	0.0.1
-     * @since       0.7.5
-     */
-    function __construct( $settings ) {
+	/**
+	 * Supplement plugin initialisation.
+	 *
+	 * @param     array $options Plugin options.
+	 * @since     1.0.0
+	 * @version   1.1.0
+	 */
+	function __construct( $options ) {
 
-    	// add any initialisation specific to wpdtrt-exif here
+		// edit here.
 
-		// Instantiate the parent object
-		parent::__construct( $settings );
-    }
+		parent::__construct( $options );
+	}
 
-    //// START WORDPRESS INTEGRATION \\\\
+	/**
+	 * ====== WordPress Integration ======
+	 */
 
-    /**
-     * Initialise plugin options ONCE.
-     *
-     * @param array $default_options
-     *
-     * @version     0.0.1
-     * @since       0.7.5
-     */
-    protected function wp_setup() {
+	/**
+	 * Supplement plugin's WordPress setup.
+	 * Note: Default priority is 10. A higher priority runs later.
+	 *
+	 * @see https://codex.wordpress.org/Plugin_API/Action_Reference Action order
+	 */
+	protected function wp_setup() {
 
-    	parent::wp_setup();
+		// edit here.
 
-		// add actions and filters here
+		parent::wp_setup();
+
+        // add actions and filters here
         add_filter( 'wp_read_image_metadata', [$this, 'filter_read_image_geodata'], '', 3 );
-    }
+	}
 
-    //// END WORDPRESS INTEGRATION \\\\
+	/**
+	 * ====== Getters and Setters ======
+	 */
 
-    //// START SETTERS AND GETTERS \\\\
-
-    /**
+   /**
      * Get metadata from attachment, including geotag
      *
      * @param $attachment_id
@@ -231,12 +224,13 @@ class WPDTRT_Exif_Plugin extends DoTheRightThing\WPPlugin\r_1_4_15\Plugin {
         );
     }
 
-    //// END SETTERS AND GETTERS \\\\
+	/**
+	 * ===== Renderers =====
+	 */
 
-    //// START RENDERERS \\\\
-    //// END RENDERERS \\\\
-
-    //// START FILTERS \\\\
+	/**
+	 * ===== Filters =====
+	 */
 
     /**
      * Get metadata from image
@@ -292,9 +286,9 @@ class WPDTRT_Exif_Plugin extends DoTheRightThing\WPPlugin\r_1_4_15\Plugin {
         return $meta;
     }
 
-    //// END FILTERS \\\\
-
-    //// START HELPERS \\\\
+	/**
+	 * ===== Helpers =====
+	 */
 
     /**
      * Generate the full decimal latitude and longitude for Google
@@ -395,8 +389,4 @@ class WPDTRT_Exif_Plugin extends DoTheRightThing\WPPlugin\r_1_4_15\Plugin {
             $sec
         );
     }
-    
-    //// END HELPERS \\\\
 }
-
-?>
