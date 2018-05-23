@@ -43,6 +43,12 @@ This plugin adds the following custom fields to attachments:
 == Changelog ==
 
 = 0.1.6 =
+* Update wpdtrt-plugin to wpdtrt-plugin-boilerplate
+* Update wpdtrt-plugin-boilerplate to 1.4.22
+* Add missing functions including those from the theme
+* Update URL in Google API key hint
+* Add tests (failing)
+* Move test images into tests folder
 
 = 0.1.5 =
 * Update wpdtrt-plugin-boilerplate to 1.4.15
