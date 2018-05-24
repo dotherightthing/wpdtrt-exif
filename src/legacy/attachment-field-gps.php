@@ -87,6 +87,7 @@ function wpdtrt_exif_attachment_field_gps( $form_fields, $post ) {
 function wpdtrt_exif_attachment_field_gps_save( $post, $attachment ) {
 	if ( isset( $attachment['wpdtrt-exif-gps'] ) ) {
 
+		// phpcs:disable
 		/*
 		// Copy user input from custom field to attachment metadata,
 		// converting $attachment['wpdtrt-exif-geotag'] array(lat,lng) to the exif format that WP uses
@@ -101,6 +102,7 @@ function wpdtrt_exif_attachment_field_gps_save( $post, $attachment ) {
 		$attachment_metadata_updated['image_meta']['longitude_ref'] = $TODO; // E
 		wp_update_attachment_metadata( $post['ID'], $attachment_metadata_updated );
 		*/
+		// phpcs:enable
 
 		update_post_meta( $post['ID'], 'wpdtrt_exif_attachment_gps', $attachment['wpdtrt-exif-gps'] );
 	}
