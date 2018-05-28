@@ -87,6 +87,7 @@ class wpdtrt_exifTest extends WP_UnitTestCase {
             'parent_post_id' => $this->post_id_2
         ) );
 
+        // tests/data/test2.jpg
         $this->attachment_2_meta = array(
             'aperture' => '2.4',
             'credit' => '',
@@ -450,94 +451,26 @@ class wpdtrt_exifTest extends WP_UnitTestCase {
 
     /**
      * Test DMS to decimal conversion
-     *
-     * @see https://www.fcc.gov/media/radio/dms-decimal
      */
-    public function test_old_meta_conversion() {
+    public function test_meta_conversion() {
 
         global $wpdtrt_exif_plugin;
 
-        // Epic 180
-        /*
-        'latitude' => Array(
-            0 => '52/1',
-            1 => '50/1',
-            2 => '1019/100'
-        ),
-        'latitude_ref' => 'N',
-        */
         $this->assertEquals(
-            number_format( 53.003167, 6 ), // current from plugin attachment field
-            number_format( $wpdtrt_exif_plugin->helper_convert_dms_to_dd( $this->attachment_2_meta['latitude'] ), 6 ),
+            52.83616388888889, // tests/data/test2.jpg
+            $wpdtrt_exif_plugin->helper_convert_dms_to_dd(
+                $this->attachment_2_meta['latitude'],
+                $this->attachment_2_meta['latitude_ref']
+            ),
             '1 Latitude should be converted from degrees-decimal to degrees-minutes-seconds'
         );
 
-        // Epic 180
-        /*
-        'longitude' => Array(
-            0 => '106/1',
-            1 => '30/1',
-            2 => '3164/100'
-        ),
-        'longitude_ref' => 'E'
-        */
         $this->assertEquals(
-            number_format( 107.027333, 6 ), // current from plugin attachment field
-            number_format( $wpdtrt_exif_plugin->helper_convert_dms_to_dd( $this->attachment_2_meta['longitude'] ), 6 ),
-            '2 Longitude should be converted from degrees-decimal to degrees-minutes-seconds'
-        );
-
-        // Epic 180
-        $this->assertEquals(
-            number_format( 53.003167, 6 ), // current from Preview
-            number_format( $wpdtrt_exif_plugin->helper_convert_dms_to_dd(Array (
-                '52/1',
-                '50/1',
-                '10.188/100'
-            )), 6 ),
-            '3 Latitude should be converted from degrees-decimal to degrees-minutes-seconds'
-        );
-
-        // Epic 180
-        $this->assertEquals(
-            number_format( 107.027333, 6 ), // current
-            number_format( $wpdtrt_exif_plugin->helper_convert_dms_to_dd(Array (
-                '106/1',
-                '30/1',
-                '31.638/100'
-            )), 6 ),
-            '4 Longitude should be converted from degrees-decimal to degrees-minutes-seconds'
-        );
-    }
-
-    /**
-     * Test DMS to decimal conversion
-     *
-     * @see https://www.fcc.gov/media/radio/dms-decimal
-     */
-    public function test_new_meta_conversion_fcc() {
-
-        global $wpdtrt_exif_plugin;
-
-        // Epic 180 - latitude
-        $this->assertEquals(
-            number_format( 52.836163, 6), // FCC
-            number_format( $wpdtrt_exif_plugin->helper_convert_dms_to_dd(Array (
-                '52/1',
-                '50/1',
-                '10.188/100'
-            )), 6 ),
-            '1 Latitude should be converted from degrees-decimal to degrees-minutes-seconds'
-        );
-
-        // Epic 180 - longitude
-        $this->assertEquals(
-            number_format( 106.508788, 6 ), // FCC
-            number_format( $wpdtrt_exif_plugin->helper_convert_dms_to_dd(Array (
-                '106/1',
-                '30/1',
-                '31.638/100'
-            )), 6 ),
+            106.5087888888888, // tests/data/test2.jpg
+            $wpdtrt_exif_plugin->helper_convert_dms_to_dd(
+                $this->attachment_2_meta['longitude'],
+                $this->attachment_2_meta['longitude_ref']
+            ),
             '2 Longitude should be converted from degrees-decimal to degrees-minutes-seconds'
         );
     }

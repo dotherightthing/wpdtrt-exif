@@ -18,13 +18,18 @@
     },
     "require": {
         "dotherightthing/wpdtrt-plugin-boilerplate": "^1.0.0",
-        "tgmpa/tgm-plugin-activation": "2.6.*"
+        "prairiewest/PHPconvertDMSToDecimal": "dev-master"
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "repositories": [
         {
             "type": "composer",
             "url": "https://repo.packagist.com/dotherightthing/"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/prairiewest/PHPconvertDMSToDecimal"
         },
         {
             "packagist.org": false

@@ -90,6 +90,7 @@ if ( ! defined( 'WPDTRT_PLUGIN_CHILD' ) ) {
  * @see https://github.com/dotherightthing/wpdtrt-plugin-boilerplate-boilerplate/wiki/Options:-Adding-WordPress-plugin-dependencies
  */
 if ( defined( 'WPDTRT_EXIF_TEST_DEPENDENCY' ) ) {
+	global $project_root_path;
 	$project_root_path = realpath( __DIR__ . '/../../..' ) . '/';
 } else {
 	$project_root_path = '';

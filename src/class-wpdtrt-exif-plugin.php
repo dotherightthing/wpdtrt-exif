@@ -143,23 +143,21 @@ class WPDTRT_Exif_Plugin extends DoTheRightThing\WPDTRT_Plugin_Boilerplate\r_1_4
 			return array();
 		}
 
-		$latitude  = $attachment_metadata['image_meta']['latitude'];
-		$longitude = $attachment_metadata['image_meta']['longitude'];
-		$lat       = $this->helper_convert_dms_to_dd( $latitude );
-		$lng       = $this->helper_convert_dms_to_dd( $longitude );
-		$lat_ref   = $attachment_metadata['image_meta']['latitude_ref'];
-		$lng_ref   = $attachment_metadata['image_meta']['longitude_ref'];
+		$latitude      = $attachment_metadata['image_meta']['latitude'];
+		$longitude     = $attachment_metadata['image_meta']['longitude'];
+		$latitude_ref  = $attachment_metadata['image_meta']['latitude_ref'];
+		$longitude_ref = $attachment_metadata['image_meta']['longitude_ref'];
+		$lat           = $this->helper_convert_dms_to_dd( $latitude, $latitude_ref );
+		$lng           = $this->helper_convert_dms_to_dd( $longitude, $longitude_ref );
+		$neg_lat       = '';
+		$neg_lng       = '';
 
-		if ( 'S' === $lat_ref ) {
+		if ( $lat < 0 ) {
 			$neg_lat = '-';
-		} else {
-			$neg_lat = '';
 		}
 
-		if ( 'W' === $lng_ref ) {
+		if ( $lng < 0 ) {
 			$neg_lng = '-';
-		} else {
-			$neg_lng = '';
 		}
 
 		if ( 0 !== $latitude && 0 !== $longitude ) {
@@ -167,10 +165,12 @@ class WPDTRT_Exif_Plugin extends DoTheRightThing\WPDTRT_Plugin_Boilerplate\r_1_4
 				// full decimal latitude and longitude for Google Maps
 				$lat_out = ( $neg_lat . number_format( $lat, 6 ) );
 				$lng_out = ( $neg_lng . number_format( $lng, 6 ) );
+
 			} elseif ( 'text' === $format ) {
+
 				// text based latitude and longitude for Alternative text
-				$lat_out = ( $this->helper_geo_pretty_fracs2dec( $latitude ) . $lat_ref );
-				$lng_out = ( $this->helper_geo_pretty_fracs2dec( $longitude ) . $lng_ref );
+				$lat_out = $this->helper_convert_dms_to_dd_pretty( $latitude, $latitude_ref );
+				$lng_out = $this->helper_convert_dms_to_dd_pretty( $longitude, $longitude_ref );
 			}
 		} else {
 			$user_gps = $this->get_user_gps( $post );
@@ -279,47 +279,49 @@ class WPDTRT_Exif_Plugin extends DoTheRightThing\WPDTRT_Plugin_Boilerplate\r_1_4
 	 */
 
 	/**
-	 * Generate the full decimal latitude and longitude for Google
-	 *  (ex geo_single_fracs2dec in twentysixteenchild-dontbelievethehype/includes/attachment-geolocation.php))
-	 *
-	 * @uses http://kristarella.blog/2008/12/geo-exif-data-in-wordpress/
-	 */
-	function helper_geo_single_fracs2dec( $fracs ) {
-		return geo_frac2dec( $fracs[0] ) +
-		geo_frac2dec( $fracs[1] ) / 60 +
-		geo_frac2dec( $fracs[2] ) / 3600;
-	}
-
-	/**
 	 * Convert fraction to decimal, format to be human readable
 	 *  (ex twentysixteenchild-dontbelievethehype/includes/attachment-geolocation.php)
 	 *
-	 * @param $fracs
-	 * @return $str
+	 * @param array $dms_fractions array( Degrees/1, Minutes/1, Seconds/100 )
+	 * @param string $axis_ref N|S|E|W
+	 * @return string $decimal_degrees_pretty
 	 */
-	public function helper_geo_pretty_fracs2dec( $fracs ) {
-		return  geo_frac2dec( $fracs[0] ) . '&deg; ' .
-		geo_frac2dec( $fracs[1] ) . '&prime; ' .
-		geo_frac2dec( $fracs[2] ) . '&Prime; ';
+	public function helper_convert_dms_to_dd_pretty( $dms_fractions, $axis_ref ) {
+
+		$d = $this->helper_convert_dms_fraction_to_number( $dms_fractions[0] );
+		$m = $this->helper_convert_dms_fraction_to_number( $dms_fractions[1] );
+		$s = $this->helper_convert_dms_fraction_to_number( $dms_fractions[2] );
+
+		$decimal_degrees_pretty = ( $d . '&deg; ' . $m . '&prime; ' . $s . '&Prime; ' . $axis_ref );
+
+		return $decimal_degrees_pretty;
 	}
 
 	/**
 	 * Convert Degrees Minutes Seconds fractions, to Decimal Degrees for Google Maps
+	 * This is called once for latitude, and once for longitude.
 	 *
-	 * @param $dms_fractions Degrees Minutes Seconds fractions
+	 * @param array $dms_fractions array( Degrees/1, Minutes/1, Seconds/100 )
+	 * @param string $axis_ref N|S|E|W
 	 * @return string $decimal_degrees
 	 * @see http://kristarella.blog/2008/12/geo-exif-data-in-wordpress/
 	 * @see https://tmackinnon.com/converting-decimal-degrees-to-degrees-minutes-seconds.php
+     * @see http://www.leancrew.com/all-this/2014/07/extracting-coordinates-from-apple-maps/ Apple Maps to Mail = 52.836163,106.508788
+     * @see https://www.fcc.gov/media/radio/dms-decimal FCC (JS Page) = 52.836164, 106.508789
+     * @see https://github.com/prairiewest/PHPconvertDMSToDecimal PHPconvertDMSToDecimal (Github PHP) = 52.83616388888889, 106.50878888888889
+     * @see https://www.web-max.ca/PHP/misc_6.php WebMax (PHP Page) = 52.83616388888889, 106.50878888888889
+     * @see https://www.latlong.net/degrees-minutes-seconds-to-decimal-degrees LatLng (PHP? Page, expects a rounded longitudinal second value) = 52.83616389,106.50888889
 	 */
-	public function helper_convert_dms_to_dd( $dms_fractions ) {
+	public function helper_convert_dms_to_dd( $dms_fractions, $axis_ref ) {
 
-		// dms_fractions = array( 52/1, 17/1, 2282/100 );
-		$degrees = $this->helper_convert_dms_to_number( $dms_fractions[0] ); // 52/1 -> 52 -> 52
-		$minutes = $this->helper_convert_dms_to_number( $dms_fractions[1] ); // 17/1 -> 17 /60 -> 0.283333333333333
-		$seconds = $this->helper_convert_dms_to_number( $dms_fractions[2] ); // 2282/100 -> 22.82 /60 -> 0.380333333333333
-		// 52.6636666667
+		global $project_root_path;
+		require_once $project_root_path . 'vendor/prairiewest/PHPconvertDMSToDecimal/convert.php';
 
-		$decimal_degrees = $degrees + $minutes / 60 + $seconds / 60;
+		$d = $this->helper_convert_dms_fraction_to_number( $dms_fractions[0] );
+		$m = $this->helper_convert_dms_fraction_to_number( $dms_fractions[1] );
+		$s = $this->helper_convert_dms_fraction_to_number( $dms_fractions[2] );
+
+		$decimal_degrees = convertDMSToDecimal( $axis_ref . ' ' . $d . ' ' . $m . ' ' . $s );
 
 		return $decimal_degrees;
 	}
@@ -333,14 +335,15 @@ class WPDTRT_Exif_Plugin extends DoTheRightThing\WPDTRT_Plugin_Boilerplate\r_1_4
 	 * @param string $str Fraction string
 	 * @return number $number Decimal number
 	 */
-	function helper_convert_dms_to_number( $str ) {
+	function helper_convert_dms_fraction_to_number( $str ) {
 
 		$decimal = 0;
 
-		// list - assigns variables as if they were an array
 		@list( $n, $d ) = explode( '/', $str );
 
 		if ( ! empty( $d ) ) {
+
+			// convert fraction a/b into array(a,b)
 			$decimal = $n / $d;
 		}
 
