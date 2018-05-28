@@ -61,8 +61,6 @@ class WPDTRT_Exif_Plugin extends DoTheRightThing\WPDTRT_Plugin_Boilerplate\r_1_4
 	 */
 	public function get_attachment_metadata( $attachment_id ) {
 
-		require_once( ABSPATH . '/wp-admin/includes/image.php' ); // access wp_read_image_metadata
-
 		// reinstate attachment metadata accidentally deleted during development:
 		// $attach_data = wp_generate_attachment_metadata( $id, get_attached_file( $id ) );
 		// wp_update_attachment_metadata( $id, $attach_data );
@@ -313,9 +311,6 @@ class WPDTRT_Exif_Plugin extends DoTheRightThing\WPDTRT_Plugin_Boilerplate\r_1_4
      * @see https://www.latlong.net/degrees-minutes-seconds-to-decimal-degrees LatLng (PHP? Page, expects a rounded longitudinal second value) = 52.83616389,106.50888889
 	 */
 	public function helper_convert_dms_to_dd( $dms_fractions, $axis_ref ) {
-
-		global $project_root_path;
-		require_once $project_root_path . 'vendor/prairiewest/PHPconvertDMSToDecimal/convert.php';
 
 		$d = $this->helper_convert_dms_fraction_to_number( $dms_fractions[0] );
 		$m = $this->helper_convert_dms_fraction_to_number( $dms_fractions[1] );

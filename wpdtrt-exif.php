@@ -110,10 +110,15 @@ require_once WPDTRT_EXIF_PATH . 'src/class-wpdtrt-exif-plugin.php';
 //}
 require_once( ABSPATH . 'wp-admin/includes/image.php' );
 
+
 // legacy helpers
 require_once WPDTRT_EXIF_PATH . 'src/legacy/attachment-field-heading.php';
 require_once WPDTRT_EXIF_PATH . 'src/legacy/attachment-field-time.php';
 require_once WPDTRT_EXIF_PATH . 'src/legacy/attachment-field-gps.php';
+
+// 3rd party helpers
+require_once $project_root_path . 'vendor/prairiewest/PHPconvertDMSToDecimal/convert.php';
+
 
 // log & trace helpers.
 global $debug;
