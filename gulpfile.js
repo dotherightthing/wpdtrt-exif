@@ -8,7 +8,7 @@
  *    gulp dist --gulpfile ./vendor/dotherightthing/wpdtrt-plugin-boilerplate/gulpfile.js --cwd ./
  *
  * @package     WPDTRT_Exif
- * @version 	0.1.6
+ * @version 	0.1.7
  * @since       0.7.5 DTRT WordPress Plugin Boilerplate Generator
  */
  
