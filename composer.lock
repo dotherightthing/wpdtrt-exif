@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "a2d81961143e1d237c66d5c1855f3111",
+    "content-hash": "bead2f102bd3d7e894004cf74cace23b",
     "packages": [
         {
             "name": "dotherightthing/wpdtrt-debug",
@@ -175,65 +175,36 @@
             "time": "2017-03-24T17:28:34+00:00"
         },
         {
-            "name": "tgmpa/tgm-plugin-activation",
-            "version": "2.6.1",
+            "name": "prairiewest/PHPconvertDMSToDecimal",
+            "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/TGMPA/TGM-Plugin-Activation.git",
-                "reference": "c626d0d91fc8ef24916e809c7b79eeafab1c1cac"
+                "url": "https://github.com/prairiewest/PHPconvertDMSToDecimal.git",
+                "reference": "b2b5ccd2fb3fb3092fe32e8a3f1bf5058cad1e25"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TGMPA/TGM-Plugin-Activation/zipball/c626d0d91fc8ef24916e809c7b79eeafab1c1cac",
-                "reference": "c626d0d91fc8ef24916e809c7b79eeafab1c1cac",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://repo.packagist.com/dotherightthing/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
-            },
-            "require": {
-                "php": ">=5.2"
+                "url": "https://api.github.com/repos/prairiewest/PHPconvertDMSToDecimal/zipball/b2b5ccd2fb3fb3092fe32e8a3f1bf5058cad1e25",
+                "reference": "b2b5ccd2fb3fb3092fe32e8a3f1bf5058cad1e25",
+                "shasum": ""
             },
             "type": "library",
             "autoload": {
                 "files": [
-                    "class-tgm-plugin-activation.php"
+                    "convert.php"
                 ]
             },
-            "notification-url": "https://repo.packagist.com/dotherightthing/downloads/",
-            "license": [
-                "GPL-2.0+"
-            ],
             "authors": [
                 {
-                    "name": "Thomas Griffin",
-                    "homepage": "http://thomasgriffinmedia.com",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Gary Jones",
-                    "homepage": "https://github.com/GaryJones",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Juliette Reinders Folmer",
-                    "homepage": "https://github.com/jrfnl",
-                    "role": "Developer"
+                    "name": "Todd Trann"
                 }
             ],
-            "description": "TGM Plugin Activation is a PHP library that allows you to easily require or recommend plugins for your WordPress themes (and plugins).",
-            "homepage": "http://tgmpluginactivation.com",
-            "keywords": [
-                "activation",
-                "library",
-                "plugins",
-                "theme",
-                "wordpress"
-            ],
-            "time": "2016-05-19T15:46:51+00:00"
+            "description": " Convert degrees / minutes / seconds to decimal degrees in PHP ",
+            "support": {
+                "source": "https://github.com/prairiewest/PHPconvertDMSToDecimal/tree/master",
+                "issues": "https://github.com/prairiewest/PHPconvertDMSToDecimal/issues"
+            },
+            "time": "2017-07-18 05:12:23"
         }
     ],
     "packages-dev": [
@@ -1299,16 +1270,16 @@
         },
         {
             "name": "jms/serializer",
-            "version": "1.11.0",
+            "version": "1.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/serializer.git",
-                "reference": "e7c53477ff55c21d1b1db7d062edc050a24f465f"
+                "reference": "1ea5e0ba68b6b38c327eb3adf5888ac74b587e9c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/e7c53477ff55c21d1b1db7d062edc050a24f465f",
-                "reference": "e7c53477ff55c21d1b1db7d062edc050a24f465f",
+                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/1ea5e0ba68b6b38c327eb3adf5888ac74b587e9c",
+                "reference": "1ea5e0ba68b6b38c327eb3adf5888ac74b587e9c",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -1354,7 +1325,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.11-dev"
+                    "dev-1.x": "1.11-dev"
                 }
             },
             "autoload": {
@@ -1364,7 +1335,7 @@
             },
             "notification-url": "https://repo.packagist.com/dotherightthing/downloads/",
             "license": [
-                "Apache-2.0"
+                "MIT"
             ],
             "authors": [
                 {
@@ -1385,7 +1356,7 @@
                 "serialization",
                 "xml"
             ],
-            "time": "2018-02-04T17:48:54+00:00"
+            "time": "2018-05-25T17:01:33+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
@@ -3950,7 +3921,7 @@
         },
         {
             "name": "symfony/config",
-            "version": "v2.8.40",
+            "version": "v2.8.41",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/config.git",
@@ -4013,7 +3984,7 @@
         },
         {
             "name": "symfony/console",
-            "version": "v2.8.40",
+            "version": "v2.8.41",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
@@ -4080,7 +4051,7 @@
         },
         {
             "name": "symfony/debug",
-            "version": "v2.8.40",
+            "version": "v2.8.41",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug.git",
@@ -4143,7 +4114,7 @@
         },
         {
             "name": "symfony/dependency-injection",
-            "version": "v2.8.40",
+            "version": "v2.8.41",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dependency-injection.git",
@@ -4212,7 +4183,7 @@
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v2.8.40",
+            "version": "v2.8.41",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
@@ -4278,7 +4249,7 @@
         },
         {
             "name": "symfony/filesystem",
-            "version": "v2.8.40",
+            "version": "v2.8.41",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
@@ -4334,7 +4305,7 @@
         },
         {
             "name": "symfony/finder",
-            "version": "v2.8.40",
+            "version": "v2.8.41",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
@@ -4515,7 +4486,7 @@
         },
         {
             "name": "symfony/process",
-            "version": "v2.8.40",
+            "version": "v2.8.41",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
@@ -4570,7 +4541,7 @@
         },
         {
             "name": "symfony/stopwatch",
-            "version": "v2.8.40",
+            "version": "v2.8.41",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/stopwatch.git",
@@ -4625,7 +4596,7 @@
         },
         {
             "name": "symfony/translation",
-            "version": "v2.8.40",
+            "version": "v2.8.41",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
@@ -4695,7 +4666,7 @@
         },
         {
             "name": "symfony/validator",
-            "version": "v2.8.40",
+            "version": "v2.8.41",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/validator.git",
@@ -4775,7 +4746,7 @@
         },
         {
             "name": "symfony/var-dumper",
-            "version": "v3.4.10",
+            "version": "v3.4.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
@@ -4850,7 +4821,7 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v2.8.40",
+            "version": "v2.8.41",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
@@ -5893,9 +5864,11 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "stable",
-    "stability-flags": [],
-    "prefer-stable": false,
+    "minimum-stability": "dev",
+    "stability-flags": {
+        "prairiewest/phpconvertdmstodecimal": 20
+    },
+    "prefer-stable": true,
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": []
