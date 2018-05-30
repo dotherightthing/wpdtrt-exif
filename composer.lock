@@ -1,7 +1,7 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
     "content-hash": "bb82dd03a93eec7e0c371c4871be88a3",
@@ -61,16 +61,16 @@
         },
         {
             "name": "dotherightthing/wpdtrt-plugin-boilerplate",
-            "version": "1.4.22",
+            "version": "1.4.24",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dotherightthing/wpdtrt-plugin-boilerplate.git",
-                "reference": "b17bb71ebab272c258c854aa5295ddf72b421a79"
+                "reference": "801088f8767c4bd1776c2a1c941a392f80db247a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dotherightthing/wpdtrt-plugin-boilerplate/zipball/b17bb71ebab272c258c854aa5295ddf72b421a79",
-                "reference": "b17bb71ebab272c258c854aa5295ddf72b421a79",
+                "url": "https://api.github.com/repos/dotherightthing/wpdtrt-plugin-boilerplate/zipball/801088f8767c4bd1776c2a1c941a392f80db247a",
+                "reference": "801088f8767c4bd1776c2a1c941a392f80db247a",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -82,7 +82,8 @@
             "require": {
                 "dotherightthing/wpdtrt-debug": "^1.0.0",
                 "gamajo/template-loader": "^1.3.0",
-                "php": ">=5.6.30"
+                "php": ">=5.6.30",
+                "tgmpa/tgm-plugin-activation": "dev-autoloader"
             },
             "require-dev": {
                 "phpdocumentor/phpdocumentor": "2.9.0",
@@ -91,14 +92,9 @@
                 "wp-cli/wp-cli": "~0.22"
             },
             "type": "library",
-            "extra": [
-                {
-                    "require-after-phpdoc": "tgmpa/tgm-plugin-activation:2.6.*"
-                }
-            ],
             "autoload": {
                 "psr-4": {
-                    "DoTheRightThing\\WPDTRT_Plugin_Boilerplate\\r_1_4_22\\": "src"
+                    "DoTheRightThing\\WPDTRT_Plugin_Boilerplate\\r_1_4_24\\": "src"
                 }
             },
             "notification-url": "https://repo.packagist.com/dotherightthing/downloads/",
@@ -121,9 +117,9 @@
             "support": {
                 "email": "support@dotherightthing.co.nz",
                 "issues": "https://github.com/dotherightthing/wpdtrt-tourdates/issues",
-                "source": "https://github.com/dotherightthing/wpdtrt-plugin-boilerplate/tree/1.4.22"
+                "source": "https://github.com/dotherightthing/wpdtrt-plugin-boilerplate/tree/1.4.24"
             },
-            "time": "2018-05-21T23:43:01+00:00"
+            "time": "2018-05-30T09:18:35+00:00"
         },
         {
             "name": "gamajo/template-loader",
@@ -211,7 +207,31 @@
                 "source": "https://github.com/prairiewest/PHPconvertDMSToDecimal/tree/master",
                 "issues": "https://github.com/prairiewest/PHPconvertDMSToDecimal/issues"
             },
-            "time": "2017-07-18 05:12:23"
+            "time": "2017-07-18T05:12:23+00:00"
+        },
+        {
+            "name": "tgmpa/tgm-plugin-activation",
+            "version": "dev-autoloader",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dotherightthing/tgm-plugin-activation",
+                "reference": "autoloader"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://repo.packagist.com/dotherightthing/dists/tgmpa/tgm-plugin-activation/dev-autoloader/ef2f7ea77f8a01b69263bee789ff9cc3.zip",
+                "reference": "autoloader",
+                "shasum": null,
+                "mirrors": [
+                    {
+                        "url": "https://repo.packagist.com/dotherightthing/dists/%package%/%version%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "type": "library",
+            "notification-url": "https://repo.packagist.com/dotherightthing/downloads/",
+            "time": "2018-05-30T03:21:48+00:00"
         }
     ],
     "packages-dev": [],
