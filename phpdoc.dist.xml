@@ -17,5 +17,7 @@
     <ignore>index.php</ignore>
     <ignore>tests/bootstrap.php</ignore>
     <ignore>vendor/*</ignore>
+    <ignore>src/legacy/attachment-geolocation.archive.php</ignore>
+    <ignore>src/legacy/wpdtrt-exif-archive.php</ignore>
   </files>
 </phpdoc>

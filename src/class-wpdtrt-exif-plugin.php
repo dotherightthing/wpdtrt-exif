@@ -82,7 +82,7 @@ class WPDTRT_Exif_Plugin extends DoTheRightThing\WPDTRT_Plugin_Boilerplate\r_1_4
 	/**
 	 * Get metadata from attachment, including geotag
 	 *
-	 * @param $attachment_id
+	 * @param int $attachment_id Attachment ID
 	 * @return array $image_metadata
 	 */
 	public function get_image_metadata( $attachment_id ) {
@@ -99,8 +99,8 @@ class WPDTRT_Exif_Plugin extends DoTheRightThing\WPDTRT_Plugin_Boilerplate\r_1_4
 	/**
 	 * Add image metadata to the attachment metadata stored in WordPress
 	 *
-	 * @param $attachment_id
-	 * @param $attachment_metadata
+	 * @param int $attachment_id Attachment ID
+	 * @param mixed $attachment_metadata Attachment meta field
 	 * @return array $merged_attachment_metadata
 	 */
 	public function update_attachment_metadata( $attachment_id, $attachment_metadata ) {
@@ -126,9 +126,9 @@ class WPDTRT_Exif_Plugin extends DoTheRightThing\WPDTRT_Plugin_Boilerplate\r_1_4
 	 * Get geotag from attachment metadata
 	 *  (partially ex get_geo_exif in twentysixteenchild-dontbelievethehype/includes/attachment-geolocation.php)
 	 *
-	 * @param $attachment_metadata
-	 * @param $format
-	 * @param $post
+	 * @param mixed $attachment_metadata Attachment meta field
+	 * @param string $format Format
+	 * @param object $post Post
 	 * @return array ($latitude, $longitude)
 	 * @todo https://github.com/dotherightthing/wpdtrt-exif/issues/3
 	 */
@@ -190,7 +190,7 @@ class WPDTRT_Exif_Plugin extends DoTheRightThing\WPDTRT_Plugin_Boilerplate\r_1_4
 	 * Get geotag from user edited custom field
 	 *  This provides a fallback if there is no GPS metadata stored with the image.
 	 *
-	 * @param $post
+	 * @param object $post Post
 	 * @return array ($latitude, $longitude)
 	 * @todo This should then be stored with the image, but it needs to be converted
 	 * @todo https://github.com/dotherightthing/wpdtrt-exif/issues/2
@@ -233,6 +233,9 @@ class WPDTRT_Exif_Plugin extends DoTheRightThing\WPDTRT_Plugin_Boilerplate\r_1_4
 	 * Added false values to prevent this function running over and over
 	 * if the image was taken with a non-geotagging camera
 	 *
+	 * @param array $meta Image meta data.
+     * @param string $file Path to image file.
+     * @param int $sourceImageType Type of image.
 	 * @see http://kristarella.blog/2009/04/add-image-exif-metadata-to-wordpress/
 	 * @uses wp-admin/includes/image.php
 	 * @todo Pull geotag from wpdtrt_exif_attachment_gps if it is not available in the image.

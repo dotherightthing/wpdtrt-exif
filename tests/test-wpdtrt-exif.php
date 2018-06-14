@@ -149,8 +149,7 @@ class WPDTRT_ExifTest extends WP_UnitTestCase {
 	/**
 	 * Create post
 	 *
-	 * @param string $post_title Post title
-	 * @param string $post_date Post date
+	 * @param array $options Post options
 	 * @param array $term_ids Taxonomy term IDs
 	 * @return number $post_id
 	 * @see https://developer.wordpress.org/reference/functions/wp_insert_post/
