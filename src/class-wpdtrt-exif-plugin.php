@@ -235,7 +235,7 @@ class WPDTRT_Exif_Plugin extends DoTheRightThing\WPDTRT_Plugin_Boilerplate\r_1_4
 	 *
 	 * @param array $meta Image meta data.
      * @param string $file Path to image file.
-     * @param int $sourceImageType Type of image.
+     * @param int $source_image_type Type of image.
 	 * @see http://kristarella.blog/2009/04/add-image-exif-metadata-to-wordpress/
 	 * @uses wp-admin/includes/image.php
 	 * @todo Pull geotag from wpdtrt_exif_attachment_gps if it is not available in the image.

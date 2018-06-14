@@ -177,6 +177,8 @@ class WPDTRT_ExifTest extends WP_UnitTestCase {
 
 	/**
 	 * Create attachment, upload media file, generate sizes
+	 *
+	 * @param array $options Options
 	 * @see http://develop.svn.wordpress.org/trunk/tests/phpunit/includes/factory/class-wp-unittest-factory-for-attachment.php
 	 * @see https://core.trac.wordpress.org/ticket/42990 - Awaiting Review
 	 * @todo Factory method not available - see create_attachment(), below
@@ -200,8 +202,7 @@ class WPDTRT_ExifTest extends WP_UnitTestCase {
 	 *  this is problematic for checking that the file_exists
 	 *  as used by wp_read_image_metadata()
 	 *
-	 * @param string $filename Filename
-	 * @param number $parent_post_id The ID of the post this attachment is for
+	 * @param array $options Options
 	 * @return number $attachment_id
 	 * @see https://developer.wordpress.org/reference/functions/wp_insert_attachment/
 	 * @see http://develop.svn.wordpress.org/trunk/tests/phpunit/includes/factory/class-wp-unittest-factory-for-attachment.php
