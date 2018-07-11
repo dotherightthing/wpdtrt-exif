@@ -34,8 +34,8 @@ jQuery(document).ready( ($) => {
     const config = wpdtrt_exif_config;
 
     $.post( wpdtrt_exif_config.ajax_url, {
-        action: 'wpdtrt_exif_data_refresh'
-    }, function( response ) {
+        action: "wpdtrt_exif_data_refresh"
+    }, ( response ) => {
         //console.log( 'Ajax complete' );
     });
 
