@@ -6,7 +6,7 @@ Tags: exif, geotag, attachment
 Requires at least: 4.9.5
 Tested up to: 4.9.5
 Requires PHP: 5.6.30
-Stable tag: 0.1.9
+Stable tag: 0.1.10
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -42,9 +42,13 @@ This plugin adds the following custom fields to attachments:
 
 == Changelog ==
 
+= 0.1.10 =
+* Update wpdtrt-plugin-boilerplate to 1.4.38
+* Sync with generator-wpdtrt-plugin-boilerplate 0.7.25
+
 = 0.1.9 =
 * Update wpdtrt-plugin-boilerplate to 1.4.25
-* Sync with generator-wpdtrt-plugin-boilerplate 0.7.20 
+* Sync with generator-wpdtrt-plugin-boilerplate 0.7.20	
 
 = 0.1.8 =
 * Update wpdtrt-plugin-boilerplate to 1.4.24

@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "wpdtrt-exif",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "Adds EXIF (time and geotag) fields to the attachment media modal, for use by other plugins.",
   "main": "wpdtrt-exif.php",
   "person": {
@@ -9,6 +9,21 @@
     "email": "dev@dotherightthing.co.nz",
     "url": "https://profiles.wordpress.org/dotherightthingnz"
   },
+  "contributors": [
+    {
+      "name": "Dan Smith",
+      "email": "dev@dotherightthing.co.nz",
+      "url": "https://profiles.wordpress.org/dotherightthingnz"
+    }
+  ],
+  "bugs": {
+    "url" : "https://github.com/dotherightthing/wpdtrt-exif/issues"
+  },
+  "keywords": [
+    "exif",
+    "geotag",
+    "attachment"
+  ],
   "devDependencies": {
     "gulp": "^3.9.1"
   },
@@ -16,11 +31,16 @@
     "vendor/dotherightthing/wpdtrt-plugin-boilerplate/"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "gulp --gulpfile ./vendor/dotherightthing/wpdtrt-plugin-boilerplate/gulpfile.js --cwd ./",
+    "install_deps": "gulp install_dependencies --gulpfile ./vendor/dotherightthing/wpdtrt-plugin-boilerplate/gulpfile.js --cwd ./ && gulp wpunit_install --gulpfile ./vendor/dotherightthing/wpdtrt-plugin-boilerplate/gulpfile.js --cwd ./",
+    "package": "gulp docs --gulpfile ./vendor/dotherightthing/wpdtrt-plugin-boilerplate/gulpfile.js --cwd ./ && gulp release --gulpfile ./vendor/dotherightthing/wpdtrt-plugin-boilerplate/gulpfile.js --cwd ./",
+    "test": "gulp lint --gulpfile ./vendor/dotherightthing/wpdtrt-plugin-boilerplate/gulpfile.js --cwd ./ && gulp wpunit_run --gulpfile ./vendor/dotherightthing/wpdtrt-plugin-boilerplate/gulpfile.js --cwd ./",
+    "version": "gulp version --gulpfile ./vendor/dotherightthing/wpdtrt-plugin-boilerplate/gulpfile.js --cwd ./",
+    "watch": "gulp compile --gulpfile ./vendor/dotherightthing/wpdtrt-plugin-boilerplate/gulpfile.js --cwd ./ && gulp watch --gulpfile ./vendor/dotherightthing/wpdtrt-plugin-boilerplate/gulpfile.js --cwd ./"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:dotherightthing/wpdtrt-exif.git"
+    "url": "https://github.com/dotherightthing/wpdtrt-exif"
   },
   "browserslist": [
     "last 2 versions",
