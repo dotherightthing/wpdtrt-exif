@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f93844c18be6d73025c094ddf012d52a",
+    "content-hash": "b6181a1a4ec51c0f6fa1c4d72498a0d2",
     "packages": [
         {
             "name": "dotherightthing/wpdtrt-debug",
@@ -29,7 +29,6 @@
                     "DoTheRightThing\\WPDebug\\": "src"
                 }
             },
-            "notification-url": "https://repo.packagist.com/dotherightthing/downloads/",
             "license": [
                 "ISC"
             ],
@@ -131,7 +130,7 @@
                     "class-gamajo-template-loader.php"
                 ]
             },
-            "notification-url": "https://repo.packagist.com/dotherightthing/downloads/",
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "GPL-2.0+"
             ],
@@ -163,13 +162,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/prairiewest/PHPconvertDMSToDecimal/zipball/b2b5ccd2fb3fb3092fe32e8a3f1bf5058cad1e25",
                 "reference": "b2b5ccd2fb3fb3092fe32e8a3f1bf5058cad1e25",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://repo.packagist.com/dotherightthing/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "type": "library",
             "autoload": {
@@ -177,7 +170,6 @@
                     "convert.php"
                 ]
             },
-            "notification-url": "https://repo.packagist.com/dotherightthing/downloads/",
             "authors": [
                 {
                     "name": "Todd Trann"
@@ -196,16 +188,51 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/dotherightthing/TGM-Plugin-Activation.git",
-                "reference": "autoloader"
+                "reference": "270098e8d04bac9ac1b7c482c98a5d27f0080a91"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dotherightthing/TGM-Plugin-Activation/zipball/autoloader",
-                "reference": "autoloader",
-                "shasum": null
+                "url": "https://api.github.com/repos/dotherightthing/TGM-Plugin-Activation/zipball/270098e8d04bac9ac1b7c482c98a5d27f0080a91",
+                "reference": "270098e8d04bac9ac1b7c482c98a5d27f0080a91",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2"
             },
             "type": "library",
-            "notification-url": "https://repo.packagist.com/dotherightthing/downloads/",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Thomas Griffin",
+                    "homepage": "http://thomasgriffinmedia.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Gary Jones",
+                    "homepage": "https://github.com/GaryJones",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Juliette Reinders Folmer",
+                    "homepage": "https://github.com/jrfnl",
+                    "role": "Developer"
+                }
+            ],
+            "description": "TGM Plugin Activation is a PHP library that allows you to easily require or recommend plugins for your WordPress themes (and plugins).",
+            "homepage": "http://tgmpluginactivation.com",
+            "keywords": [
+                "activation",
+                "library",
+                "plugins",
+                "theme",
+                "wordpress"
+            ],
+            "support": {
+                "issues": "https://github.com/TGMPA/TGM-Plugin-Activation/issues",
+                "source": "https://github.com/TGMPA/TGM-Plugin-Activation"
+            },
             "time": "2018-05-30T03:21:48+00:00"
         }
     ],

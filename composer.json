@@ -42,6 +42,10 @@
             "url": "https://github.com/dotherightthing/tgm-plugin-activation"
         },
         {
+            "type": "vcs",
+            "url": "https://github.com/prairiewest/PHPconvertDMSToDecimal"
+        },
+        {
             "type": "composer",
             "url": "https://wpackagist.org"
         }
