@@ -44,10 +44,6 @@
         {
             "type": "vcs",
             "url": "https://github.com/prairiewest/PHPconvertDMSToDecimal"
-        },
-        {
-            "type": "composer",
-            "url": "https://wpackagist.org"
         }
     ],
     "config": {
