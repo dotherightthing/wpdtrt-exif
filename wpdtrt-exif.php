@@ -1,5 +1,13 @@
 <?php
 /**
+ * DTRT EXIF
+ *
+ * @package     WPDTRT_Exif
+ * @author      Dan Smith
+ * @copyright   2018 Do The Right Thing
+ * @license     GPL-2.0+
+ *
+ * @wordpress-plugin
  * Plugin Name:  DTRT EXIF
  * Plugin URI:   https://github.com/dotherightthing/wpdtrt-exif
  * Description:  Adds EXIF (time and geotag) fields to the attachment media modal, for use by other plugins.
@@ -84,7 +92,7 @@ if ( ! defined( 'WPDTRT_PLUGIN_CHILD' ) ) {
 }
 
 /**
- * Determine the correct path to the PSR-4 autoloader
+ * Determine the correct path to the PSR-4 autoloader.
  *
  * @see https://github.com/dotherightthing/wpdtrt-plugin-boilerplate-boilerplate/issues/104
  * @see https://github.com/dotherightthing/wpdtrt-plugin-boilerplate-boilerplate/wiki/Options:-Adding-WordPress-plugin-dependencies
@@ -101,8 +109,8 @@ require_once $project_root_path . 'vendor/autoload.php';
 if ( is_admin() ) {
 	// This replaces the TGMPA autoloader
 	// @see dotherightthing/generator-wpdtrt-plugin-boilerplate#77
-	// @see dotherightthing/wpdtrt-plugin-boilerplate#136
-	require_once( $project_root_path . 'vendor/tgmpa/tgm-plugin-activation/class-tgm-plugin-activation.php');
+	// @see dotherightthing/wpdtrt-plugin-boilerplate#136.
+	require_once( $project_root_path . 'vendor/tgmpa/tgm-plugin-activation/class-tgm-plugin-activation.php' );
 }
 
 // sub classes, not loaded via PSR-4.
@@ -112,24 +120,24 @@ require_once WPDTRT_EXIF_PATH . 'src/class-wpdtrt-exif-plugin.php';
 // access wp_read_image_metadata
 // remove trailing slash from ABSPATH
 // works for local unit testing, but fails in local WordPress and in Travis
-//if ( substr($test_path, -1) == '/' ) {
-//  $test_path = substr($test_path, 0, -1);
-//}
+// if ( substr($test_path, -1) == '/' ) {
+// $test_path = substr($test_path, 0, -1);
+// }.
 require_once( ABSPATH . 'wp-admin/includes/image.php' );
 
 
-// legacy helpers
+// legacy helpers.
 require_once WPDTRT_EXIF_PATH . 'src/legacy/attachment-field-heading.php';
 require_once WPDTRT_EXIF_PATH . 'src/legacy/attachment-field-time.php';
 require_once WPDTRT_EXIF_PATH . 'src/legacy/attachment-field-gps.php';
 
-// 3rd party helpers
+// 3rd party helpers.
 require_once $project_root_path . 'vendor/prairiewest/PHPconvertDMSToDecimal/convert.php';
 
 
 // log & trace helpers.
 global $debug;
-$debug = new DoTheRightThing\WPDebug\Debug;
+$debug = new DoTheRightThing\WPDebug\Debug();
 
 /**
  * ===== WordPress Integration =====
@@ -197,7 +205,7 @@ function wpdtrt_exif_helper_deactivate() {
  */
 function wpdtrt_exif_plugin_init() {
 	// pass object reference between classes via global
-	// because the object does not exist until the WordPress init action has fired
+	// because the object does not exist until the WordPress init action has fired.
 	global $wpdtrt_exif_plugin;
 
 	/**

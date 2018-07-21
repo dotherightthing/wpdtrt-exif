@@ -14,10 +14,9 @@
  * Add Time field to media uploader, for Time dependent functions (map, weather)
  * Note: except for 'title', unwanted fields cannot be removed from the attachment modal
  *
- * @param $form_fields array, fields to include in attachment form
- * @param $post object, attachment record in database
- * @return $form_fields, modified form fields
- *
+ * @param array  $form_fields Fields to include in attachment form.
+ * @param object $post object Attachment record in database.
+ * @return $form_fields Modified form fields
  * @see https://codex.wordpress.org/Function_Reference/remove_post_type_support
  * @see https://core.trac.wordpress.org/ticket/23932
  * @see https://codex.wordpress.org/Function_Reference/get_attached_file
@@ -29,16 +28,15 @@ function wpdtrt_exif_attachment_field_time( $form_fields, $post ) {
 
 	// NOTE:
 	// $post->ID // object reference (@param type)
-	// $post['ID'] // array reference
-
+	// $post['ID'] // array reference.
 	global $wpdtrt_exif_plugin;
 
-	// this will also return the attachment geotag if it is available
+	// this will also return the attachment geotag if it is available.
 	$attachment_metadata = $wpdtrt_exif_plugin->get_attachment_metadata( $post->ID );
 
 	// wp_get_attachment_link has been overwritten to pass settings to JS, so it only ever points to the 'large' version
-
-	// Time is read only
+	//
+	// Time is read only.
 	if ( ! empty( $attachment_metadata['image_meta']['created_timestamp'] ) ) {
 		$timestamp = date( 'd.m.Y h:i:s', $attachment_metadata['image_meta']['created_timestamp'] );
 	} else {
@@ -58,9 +56,9 @@ function wpdtrt_exif_attachment_field_time( $form_fields, $post ) {
 /**
  * Save value of Time field in media uploader, for Time dependent functions (map, weather)
  *
- * @param $post array, the post data for database
- * @param $attachment array, attachment fields from $_POST form
- * @return $post array, modified post data
+ * @param array $post The post data for database.
+ * @param array $attachment Attachment fields from $_POST form.
+ * @return array $post Modified post data
  */
 function wpdtrt_exif_attachment_field_time_save( $post, $attachment ) {
 	if ( isset( $attachment['wpdtrt-exif-time'] ) ) {

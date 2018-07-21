@@ -1,5 +1,4 @@
-<?php
-// phpcs:disable
+<?php // phpcs:disable
 /**
  * Convert Degrees Minutes Seconds String To Number
  * @param string $string The String

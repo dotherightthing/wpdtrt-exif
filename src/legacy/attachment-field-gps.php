@@ -7,17 +7,15 @@
  *
  * @since       0.0.1
  * @see http://www.billerickson.net/wordpress-add-custom-fields-media-gallery/
- *
  * @package     WPDTRT_Exif
  */
 
 /**
  * Add GPS field to media uploader, for GPS dependent functions (map, weather)
  *
- * @param $form_fields array, fields to include in attachment form
- * @param $post object, attachment record in database
- * @return $form_fields, modified form fields
- *
+ * @param array  $form_fields Fields to include in attachment form.
+ * @param object $post Attachment record in database.
+ * @return $form_fields Modified form fields
  * @see https://codex.wordpress.org/Function_Reference/remove_post_type_support
  * @see https://core.trac.wordpress.org/ticket/23932
  * @see https://codex.wordpress.org/Function_Reference/get_attached_file
@@ -42,11 +40,11 @@ function wpdtrt_exif_attachment_field_gps( $form_fields, $post ) {
 
 	if ( isset( $attachment_metadata_gps['latitude'], $attachment_metadata_gps['longitude'] ) ) {
 		// if the values can be pulled from the image
-		// then display these values to content admins
+		// then display these values to content admins.
 		$value                          = ( $attachment_metadata_gps['latitude'] . ',' . $attachment_metadata_gps['longitude'] );
-		$attachment_metadata_gps_source = 'WordPress'; // i.e. Image metadata has been stored to WordPress as attachment metadata
+		$attachment_metadata_gps_source = 'WordPress'; // i.e. Image metadata has been stored to WordPress as attachment metadata.
 	} else {
-		// else try to pull these values from the user field
+		// else try to pull these values from the user field.
 		$value                          = get_post_meta( $post->ID, 'wpdtrt_exif_attachment_gps', true );
 		$attachment_metadata_gps_source = 'This field';
 	}
@@ -80,9 +78,9 @@ function wpdtrt_exif_attachment_field_gps( $form_fields, $post ) {
 /**
  * Save value of Time field in media uploader, for GPS dependent functions (map, weather)
  *
- * @param $post array, the post data for database
- * @param $attachment array, attachment fields from $_POST form
- * @return $post array, modified post data
+ * @param array $post The post data for database.
+ * @param array $attachment Attachment fields from $_POST form.
+ * @return array $post Modified post data
  */
 function wpdtrt_exif_attachment_field_gps_save( $post, $attachment ) {
 	if ( isset( $attachment['wpdtrt-exif-gps'] ) ) {
