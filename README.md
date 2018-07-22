@@ -6,7 +6,7 @@ Adds EXIF (time and geotag) fields to the attachment media modal, for use by oth
 
 ## Setup and Maintenance
 
-Please read [DTRT WordPress Plugin Boilerplate: Workflows](https://github.com/dotherightthing/wpdtrt-plugin-boilerplate-boilerplate/wiki/Workflows).
+Please read [DTRT WordPress Plugin Boilerplate: Workflows](https://github.com/dotherightthing/wpdtrt-plugin-boilerplate/wiki/Workflows).
 
 ## WordPress Installation and Usage
 
