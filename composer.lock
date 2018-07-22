@@ -54,16 +54,16 @@
         },
         {
             "name": "dotherightthing/wpdtrt-plugin-boilerplate",
-            "version": "1.4.39",
+            "version": "1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dotherightthing/wpdtrt-plugin-boilerplate.git",
-                "reference": "872e5f5ae01c15a2385d0cb3e1cfc6dcd96c128f"
+                "reference": "b8db12dc55de69dd758d4eb7d79a3c6c913a8ccf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dotherightthing/wpdtrt-plugin-boilerplate/zipball/872e5f5ae01c15a2385d0cb3e1cfc6dcd96c128f",
-                "reference": "872e5f5ae01c15a2385d0cb3e1cfc6dcd96c128f",
+                "url": "https://api.github.com/repos/dotherightthing/wpdtrt-plugin-boilerplate/zipball/b8db12dc55de69dd758d4eb7d79a3c6c913a8ccf",
+                "reference": "b8db12dc55de69dd758d4eb7d79a3c6c913a8ccf",
                 "shasum": ""
             },
             "require": {
@@ -73,15 +73,17 @@
                 "tgmpa/tgm-plugin-activation": "dev-autoloader"
             },
             "require-dev": {
+                "dealerdirect/phpcodesniffer-composer-installer": "^0.4.4",
                 "phpdocumentor/phpdocumentor": "2.9.0",
                 "phpunit/phpunit": "^5.7",
                 "psy/psysh": "~0.6",
-                "wp-cli/wp-cli": "~0.22"
+                "wp-cli/wp-cli": "~0.22",
+                "wp-coding-standards/wpcs": "^0.14.1"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "DoTheRightThing\\WPDTRT_Plugin_Boilerplate\\r_1_4_39\\": "src"
+                    "DoTheRightThing\\WPDTRT_Plugin_Boilerplate\\r_1_5_0\\": "src"
                 }
             },
             "license": [
@@ -103,9 +105,9 @@
             "support": {
                 "email": "support@dotherightthing.co.nz",
                 "issues": "https://github.com/dotherightthing/wpdtrt-tourdates/issues",
-                "source": "https://github.com/dotherightthing/wpdtrt-plugin-boilerplate/tree/1.4.39"
+                "source": "https://github.com/dotherightthing/wpdtrt-plugin-boilerplate/tree/1.5.0"
             },
-            "time": "2018-07-15T13:11:03+00:00"
+            "time": "2018-07-22T10:52:06+00:00"
         },
         {
             "name": "gamajo/template-loader",
