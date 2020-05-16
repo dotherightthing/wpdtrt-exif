@@ -329,7 +329,7 @@ class WPDTRT_ExifTest extends WP_UnitTestCase {
 		//
 		// ok.
 		$this->assertContains(
-			'wp-content/uploads/tests/data/test-scaled.jpg',
+			'wp-content/uploads/tests/data/test1-scaled.jpg',
 			get_attached_file( $this->attachment_id_1 ),
 			'Attachment 1 should exist'
 		);
