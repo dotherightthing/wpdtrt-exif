@@ -18,7 +18,7 @@
     },
     "require": {
         "dotherightthing/wpdtrt-plugin-boilerplate": "^1.5.3",
-        "prairiewest/PHPconvertDMSToDecimal": "dev-master"
+        "prairiewest/phpconvertdmstodecimal": "dev-master"
     },
     "require-dev": {
         "wp-coding-standards/wpcs": "^0.14.1",
