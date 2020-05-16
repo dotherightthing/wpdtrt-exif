@@ -21,12 +21,11 @@
         "prairiewest/PHPconvertDMSToDecimal": "dev-master"
     },
     "require-dev": {
-        "phpdocumentor/phpdocumentor": "2.9.0",
-        "phpunit/phpunit": "^5.7",
-        "psy/psysh" : "~0.6",
-        "wp-cli/wp-cli" : "~0.22",
         "wp-coding-standards/wpcs": "^0.14.1",
-        "dealerdirect/phpcodesniffer-composer-installer": "^0.4.4"
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.4.4",
+        "phpunit/phpunit": "^7.5.14",
+        "psy/psysh" : "~0.6",
+        "wp-cli/wp-cli": "^2.3"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,

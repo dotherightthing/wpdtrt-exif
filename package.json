@@ -20,23 +20,24 @@
     "url": "https://github.com/dotherightthing/wpdtrt-exif/issues"
   },
   "keywords": [
+    "wordpress-plugin",
     "exif",
     "geotag",
     "attachment"
   ],
   "config": {
+    "wpdtrt_base_url_local": "http://dontbelievethehype.dan",
     "wpdtrt_npm_scripts": "./node_modules/wpdtrt-npm-scripts"
   },
   "scripts": {
-    "build": "npm run build --prefix $npm_package_config_wpdtrt_npm_scripts",
     "compile": "npm run compile --prefix $npm_package_config_wpdtrt_npm_scripts",
-    "dependencies": "npm run dependencies --prefix $npm_package_config_wpdtrt_npm_scripts",
     "docs": "npm run docs --prefix $npm_package_config_wpdtrt_npm_scripts",
     "lint": "npm run lint --prefix $npm_package_config_wpdtrt_npm_scripts",
     "release": "npm run release --prefix $npm_package_config_wpdtrt_npm_scripts",
+    "scrape:wordpress_maintenance_page": "npm run scrape:wordpress_maintenance_page --prefix $npm_package_config_wpdtrt_npm_scripts -- $npm_package_config_wpdtrt_base_url_local",
     "test": "npm run test --prefix $npm_package_config_wpdtrt_npm_scripts",
     "version": "npm run version --prefix $npm_package_config_wpdtrt_npm_scripts",
-    "watch": "npm run watch --prefix $npm_package_config_wpdtrt_npm_scripts"
+    "watch": "nodemon"
   },
   "repository": {
     "type": "git",
@@ -45,7 +46,8 @@
   "license": "ISC",
   "homepage": "https://github.com/dotherightthing/wpdtrt-exif",
   "srcDir": "/Volumes/DanBackup/Websites/wpdtrt-exif",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "wpdtrt-npm-scripts": "github:dotherightthing/wpdtrt-npm-scripts"
   }
 }
