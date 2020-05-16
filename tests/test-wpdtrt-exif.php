@@ -317,8 +317,9 @@ class WPDTRT_ExifTest extends WP_UnitTestCase {
 	}
 
 	/**
-	 * Test that meta data can be pulled from the attachment image
-	 *  using the WordPress API
+	 * Test that meta data can be pulled from the attachment image using the WordPress API.
+	 * Note: Test images exceed the width/height big_image threshhold of 2560px and so are renamed to -scaled
+	 * See: https://make.wordpress.org/core/2019/10/09/introducing-handling-of-big-images-in-wordpress-5-3/
 	 */
 	public function test_core_meta_retrieval() {
 
@@ -328,14 +329,14 @@ class WPDTRT_ExifTest extends WP_UnitTestCase {
 		//
 		// ok.
 		$this->assertContains(
-			'wp-content/uploads/tests/data/test1.jpg',
+			'wp-content/uploads/tests/data/test-scaled.jpg',
 			get_attached_file( $this->attachment_id_1 ),
 			'Attachment 1 should exist'
 		);
 
 		// ok.
 		$this->assertContains(
-			'wp-content/uploads/tests/data/test2.jpg',
+			'wp-content/uploads/tests/data/test2-scaled.jpg',
 			get_attached_file( $this->attachment_id_2 ),
 			'Attachment 2 should exist'
 		);
@@ -344,7 +345,7 @@ class WPDTRT_ExifTest extends WP_UnitTestCase {
 		// ok - disabled as this path can change
 
 		$this->assertEquals(
-		'/var/folders/0y/31dr5mx52c98lmldc_zpw3w00000gn/T/wordpress//wp-content/uploads/tests/data/test2.jpg',
+		'/var/folders/0y/31dr5mx52c98lmldc_zpw3w00000gn/T/wordpress//wp-content/uploads/tests/data/test2-scaled.jpg',
 		get_attached_file( $this->attachment_id_2 ),
 		'Attachment should have this file path'
 		);
@@ -359,13 +360,13 @@ class WPDTRT_ExifTest extends WP_UnitTestCase {
 		// ok.
 		$this->assertEquals(
 			$this->attachment_2_meta,
-			wp_read_image_metadata( 'tests/data/test2.jpg' ),
+			wp_read_image_metadata( 'tests/data/test2-scaled.jpg' ),
 			'Image metadata should exist'
 		);
 
 		// ok.
 		$this->assertTrue(
-			file_exists( 'tests/data/test2.jpg' ),
+			file_exists( 'tests/data/test2-scaled.jpg' ),
 			'Real file should exist'
 		);
 
@@ -382,21 +383,21 @@ class WPDTRT_ExifTest extends WP_UnitTestCase {
 			// passes if image manually copied over
 
 			$this->assertFileExists(
-			'/var/folders/0y/31dr5mx52c98lmldc_zpw3w00000gn/T/wordpress/wp-content/uploads/2018/04/test1.jpg',
+			'/var/folders/0y/31dr5mx52c98lmldc_zpw3w00000gn/T/wordpress/wp-content/uploads/2018/04/test1-scaled.jpg',
 			'file does not exist 1'
 		);
 		*/
 
 		/*
 		$this->assertFileExists(
-			'/var/folders/0y/31dr5mx52c98lmldc_zpw3w00000gn/T/wordpress/wp-content/uploads/2018/04/tests/data/test1.jpg',
+			'/var/folders/0y/31dr5mx52c98lmldc_zpw3w00000gn/T/wordpress/wp-content/uploads/2018/04/tests/data/test1-scaled.jpg',
 			'file does not exist 2'
 		);
 		*/
 
 		/*
 		$this->assertFileExists(
-			'/var/folders/0y/31dr5mx52c98lmldc_zpw3w00000gn/T/wordpress/wp-content/uploads/tests/data/test1.jpg',
+			'/var/folders/0y/31dr5mx52c98lmldc_zpw3w00000gn/T/wordpress/wp-content/uploads/tests/data/test1-scaled.jpg',
 			'file does not exist 3'
 		);
 		*/
@@ -405,7 +406,7 @@ class WPDTRT_ExifTest extends WP_UnitTestCase {
 		// passes with bogus path, image NOT manually copied over nor actually in file system at this location
 
 		$this->assertSame(
-			'/var/folders/0y/31dr5mx52c98lmldc_zpw3w00000gn/T/wordpress//wp-content/uploads/tests/data/test1.jpg',
+			'/var/folders/0y/31dr5mx52c98lmldc_zpw3w00000gn/T/wordpress//wp-content/uploads/tests/data/test1-scaled.jpg',
 			get_attached_file( $this->attachment_id_1 ),
 			'file does not exist 4'
 		);
@@ -465,7 +466,7 @@ class WPDTRT_ExifTest extends WP_UnitTestCase {
 		global $wpdtrt_exif_plugin;
 
 		$this->assertEquals(
-			52.83616388888889, // tests/data/test2.jpg.
+			52.83616388888889, // tests/data/test2-scaled.jpg.
 			$wpdtrt_exif_plugin->helper_convert_dms_to_dd(
 				$this->attachment_2_meta['latitude'],
 				$this->attachment_2_meta['latitude_ref']
@@ -474,7 +475,7 @@ class WPDTRT_ExifTest extends WP_UnitTestCase {
 		);
 
 		$this->assertEquals(
-			106.5087888888888, // tests/data/test2.jpg.
+			106.5087888888888, // tests/data/test2-scaled.jpg.
 			$wpdtrt_exif_plugin->helper_convert_dms_to_dd(
 				$this->attachment_2_meta['longitude'],
 				$this->attachment_2_meta['longitude_ref']
