@@ -23,7 +23,7 @@ class WPDTRT_Exif_Rewrite extends DoTheRightThing\WPDTRT_Plugin_Boilerplate\r_1_
 	 * @since     1.0.0
 	 * @version   1.1.0
 	 */
-	public function __construct( $options ) {
+	public function __construct( $options ) { // phpcs:disable
 
 		// edit here.
 		parent::__construct( $options );
@@ -39,7 +39,7 @@ class WPDTRT_Exif_Rewrite extends DoTheRightThing\WPDTRT_Plugin_Boilerplate\r_1_
 	 *
 	 * @see https://codex.wordpress.org/Plugin_API/Action_Reference Action order
 	 */
-	protected function wp_setup() {
+	protected function wp_setup() { // phpcs:disable
 
 		// edit here.
 		parent::wp_setup();

@@ -1,43 +1,37 @@
 /**
  * @file DTRT EXIF frontend.js
- * @summary
- *     Front-end scripting for public pages
- *     PHP variables are provided in `wpdtrt_exif_config`.
+ * @summary Front-end scripting for public pages.
+ * @description PHP variables are provided in `wpdtrt_exif_config`.
  * @version 0.0.1
- * @since   0.7.0 DTRT WordPress Plugin Boilerplate Generator
+ * @since   0.7.0
  */
 
 /* eslint-env browser */
-/* global document, jQuery, wpdtrt_exif_config */
+/* global jQuery, wpdtrt_exif_config */
 /* eslint-disable no-unused-vars */
 
 /**
- * @namespace wpdtrt_exif_ui
+ * @namespace wpdtrtExifUi
  */
-const wpdtrt_exif_ui = {
+const wpdtrtExifUi = {
 
     /**
-     * Initialise front-end scripting
+     * @summary Initialise front-end scripting
      * @since 0.0.1
      */
     init: () => {
-        "use strict";
-
-        console.log("wpdtrt_exif_ui.init");
+        console.log('wpdtrtExifUi.init'); // eslint-disable-line no-console
     }
-}
+};
 
-jQuery(document).ready( ($) => {
+jQuery(document).ready(($) => {
+    const config = wpdtrt_exif_config; // eslint-disable-line
 
-    "use strict";
-
-    const config = wpdtrt_exif_config;
-
-    $.post( wpdtrt_exif_config.ajax_url, {
-        action: "wpdtrt_exif_data_refresh"
-    }, ( response ) => {
-        //console.log( 'Ajax complete' );
+    $.post(wpdtrt_exif_config.ajax_url, {
+        action: 'wpdtrt_exif_data_refresh'
+    }, (response) => {
+        // console.log('Ajax complete');
     });
 
-    wpdtrt_exif_ui.init();
+    wpdtrtExifUi.init();
 });

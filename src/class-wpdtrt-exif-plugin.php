@@ -21,7 +21,7 @@ class WPDTRT_Exif_Plugin extends DoTheRightThing\WPDTRT_Plugin_Boilerplate\r_1_5
 	 * @since     1.0.0
 	 * @version   1.1.0
 	 */
-	public function __construct( $options ) {
+	public function __construct( $options ) { // phpcs:disable
 
 		// edit here.
 		parent::__construct( $options );
@@ -245,7 +245,7 @@ class WPDTRT_Exif_Plugin extends DoTheRightThing\WPDTRT_Plugin_Boilerplate\r_1_5
 		// but the value is not accessible to the function.
 		// note: @ suppresses any error messages that might be generated
 		// by the prefixed expression.
-		$exif = @exif_read_data( $file );
+		$exif = @exif_read_data( $file ); // phpcs:disable
 
 		if ( ! empty( $exif['GPSLatitude'] ) ) {
 			$meta['latitude'] = $exif['GPSLatitude'];
@@ -338,7 +338,7 @@ class WPDTRT_Exif_Plugin extends DoTheRightThing\WPDTRT_Plugin_Boilerplate\r_1_5
 
 		$decimal = 0;
 
-		@list( $n, $d ) = explode( '/', $str );
+		@list( $n, $d ) = explode( '/', $str ); // phpcs:disable
 
 		if ( ! empty( $d ) ) {
 

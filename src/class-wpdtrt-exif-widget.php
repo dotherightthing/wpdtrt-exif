@@ -23,7 +23,7 @@ class WPDTRT_Exif_Widget extends DoTheRightThing\WPDTRT_Plugin_Boilerplate\r_1_5
 	 * @since     1.0.0
 	 * @version   1.1.0
 	 */
-	public function __construct( $options ) {
+	public function __construct( $options ) { // phpcs:disable
 
 		// edit here.
 		parent::__construct( $options );
