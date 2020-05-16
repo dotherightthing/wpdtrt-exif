@@ -311,6 +311,7 @@ class WPDTRT_Exif_Plugin extends DoTheRightThing\WPDTRT_Plugin_Boilerplate\r_1_5
 	 * @see https://github.com/prairiewest/PHPconvertDMSToDecimal PHPconvertDMSToDecimal (Github PHP) = 52.83616388888889, 106.50878888888889.
 	 * @see https://www.web-max.ca/PHP/misc_6.php WebMax (PHP Page) = 52.83616388888889, 106.50878888888889.
 	 * @see https://www.latlong.net/degrees-minutes-seconds-to-decimal-degrees LatLng (PHP? Page, expects a rounded longitudinal second value) = 52.83616389,106.50888889.
+	 * @see wpdtrt/library/image-admin-fields.php - gps_dms_to_decimal(), which also uses a $reference_direction
 	 */
 	public function helper_convert_dms_to_dd( $dms_fractions, $axis_ref ) {
 
@@ -330,6 +331,7 @@ class WPDTRT_Exif_Plugin extends DoTheRightThing\WPDTRT_Plugin_Boilerplate\r_1_5
 	 *  Note: replaced by helper_convert_fraction_to_decimal()
 	 *
 	 * @param string $str Fraction string.
+	 * @see wpdtrt/library/image-admin-fields.php - dms_to_number()
 	 * @return number $number Decimal number
 	 */
 	public function helper_convert_dms_fraction_to_number( $str ) {
