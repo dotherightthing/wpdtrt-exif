@@ -44,6 +44,15 @@ class WPDTRT_Exif_Plugin extends DoTheRightThing\WPDTRT_Plugin_Boilerplate\r_1_7
 
 		// add actions and filters here.
 		add_filter( 'wp_read_image_metadata', array( $this, 'filter_read_image_geodata' ), '', 3 );
+
+		/**
+		 * Prevent images exceeding the width/height big_image threshhold of 2560px
+		 * from being -scaled in WordPress 5.3
+		 * as this appears to affect exif retention.
+		 *
+		 * @see https://make.wordpress.org/core/2019/10/09/introducing-handling-of-big-images-in-wordpress-5-3/
+		 */
+		add_filter( 'big_image_size_threshold', '__return_false' );
 	}
 
 	/**
