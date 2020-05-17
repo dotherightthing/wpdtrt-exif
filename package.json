@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "wpdtrt-exif",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "Adds EXIF (time and geotag) fields to the attachment media modal, for use by other plugins.",
   "main": "wpdtrt-exif.php",
   "person": {
@@ -30,11 +30,11 @@
     "wpdtrt_npm_scripts": "./node_modules/wpdtrt-npm-scripts"
   },
   "scripts": {
+    "changelog": "npm run changelog --prefix $npm_package_config_wpdtrt_npm_scripts",
     "compile": "npm run compile --prefix $npm_package_config_wpdtrt_npm_scripts",
     "docs": "npm run docs --prefix $npm_package_config_wpdtrt_npm_scripts",
     "lint": "npm run lint --prefix $npm_package_config_wpdtrt_npm_scripts",
     "release": "npm run release --prefix $npm_package_config_wpdtrt_npm_scripts",
-    "scrape:wordpress_maintenance_page": "npm run scrape:wordpress_maintenance_page --prefix $npm_package_config_wpdtrt_npm_scripts -- $npm_package_config_wpdtrt_base_url_local",
     "test": "npm run test --prefix $npm_package_config_wpdtrt_npm_scripts",
     "version": "npm run version --prefix $npm_package_config_wpdtrt_npm_scripts",
     "watch": "nodemon"
@@ -46,8 +46,8 @@
   "license": "ISC",
   "homepage": "https://github.com/dotherightthing/wpdtrt-exif",
   "srcDir": "/Volumes/DanBackup/Websites/wpdtrt-exif",
-  "dependencies": {
-    "wpdtrt-npm-scripts": "github:dotherightthing/wpdtrt-npm-scripts"
-  },
-  "devDependencies": {}
+  "dependencies": {},
+  "devDependencies": {
+    "wpdtrt-npm-scripts": "github:dotherightthing/wpdtrt-npm-scripts#semver:0.3.*"
+  }
 }

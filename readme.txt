@@ -6,7 +6,7 @@ Tags: exif, geotag, attachment
 Requires at least: 4.9.5
 Tested up to: 4.9.5
 Requires PHP: 5.6.30
-Stable tag: 0.2.2
+Stable tag: 0.3.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -41,6 +41,16 @@ This plugin adds the following custom fields to attachments:
 2. The caption for ./images/screenshot-2.(png|jpg|jpeg|gif)
 
 == Changelog ==
+
+= 0.3.0 =
+* Optimise breakpoints
+* Disable big_image_size_threshold filter
+* Update dependencies
+* Update wpdtrt-plugin-boilerplate to 1.7.0
+* Fix/ignore linting errors
+* Fix casing of Composer dependency
+* Replace Gulp build scripts with wpdtrt-npm-scripts
+* Replace Travis with Github Actions
 
 = 0.2.2 =
 * Update wpdtrt-plugin-boilerplate to 1.5.3
