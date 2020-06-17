@@ -78,6 +78,7 @@ class WPDTRT_Exif_Plugin extends DoTheRightThing\WPDTRT_Plugin_Boilerplate\r_1_7
 		// then this wasn't stored when the image was uploaded into WP
 		// (i.e. it was uploaded before this function was written)
 		// so reprocess the image.
+		// TODO this likely fails with Amazon S3
 		if ( ! array_key_exists( 'latitude', $attachment_metadata ) || ! array_key_exists( 'longitude', $attachment_metadata ) ) {
 
 			$attachment_metadata = $this->update_attachment_metadata( $attachment_id, $attachment_metadata );
