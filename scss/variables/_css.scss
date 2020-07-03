@@ -1,0 +1,16 @@
+//
+// File: scss/variables/_css.scss
+//
+// Since:
+//   0.9.x - DTRT WordPress Plugin Boilerplate Generator
+//
+// Colours are specified in hsla values:
+// - Hue: 0 - 360 on a colour wheel (e.g. http://hslpicker.com/)
+// - Saturation: 0 (grayscale) - 100 (full colour)
+// - Lightness: 0% (black), 50% (average), 100% (completely light)
+// - Alpha
+//
+
+:root {
+    --wpdtrt-exif-demo-color: hsla(0, 0%, 0%, 1);
+}
