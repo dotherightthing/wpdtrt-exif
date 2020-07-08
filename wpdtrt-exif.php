@@ -110,7 +110,7 @@ if ( is_admin() ) {
 	// This replaces the TGMPA autoloader
 	// @see dotherightthing/generator-wpdtrt-plugin-boilerplate#77
 	// @see dotherightthing/wpdtrt-plugin-boilerplate#136.
-	require_once( $project_root_path . 'vendor/tgmpa/tgm-plugin-activation/class-tgm-plugin-activation.php' );
+	require_once $project_root_path . 'vendor/tgmpa/tgm-plugin-activation/class-tgm-plugin-activation.php';
 }
 
 // sub classes, not loaded via PSR-4.
@@ -123,7 +123,7 @@ require_once WPDTRT_EXIF_PATH . 'src/class-wpdtrt-exif-plugin.php';
 // if ( substr($test_path, -1) == '/' ) {
 // $test_path = substr($test_path, 0, -1);
 // }.
-require_once( ABSPATH . 'wp-admin/includes/image.php' );
+require_once ABSPATH . 'wp-admin/includes/image.php';
 
 
 // legacy helpers.
