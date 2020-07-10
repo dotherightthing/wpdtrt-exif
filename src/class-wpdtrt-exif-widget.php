@@ -14,7 +14,7 @@
  * @since   1.0.0
  * @version 1.0.0
  */
-class WPDTRT_Exif_Widget extends DoTheRightThing\WPDTRT_Plugin_Boilerplate\r_1_7_0\Widget {
+class WPDTRT_Exif_Widget extends DoTheRightThing\WPDTRT_Plugin_Boilerplate\r_1_7_5\Widget {
 
 	/**
 	 * Supplement widget initialisation.
