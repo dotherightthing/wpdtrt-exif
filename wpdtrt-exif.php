@@ -132,7 +132,7 @@ require_once WPDTRT_EXIF_PATH . 'src/legacy/attachment-field-time.php';
 require_once WPDTRT_EXIF_PATH . 'src/legacy/attachment-field-gps.php';
 
 // 3rd party helpers.
-require_once $project_root_path . 'vendor/prairiewest/PHPconvertDMSToDecimal/convert.php';
+require_once $project_root_path . 'vendor/prairiewest/phpconvertdmstodecimal/convert.php';
 
 
 // log & trace helpers.

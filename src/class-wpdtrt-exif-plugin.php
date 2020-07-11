@@ -318,7 +318,7 @@ class WPDTRT_Exif_Plugin extends DoTheRightThing\WPDTRT_Plugin_Boilerplate\r_1_7
 	 * @see https://tmackinnon.com/converting-decimal-degrees-to-degrees-minutes-seconds.php
 	 * @see http://www.leancrew.com/all-this/2014/07/extracting-coordinates-from-apple-maps/ Apple Maps to Mail = 52.836163,106.508788.
 	 * @see https://www.fcc.gov/media/radio/dms-decimal FCC (JS Page) = 52.836164, 106.508789.
-	 * @see https://github.com/prairiewest/PHPconvertDMSToDecimal PHPconvertDMSToDecimal (Github PHP) = 52.83616388888889, 106.50878888888889.
+	 * @see https://github.com/prairiewest/phpconvertdmstodecimal phpconvertdmstodecimal (Github PHP) = 52.83616388888889, 106.50878888888889.
 	 * @see https://www.web-max.ca/PHP/misc_6.php WebMax (PHP Page) = 52.83616388888889, 106.50878888888889.
 	 * @see https://www.latlong.net/degrees-minutes-seconds-to-decimal-degrees LatLng (PHP? Page, expects a rounded longitudinal second value) = 52.83616389,106.50888889.
 	 * @see wpdtrt/library/image-admin-fields.php - gps_dms_to_decimal(), which also uses a $reference_direction
