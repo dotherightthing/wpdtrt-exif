@@ -162,17 +162,17 @@
             "time": "2018-09-24T10:23:49+00:00"
         },
         {
-            "name": "prairiewest/PHPconvertDMSToDecimal",
+            "name": "prairiewest/phpconvertdmstodecimal",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/prairiewest/PHPconvertDMSToDecimal.git",
-                "reference": "fdbfbe28b85b24edb01c9912aa5303e212f7173a"
+                "url": "https://github.com/prairiewest/phpconvertdmstodecimal.git",
+                "reference": "7885ab5aae63eb7cde5639b9cdc3ca5b9f241019"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/prairiewest/PHPconvertDMSToDecimal/zipball/fdbfbe28b85b24edb01c9912aa5303e212f7173a",
-                "reference": "fdbfbe28b85b24edb01c9912aa5303e212f7173a",
+                "url": "https://api.github.com/repos/prairiewest/phpconvertdmstodecimal/zipball/7885ab5aae63eb7cde5639b9cdc3ca5b9f241019",
+                "reference": "7885ab5aae63eb7cde5639b9cdc3ca5b9f241019",
                 "shasum": ""
             },
             "type": "library",
@@ -188,10 +188,10 @@
             ],
             "description": " Convert degrees / minutes / seconds to decimal degrees in PHP ",
             "support": {
-                "source": "https://github.com/prairiewest/PHPconvertDMSToDecimal/tree/master",
-                "issues": "https://github.com/prairiewest/PHPconvertDMSToDecimal/issues"
+                "source": "https://github.com/prairiewest/phpconvertdmstodecimal/tree/master",
+                "issues": "https://github.com/prairiewest/phpconvertdmstodecimal/issues"
             },
-            "time": "2019-09-24T04:22:07+00:00"
+            "time": "2020-07-11T21:10:39+00:00"
         },
         {
             "name": "tgmpa/tgm-plugin-activation",
