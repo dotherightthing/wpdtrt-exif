@@ -1,1 +1,1 @@
-* [bce84c2] Update dependency to fix casing of package name
+* [4c46bda] Update internal references to updated package name

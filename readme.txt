@@ -6,7 +6,7 @@ Tags: exif, geotag, attachment
 Requires at least: 5.3.3
 Tested up to: 5.3.3
 Requires PHP: 7.2.15
-Stable tag: 0.3.3
+Stable tag: 0.3.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -41,6 +41,9 @@ This plugin adds the following custom fields to attachments:
 2. The caption for ./images/screenshot-2.(png|jpg|jpeg|gif)
 
 == Changelog ==
+
+= 0.3.4 =
+* Fix internal references to old name of prairiewest/phpconvertdmstodecimal
 
 = 0.3.3 =
 * Fix prairiewest/phpconvertdmstodecimal not being added to release zip in Github action (filename casing)
