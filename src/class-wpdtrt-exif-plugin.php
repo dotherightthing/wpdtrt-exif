@@ -12,7 +12,7 @@
  *
  * @since   1.0.0
  */
-class WPDTRT_Exif_Plugin extends DoTheRightThing\WPDTRT_Plugin_Boilerplate\r_1_7_5\Plugin {
+class WPDTRT_Exif_Plugin extends DoTheRightThing\WPDTRT_Plugin_Boilerplate\r_1_7_6\Plugin {
 
 	/**
 	 * Supplement plugin initialisation.
