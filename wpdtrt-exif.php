@@ -216,9 +216,9 @@ function wpdtrt_exif_plugin_init() {
 	$plugin_options = array(
 		'google_static_maps_api_key' => array(
 			'type'  => 'password',
-			'label' => __( 'Google Static Maps API Key', 'wpdtrt-exif' ),
+			'label' => __( 'Google Cloud Platform API key', 'wpdtrt-exif' ),
 			'size'  => 50,
-			'tip'   => __( 'https://developers.google.com/maps/documentation/maps-static/get-api-key', 'wpdtrt-exif' ),
+			'tip'   => __( 'https://console.cloud.google.com/apis/credentials, https://console.cloud.google.com/apis/library (Maps Static API', 'wpdtrt-exif' ),
 		),
 	);
 
