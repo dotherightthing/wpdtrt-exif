@@ -14,7 +14,7 @@
  * @since   1.0.0
  * @version 1.0.0
  */
-class WPDTRT_Exif_Rewrite extends DoTheRightThing\WPDTRT_Plugin_Boilerplate\r_1_7_6\Rewrite {
+class WPDTRT_Exif_Rewrite extends DoTheRightThing\WPDTRT_Plugin_Boilerplate\r_1_7_7\Rewrite {
 
 	/**
 	 * Supplement plugin initialisation.
