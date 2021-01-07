@@ -17,7 +17,7 @@
         "issues": "https://github.com/dotherightthing/wpdtrt-exif/issues"
     },
     "require": {
-        "dotherightthing/wpdtrt-plugin-boilerplate": "^1.7.6",
+        "dotherightthing/wpdtrt-plugin-boilerplate": "^1.7.7",
         "prairiewest/phpconvertdmstodecimal": "dev-master"
     },
     "require-dev": {
