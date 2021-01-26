@@ -218,7 +218,7 @@ function wpdtrt_exif_plugin_init() {
 			'type'  => 'password',
 			'label' => __( 'Google Cloud Platform API key', 'wpdtrt-exif' ),
 			'size'  => 50,
-			'tip'   => __( 'https://console.cloud.google.com/apis/credentials, https://console.cloud.google.com/apis/library (Maps Static API', 'wpdtrt-exif' ),
+			'tip'   => __( 'console.cloud.google.com/apis/credentials, console.cloud.google.com/apis/library (Maps Static API)', 'wpdtrt-exif' ),
 		),
 	);
 
