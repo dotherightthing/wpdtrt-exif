@@ -6,18 +6,36 @@
 // @since       0.7.5 DTRT WordPress Plugin Boilerplate Generator
 //
 
-@import 'vendor/dotherightthing/wpdtrt-plugin-boilerplate/scss/variables';
-@import 'vendor/dotherightthing/wpdtrt-plugin-boilerplate/scss/extends';
-@import 'vendor/dotherightthing/wpdtrt-plugin-boilerplate/scss/backend';
+// -------------------------------------------------------------------
+// Variables
+// -------------------------------------------------------------------
+
+@import '../node_modules/wpdtrt-scss/scss/variables/scss';
 @import 'variables/scss';
+
+// -------------------------------------------------------------------
+// Mixins
+// -------------------------------------------------------------------
+
+@import '../node_modules/wpdtrt-scss/scss/mixins';
+
+// -------------------------------------------------------------------
+// Extends
+// -------------------------------------------------------------------
+
+@import '../node_modules/wpdtrt-scss/scss/extends';
 @import 'extends';
 
 // -------------------------------------------------------------------
-// Attachment page
+// Styles
 // -------------------------------------------------------------------
+
+@import '../node_modules/wpdtrt-scss/scss/_backend';
+
+// Attachment page
 
 // align text with label
 // classname is generated from $form_fields[FIELD_NAME]
 .compat-field-wpdtrt-exif-gps {
-    @extend %wpdtrt-plugin-boilerplate--last-attachment-field-divider;
+    @extend %wpdtrt-scss-attachment-field-divider-last;
 }
