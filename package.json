@@ -47,7 +47,7 @@
   "homepage": "https://github.com/dotherightthing/wpdtrt-exif",
   "srcDir": "/Volumes/DanBackup/Websites/wpdtrt-exif",
   "dependencies": {
-    "wpdtrt-scss": "github:dotherightthing/wpdtrt-scss#semver:0.1.*"
+    "wpdtrt-scss": "github:dotherightthing/wpdtrt-scss#semver:*"
   },
   "devDependencies": {
     "wpdtrt-npm-scripts": "github:dotherightthing/wpdtrt-npm-scripts#semver:0.3.*"
