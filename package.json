@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "wpdtrt-exif",
-  "version": "0.3.5",
+  "version": "0.3.6",
   "description": "Adds EXIF (time and geotag) fields to the attachment media modal, for use by other plugins.",
   "main": "wpdtrt-exif.php",
   "person": {
