@@ -14,7 +14,7 @@
  * @since   1.0.0
  * @version 1.0.0
  */
-class WPDTRT_Exif_Taxonomy extends DoTheRightThing\WPDTRT_Plugin_Boilerplate\r_1_7_14\Taxonomy {
+class WPDTRT_Exif_Taxonomy extends DoTheRightThing\WPDTRT_Plugin_Boilerplate\r_1_7_15\Taxonomy {
 
 	/**
 	 * Supplement taxonomy initialisation.
