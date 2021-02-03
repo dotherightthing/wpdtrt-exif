@@ -50,6 +50,6 @@
     "wpdtrt-scss": "github:dotherightthing/wpdtrt-scss#semver:*"
   },
   "devDependencies": {
-    "wpdtrt-npm-scripts": "github:dotherightthing/wpdtrt-npm-scripts#semver:0.3.*"
+    "wpdtrt-npm-scripts": "github:dotherightthing/wpdtrt-npm-scripts#semver:*"
   }
 }
