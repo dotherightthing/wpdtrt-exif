@@ -1,2 +1,3 @@
-* [fbb0517] Update dependencies, update wpdtrt-plugin-boilerplate from 1.7.16 to 1.7.17
-* [fc69458] Sync comment with plugin generator
+* [7c4de69] Update wpdtrt-scss to 0.1.17
+* [9004a47] Update wpdtrt-scss to 0.1.14
+* [c690f86] Update wpdtrt-scss to 0.1.13
