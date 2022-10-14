@@ -7,23 +7,23 @@
 //
 
 // -------------------------------------------------------------------
-// Variables
+// Imports
 // -------------------------------------------------------------------
 
-@import '../node_modules/wpdtrt-scss/scss/variables/scss';
-@import 'variables/scss';
+// Import wpdtrt-scss library helpers
+@use '../node_modules/wpdtrt-scss/scss' as wpdtrt-scss;
 
-// -------------------------------------------------------------------
-// Mixins
-// -------------------------------------------------------------------
+// Import `include media` library (including default `$breakpoint` map)
+@use '../node_modules/include-media/dist/include-media' as *;
 
-@import '../node_modules/wpdtrt-scss/scss/mixins';
+// Import local variables
+@use 'variables/scss' as *;
 
-// -------------------------------------------------------------------
-// Extends
-// -------------------------------------------------------------------
+// Extend default `$breakpoint` map from library variables
+$breakpoints: map-merge($breakpoints, wpdtrt-scss.$breakpoints);
 
-@import '../node_modules/wpdtrt-scss/scss/extends';
+// Extend default `$breakpoint` map from local variables (optional)
+// $breakpoints: map-merge($breakpoints, $local-breakpoints);
 
 // -------------------------------------------------------------------
 // Styles

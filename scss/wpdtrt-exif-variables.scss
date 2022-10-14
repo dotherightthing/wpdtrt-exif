@@ -5,4 +5,9 @@
 // @package     wpdtrt_exif
 // @since       0.3.2
 
-@import 'variables/css';
+// -------------------------------------------------------------------
+// Imports
+// -------------------------------------------------------------------
+
+// Import local variables
+@use 'variables/css' as *;
