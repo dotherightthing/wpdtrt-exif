@@ -46,10 +46,10 @@
   "license": "ISC",
   "homepage": "https://github.com/dotherightthing/wpdtrt-exif",
   "srcDir": "/Volumes/DanBackup/Websites/wpdtrt-exif",
-  "dependencies": {
-    "wpdtrt-scss": "github:dotherightthing/wpdtrt-scss#semver:*"
-  },
   "devDependencies": {
     "wpdtrt-npm-scripts": "github:dotherightthing/wpdtrt-npm-scripts#semver:*"
+  },
+  "dependencies": {
+    "wpdtrt-scss": "github:dotherightthing/wpdtrt-scss"
   }
 }
